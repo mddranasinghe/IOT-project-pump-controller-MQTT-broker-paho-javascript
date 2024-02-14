@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    
+  
+</head>
+<body>
+    <div class="container">
+  
+        <img src="log.jpg"  id="logo"style=" display:block;
+        margin-left: auto;
+        margin-right: auto;">
+<main>
+
+   <!--<div class="b1"> <button id="dashboardsbutton" >Dashboards</button></div>
+
+    <div class="b1"><button id="scenebutton" >Sceneoooo</button></div>
+
+    <div class="b1"><button id="scenebutton" >Sceneoooo</button></div>-->
+</main>
+
+<div class="scrollmenu">
+    <a href="smarthome.html "  style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">Home</a>
+    <a href="test1.html">home2</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+    <a href="#support">Support</a>
+    <a href="#blog">Blog</a>
+    <a href="#tools">Tools</a>  
+    <a href="#base">Base</a>
+    <a href="#custom">Custom</a>
+    <a href="#more">More</a>
+    <a href="#logo">Logo</a>
+    </div>
+</main>
+
+    <br>
+<main>
+    <div class="box1" id="bedroom">
+        <div class="circle"><img src="bedroom.png "  class="img" ></div>
+        <h4>Bed Room</h4>
+        <p> 7 Devices </p>
+    </div>
+
+    <div class="box1"  id="kitchen">
+        <div class="circle"><img src="kitchn.png"  class="img" ></div>
+    <h4>Kitchen</h4>
+    <p> 6 Devices </p>
+    </div>
+
+ 
+    <div class="box2"  id="livingroom">
+        <div class="circle" ><img src="livingroom.png"  class="img" ></div>
+        <h4> Living Room</h4>
+        <p> 5 Devices </p>
+    </div>
+
+
+    <div class="box2" id="meeting">
+        <div class="circle"  ><img src="meeting.png"  class="img" ></div>
+        <h4>Meeting Room</h4>
+        <p> 8 Devices </p>
+    </div>
+
+    <div class="box1" id="bedroom">
+        <div class="circle"><img src="bedroom.png "  class="img" ></div>
+        <h4>Bed Room</h4>
+        <p> 7 Devices </p>
+    </div>
+
+    <div class="box1"  id="kitchen">
+        <div class="circle"><img src="kitchn.png"  class="img" ></div>
+    <h4>Kitchen</h4>
+    <p> 6 Devices </p>
+    </div>
+
+    <div class="box1" id="bedroom">
+        <div class="circle"><img src="bedroom.png "  class="img" ></div>
+        <h4>Bed Room</h4>
+        <p> 7 Devices </p>
+    </div>
+
+    <div class="box1"  id="kitchen">
+        <div class="circle"><img src="kitchn.png"  class="img" ></div>
+    <h4>Kitchen</h4>
+    <p> 6 Devices </p>
+    </div>
+
+
+
+
+
+    <br><br>
+
+
+
+        <div class="dotdiv">
+            <div class="dot" id="page1"style="width: 10px; height: 10px;"></div>
+            <div class="dot" id="pag2" ></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            </div>
+        </mian>
+    </div>
+    <script>
+    function startup() {
+        const el = document.getElementById("canvas");
+        el.addEventListener("touchstart", handleStart);
+        el.addEventListener("touchend", handleEnd);
+        el.addEventListener("touchcancel", handleCancel);
+        el.addEventListener("touchmove", handleMove);
+        log("Initialized.");
+      }
+      
+      document.addEventListener("DOMContentLoaded", startup);
+
+
+
+      document.getElementById("bedroom").onclick=function(){location.href="page1.html"}
+document.getElementById("kitchen").onclick=function(){location.href="page1.html"}
+document.getElementById("livingroom").onclick=function(){location.href="page1.html"}
+document.getElementById("meeting").onclick=function(){location.href="page1.html"}
+
+
+document.getElementById("dashboardsbutton").onclick=function(){location.href="smarthome.html"}
+document.getElementById("scenebutton").onclick=function(){location.href="scene.html"}
+
+document.getElementById("pag2").onclick=function(){location.href="test1.html"}
+
+document.getElementById("home").onclick=function(){location.href="test1.html"}
+
+    </script>
+</body>
+</html>
