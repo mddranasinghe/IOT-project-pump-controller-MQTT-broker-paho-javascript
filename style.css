@@ -206,17 +206,17 @@ display: inline-block;
 
 @media only screen and (max-width: 600px) {
     .container {
-        width: 400px;
+        width: 100%;
     }
     #logo {
-        width: 220px; 
+        width: 50%; 
     }
     .b1, #dashboardsbutton, #scenebutton {
-        width: 100px; 
+        width: 10%; 
         margin-bottom: 10px;
     }
     .box1, .box2 {
-        width: 180px; 
+        width: 45%; 
         margin-bottom: 20px;
         padding: 10px; 
         box-sizing: border-box;
