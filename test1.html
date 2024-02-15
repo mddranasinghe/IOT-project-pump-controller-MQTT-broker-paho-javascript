@@ -24,8 +24,8 @@
 </main>
 
 <div class="scrollmenu">
-<a href="smarthome.html "  >Home</a>
-<a href="test1.html" style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">home2</a>
+<a href="index.html "  id="home">Home</a>
+<a href="test1.html" id="home2"style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">home2</a>
 <a href="#contact">Contact</a>
 <a href="#about">About</a>
 <a href="#support">Support</a>
@@ -102,7 +102,7 @@
 
         <div class="dotdiv">
             <div class="dot" id="page1"></div>
-            <div class="dot" id="pag2"style="width: 10px; height: 10px;" ></div>
+            <div class="dot" id="page2"style="width: 10px; height: 10px;" ></div>
             <div class="dot"></div>
             <div class="dot"></div>
             </div>
@@ -128,11 +128,9 @@ document.getElementById("livingroom").onclick=function(){location.href="page1.ht
 document.getElementById("meeting").onclick=function(){location.href="page1.html"}
 
 
-document.getElementById("dashboardsbutton").onclick=function(){location.href="index.html"}
-document.getElementById("scenebutton").onclick=function(){location.href="scene.html"}
 
 document.getElementById("page1").onclick=function(){location.href="index.html"}
-
+document.getElementById("page2").onclick=function(){location.href="test1.html"}
     </script>
 </body>
 </html>
