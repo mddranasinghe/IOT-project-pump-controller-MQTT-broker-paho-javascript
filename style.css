@@ -34,8 +34,12 @@ div.scrollmenu {
     border-radius:5px 5px;
 
     white-space: nowrap;
+    width: 90%;
+    margin-top: -5%;
+    overflow-x: scroll;
+
   }
-  .scrollmenu::-webkit-scrollbar
+  .scrollmenu::-webkit-scrollbar /* remove the scrollbar*/
   {
   
   width: 0;
@@ -48,6 +52,7 @@ div.scrollmenu {
     padding: 14px;
     text-decoration: none;
     width: 100px;
+    margin-top: 10%;
   }
   
   div.scrollmenu a:hover {
@@ -250,9 +255,13 @@ display: inline-block;
         margin-bottom: 10px;
     }
     .box1, .box2 {
-        width: 45%; 
+        width: 47%; 
         margin-bottom: 20px;
-        padding: 10px; 
+        margin-right: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         box-sizing: border-box;
     }
     .circle {
@@ -260,7 +269,7 @@ display: inline-block;
         margin-right: auto;
     }
     .img {
-        width: 60%; 
+        width: 70%; 
     }
     .box1 h4, .box2 h4, .box1 p, .box2 p {
         margin-left: 0; 
@@ -285,9 +294,9 @@ display: inline-block;
         margin-bottom: 10px;
     }
     .box1, .box2 {
-        width: 45%; 
+        width: 48.5%; 
         margin-bottom: 20px;
-        padding: 20px; 
+        padding: 35px; 
         box-sizing: border-box;
     }
     .circle {
@@ -306,6 +315,6 @@ display: inline-block;
         text-align: center;
     }
 
-    
+  
 }
 
