@@ -11,9 +11,9 @@
 <body>
     <div class="container">
   
-        <img src="log.jpg"  id="logo"style=" display:block;
+      <!-- <img src="log.jpg"  id="logo"style=" display:block;
         margin-left: auto;
-        margin-right: auto;">
+        margin-right: auto;"> --> 
 <main>
 
    <!--<div class="b1"> <button id="dashboardsbutton" >Dashboards</button></div>
@@ -23,18 +23,16 @@
     <div class="b1"><button id="scenebutton" >Sceneoooo</button></div>-->
 
 </main>
+
 <div class="scrollmenu">
-    <a href="index.html "style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">Home</a>
-    <a href="test1.html" >home2</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-    <a href="#support">Support</a>
-    <a href="blog.html">Blog</a>
-    <a href="#tools">Tools</a>  
-    <a href="#base">Base</a>
-    <a href="#custom">Custom</a>
-    <a href="#more">More</a>
-    <a href="#logo">Logo</a>
+    <a href="index.html "style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">Home 1</a>
+    <a href="home2.html" >Home 2</a>
+    <a href="home3.html">Home  3</a>
+    <a href="home4.html">Home  4</a>
+    <a href="home5.html">Home  5</a>
+    <a href="home6.html">Home  6</a>
+
+
     </div>
 
 
@@ -101,37 +99,50 @@
         <div class="dotdiv">
             <div class="dot" id="page1"style="width: 10px; height: 10px;"></div>
             <div class="dot" id="page2" ></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+            <div class="dot" id="page3"></div>
+            <div class="dot" id="page4"></div>
+            <div class="dot" id="page5"></div>
+            <div class="dot" id="page6"></div>
             </div>
         </mian>
     </div>
     <script>
-    function startup() {
-        const el = document.getElementById("canvas");
-        el.addEventListener("touchstart", handleStart);
-        el.addEventListener("touchend", handleEnd);
-        el.addEventListener("touchcancel", handleCancel);
-        el.addEventListener("touchmove", handleMove);
-        log("Initialized.");
-      }
-      
-      document.addEventListener("DOMContentLoaded", startup);
 
 
 
-      document.getElementById("bedroom").onclick=function(){location.href="page1.html"}
+
+/*widgest*/
+document.getElementById("bedroom").onclick=function(){location.href="page1.html"}
 document.getElementById("kitchen").onclick=function(){location.href="page1.html"}
 document.getElementById("livingroom").onclick=function(){location.href="page1.html"}
 document.getElementById("meeting").onclick=function(){location.href="page1.html"}
 
 
-
-
-
-
+/*dot---*/
 document.getElementById("page1").onclick=function(){location.href="index.html"}
-document.getElementById("page2").onclick=function(){location.href="test1.html"}
+document.getElementById("page2").onclick=function(){location.href="home2.html"}
+document.getElementById("page3").onclick=function(){location.href="home3.html"}
+document.getElementById("page4").onclick=function(){location.href="home4.html"}
+document.getElementById("page5").onclick=function(){location.href="home5.html"}
+document.getElementById("page6").onclick=function(){location.href="home6.html"}
+
+
+/*center the specified <a> tag one screen*/
+
+/*center the specified <a> tag*/
+
+    window.onload=function()
+{
+var specifiedtag=document.querySelector('.scrollmenu a[href="index.html"]');
+if(specifiedtag)
+{
+specifiedtag.classList.add('centered');
+specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
+
+}
+
+};
+
 
 
     </script>

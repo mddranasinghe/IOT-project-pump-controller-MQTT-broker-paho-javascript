@@ -36,7 +36,9 @@ div.scrollmenu {
     white-space: nowrap;
     width: 90%;
     margin-top: -5%;
-    overflow-x: scroll;
+
+
+  
 
   }
   .scrollmenu::-webkit-scrollbar /* remove the scrollbar*/
@@ -53,6 +55,8 @@ div.scrollmenu {
     text-decoration: none;
     width: 100px;
     margin-top: 10%;
+ 
+;
   }
   
   div.scrollmenu a:hover {
@@ -182,7 +186,7 @@ width: 5px;
 height:5px;
 border-radius:5px 5px;
 background-color:rgb(70, 184, 110);
-margin-left: 10px;
+margin-left: 20px;
 
 display: inline-block;
 
@@ -275,7 +279,7 @@ display: inline-block;
         margin-left: 0; 
     }
     .dotdiv {
-        width: 100px; 
+        width: 100%; 
         margin: 0 auto;
         text-align: center;
     }

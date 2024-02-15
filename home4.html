@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .box1,.box2{
+              background-color: rgb(227, 164, 236);
+          }
+        </style>
+</head>
+<body>
+    <div class="container">
+  
+      <!-- <img src="log.jpg"  id="logo"style=" display:block;
+        margin-left: auto;
+        margin-right: auto;"> --> 
+<main>
+
+   <!--<div class="b1"> <button id="dashboardsbutton" >Dashboards</button></div>
+
+    <div class="b1"><button id="scenebutton" >Sceneoooo</button></div>
+
+    <div class="b1"><button id="scenebutton" >Sceneoooo</button></div>-->
+
+</main>
+
+<div class="scrollmenu">
+    <a href="index.html ">Home 1</a>
+    <a href="home2.html" >Home 2</a>
+    <a href="home3.html" >Home 3</a>
+    <a href="home4.html" style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">Home  4</a>
+    <a href="home5.html">Home  5</a>
+    <a href="home6.html">Home 6</a>
+
+
+    </div>
+
+
+    <br>
+<main>
+    <div class="box1" id="bedroom">
+        <div class="circle"><img src="bedroom.png "  class="img" ></div>
+        <h4>Bed Room</h4>
+        <p> 7 Devices </p>
+    </div>
+
+    <div class="box1"  id="kitchen">
+        <div class="circle"><img src="kitchn.png"  class="img" ></div>
+    <h4>Kitchen</h4>
+    <p> 6 Devices </p>
+    </div>
+
+ 
+    <div class="box2"  id="livingroom">
+        <div class="circle" ><img src="livingroom.png"  class="img" ></div>
+        <h4> Living Room</h4>
+        <p> 5 Devices </p>
+    </div>
+
+
+    <div class="box2" id="meeting">
+        <div class="circle"  ><img src="meeting.png"  class="img" ></div>
+        <h4>Meeting Room</h4>
+        <p> 8 Devices </p>
+    </div>
+
+    <div class="box1" id="bedroom">
+        <div class="circle"><img src="bedroom.png "  class="img" ></div>
+        <h4>Bed Room</h4>
+        <p> 7 Devices </p>
+    </div>
+
+    <div class="box1"  id="kitchen">
+        <div class="circle"><img src="kitchn.png"  class="img" ></div>
+    <h4>Kitchen</h4>
+    <p> 6 Devices </p>
+    </div>
+
+    <div class="box1" id="bedroom">
+        <div class="circle"><img src="bedroom.png "  class="img" ></div>
+        <h4>Bed Room</h4>
+        <p> 7 Devices </p>
+    </div>
+
+    <div class="box1"  id="kitchen">
+        <div class="circle"><img src="kitchn.png"  class="img" ></div>
+    <h4>Kitchen</h4>
+    <p> 6 Devices </p>
+    </div>
+
+
+
+
+
+    <br><br>
+
+
+
+        <div class="dotdiv">
+            <div class="dot" id="page1"></div>
+            <div class="dot" id="page2" ></div>
+            <div class="dot" id="page3"></div>
+            <div class="dot" id="page4" style="width: 10px; height: 10px;"> </div>
+            <div class="dot" id="page5"></div>
+            <div class="dot" id="page6"></div>
+            </div>
+        </mian>
+    </div>
+    <script>
+
+
+
+
+/*widgest*/
+document.getElementById("bedroom").onclick=function(){location.href="page1.html"}
+document.getElementById("kitchen").onclick=function(){location.href="page1.html"}
+document.getElementById("livingroom").onclick=function(){location.href="page1.html"}
+document.getElementById("meeting").onclick=function(){location.href="page1.html"}
+
+
+/*dot---*/
+document.getElementById("page1").onclick=function(){location.href="index.html"}
+document.getElementById("page2").onclick=function(){location.href="home2.html"}
+document.getElementById("page3").onclick=function(){location.href="home3.html"}
+document.getElementById("page4").onclick=function(){location.href="home4.html"}
+document.getElementById("page5").onclick=function(){location.href="home5.html"}
+document.getElementById("page6").onclick=function(){location.href="home6.html"}
+
+/*center the specified <a> tag one screen*/
+
+/*center the specified <a> tag*/
+
+    window.onload=function()
+{
+var specifiedtag=document.querySelector('.scrollmenu a[href="home4.html"]');
+if(specifiedtag)
+{
+specifiedtag.classList.add('centered');
+specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
+
+}
+
+};
+
+    </script>
+</body>
+</html>
