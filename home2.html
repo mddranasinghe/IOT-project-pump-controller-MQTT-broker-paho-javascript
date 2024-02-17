@@ -10,11 +10,18 @@
         .box1,.box2{
               background-color: rgb(200, 242, 251);
           }
+
+          #coordinates {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+    }
         </style>
 </head>
 <body>
     <div class="container">
-  
+    
+            <div id="coordinates"></div>
       <!-- <img src="log.jpg"  id="logo"style=" display:block;
         margin-left: auto;
         margin-right: auto;"> --> 
@@ -41,7 +48,7 @@
 
 
     <br>
-<main>
+<main id="main">
     <div class="box1" id="bedroom">
         <div class="circle"><img src="bedroom.png "  class="img" ></div>
         <h4>Bed Room</h4>
@@ -146,6 +153,43 @@ specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 };
+
+
+var box = document.getElementById('main');
+  
+
+  //var coordinatesDisplay = document.getElementById('coordinates');
+
+  // Variables to store starting and ending x-coordinates
+  var startX = 0;
+  var endX = 0;
+
+ 
+  box.addEventListener('touchstart', function(event) {
+        // Capture starting x-coordinate when touch starts
+        startX = event.touches[0].clientX - window.innerWidth / 2;
+    });
+
+    box.addEventListener('touchmove', function(event) {
+        // Update ending x-coordinate when touch is moved
+        endX = event.touches[0].clientX - window.innerWidth / 2;
+      // Update coordinates display
+  //    coordinatesDisplay.textContent = 'Start X: ' + startX + ', End X: ' + endX;
+
+if (endX > startX) {
+ 
+  location.href = "home3.html";
+}
+
+if (endX < startX) {
+ 
+ location.href = "index.html";
+}
+
+
+
+});
+
     </script>
 </body>
 </html>

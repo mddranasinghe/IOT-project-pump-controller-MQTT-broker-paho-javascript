@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    
-  
+    <style>
+
+
+
+
+    </style>  
 </head>
 <body>
     <div class="container">
+       
+        
   
       <!-- <img src="log.jpg"  id="logo"style=" display:block;
         margin-left: auto;
@@ -37,7 +43,7 @@
 
 
     <br>
-<main>
+<main id="main">
     <div class="box1" id="bedroom">
         <div class="circle"><img src="bedroom.png "  class="img" ></div>
         <h4>Bed Room</h4>
@@ -106,6 +112,9 @@
             </div>
         </mian>
     </div>
+
+
+  
     <script>
 
 
@@ -128,9 +137,6 @@ document.getElementById("page6").onclick=function(){location.href="home6.html"}
 
 
 /*center the specified <a> tag one screen*/
-
-/*center the specified <a> tag*/
-
     window.onload=function()
 {
 var specifiedtag=document.querySelector('.scrollmenu a[href="index.html"]');
@@ -144,6 +150,47 @@ specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
 };
 
 
+/*center the specified <a> tag*/
+
+
+
+    var box = document.getElementById('main');
+  
+
+    //var coordinatesDisplay = document.getElementById('coordinates');
+
+    // Variables to store starting and ending x-coordinates
+    var startX = 0;
+    var endX = 0;
+
+
+    box.addEventListener('touchstart', function(event) {
+        // Capture starting x-coordinate when touch starts
+        startX = event.touches[0].clientX - window.innerWidth / 2;
+    });
+
+    box.addEventListener('touchmove', function(event) {
+        // Update ending x-coordinate when touch is moved
+        endX = event.touches[0].clientX - window.innerWidth / 2;
+
+        // Update coordinates display
+    //    coordinatesDisplay.textContent = 'Start X: ' + startX + ', End X: ' + endX;
+  
+if (endX > startX) {
+   
+    location.href = "home2.html";
+}
+  
+if (endX < startX) {
+   
+   location.href = "home3.html";
+}
+
+
+  
+});
+	
+	
 
     </script>
 </body>
