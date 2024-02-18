@@ -146,6 +146,7 @@ window.addEventListener('touchend', function(event) {
         }
     } else if (endX - startX > threshold) {
         // Swipe from left to right
+        var prevPageLink = document.getElementById('prevPage').href;
         if (prevPageLink) {
             window.location.href = prevPageLink;
         }
