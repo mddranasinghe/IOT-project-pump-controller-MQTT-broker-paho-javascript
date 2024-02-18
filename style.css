@@ -28,19 +28,18 @@ main{
     /*scroll menu*.........................................*/
 }
 div.scrollmenu {
-    background-color:white;
+    background-color: white;
     overflow: auto;
     border-style: none;
-    border-radius:5px 5px;
-
+    border-radius: 5px 5px;
     white-space: nowrap;
-    width: 90%;
-    margin-top: -5%;
+    width: 100%;
+    margin-top: 0; /* Remove negative margin */
 
+    top: 0; /* Set to the top of the screen */
 
-  
+}
 
-  }
   .scrollmenu::-webkit-scrollbar /* remove the scrollbar*/
   {
   
@@ -54,7 +53,7 @@ div.scrollmenu {
     padding: 14px;
     text-decoration: none;
     width: 100px;
-    margin-top: 10%;
+ 
  
 ;
   }
@@ -133,8 +132,8 @@ margin-left: -80%;
        padding:40px;
        border-radius:  20px 20px;
        float: left;
-       margin-top: 10px;
-       margin: 0 auto;
+     
+  
        
    
      
@@ -142,6 +141,7 @@ margin-left: -80%;
   
 .box1{
   margin-right: 10px;
+  
 
 
 }
@@ -181,7 +181,7 @@ margin-left: -80%;
 
 
 .dot{
-
+   
 width: 5px;
 height:5px;
 border-radius:5px 5px;
@@ -208,8 +208,14 @@ display: inline-block;
 }
 .dotdiv
 {
-   
-    margin: 0 auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color:#e5e7eb;
+    padding: 10px;
+    border-top: 1px; /* Add a border at the top for separation */
+    z-index: 1000; /* Ensure it stays above other content */
 
 }
 
@@ -241,9 +247,13 @@ display: inline-block;
         margin-left: 0; 
     }
     .dotdiv {
+      
         width: 100%; 
         margin: 0 auto;
         text-align: center;
+    }
+    .dot{
+
     }
 }
 
@@ -314,11 +324,14 @@ display: inline-block;
         margin-left: 0; 
     }
     .dotdiv {
-        width: 1000px; 
+        width: 100%; 
         margin: 0 auto;
         text-align: center;
     }
 
-  
+    div.scrollmenu
+    {
+        width: 100%;
+    }
 }
 
