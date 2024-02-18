@@ -32,9 +32,9 @@
     <a href="index.html ">Home 1</a>
     <a href="home2.html" >Home  2</a>
     <a href="home3.html" >Home  3</a>
-    <a href="home4.html" >Home  4</a>
+    <a href="home4.html" id="prevPage">Home  4</a>
     <a href="home5.html" style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">Home  5</a>
-    <a href="home6.html">Home 6</a>
+    <a href="home6.html" id="prevPage">Home 6</a>
 
 
     </div>
@@ -148,6 +148,33 @@ specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
 
 };
 
+
+
+	
+var startX = 0;
+
+window.addEventListener('touchstart', function(event) {
+    startX = event.touches[0].clientX;
+});
+
+window.addEventListener('touchend', function(event) {
+    var endX = event.changedTouches[0].clientX;
+    var threshold = 50; // Minimum distance required to trigger navigation (in pixels)
+
+    if (startX - endX > threshold) {
+        // Swipe from right to left
+        var nextPageLink = document.getElementById('nextPage').href;
+        if (nextPageLink) {
+            window.location.href = nextPageLink;
+        }
+    } else if (endX - startX > threshold) {
+        // Swipe from left to right
+        var prevPageLink = document.getElementById('prevPage').href;
+        if (prevPageLink) {
+            window.location.href = prevPageLink;
+        }
+    }
+});
     </script>
 </body>
 </html>

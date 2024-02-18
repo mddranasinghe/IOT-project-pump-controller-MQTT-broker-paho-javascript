@@ -36,9 +36,9 @@
 </main>
 
 <div class="scrollmenu">
-    <a href="index.html ">Home 1</a>
+    <a href="index.html " id="nextPage">Home 1</a>
     <a href="home2.html" style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">Home  2</a>
-    <a href="home3.html">Home  3</a>
+    <a href="home3.html" id="prevPage">Home  3</a>
     <a href="home4.html">Home  4</a>
     <a href="home5.html">Home 5</a>
     <a href="home6.html">Home  6</a>
@@ -154,41 +154,31 @@ specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
 
 };
 
-/*
-var box = document.getElementById('main');
-  
+	
+var startX = 0;
 
-  //var coordinatesDisplay = document.getElementById('coordinates');
+window.addEventListener('touchstart', function(event) {
+    startX = event.touches[0].clientX;
+});
 
-  // Variables to store starting and ending x-coordinates
-  var startX = 0;
-  var endX = 0;
+window.addEventListener('touchend', function(event) {
+    var endX = event.changedTouches[0].clientX;
+    var threshold = 50; // Minimum distance required to trigger navigation (in pixels)
 
- 
-  box.addEventListener('touchstart', function(event) {
-        // Capture starting x-coordinate when touch starts
-        startX = event.touches[0].clientX - window.innerWidth / 2;
-    });
-
-    box.addEventListener('touchmove', function(event) {
-        // Update ending x-coordinate when touch is moved
-        endX = event.touches[0].clientX - window.innerWidth / 2;
-      // Update coordinates display
-  //    coordinatesDisplay.textContent = 'Start X: ' + startX + ', End X: ' + endX;
-
-if (endX > startX) {
- 
-  location.href = "home3.html";
-}
-
-if (endX < startX) {
- 
- location.href = "index.html";
-}
-
-
-
-});*/
+    if (startX - endX > threshold) {
+        // Swipe from right to left
+        var nextPageLink = document.getElementById('nextPage').href;
+        if (nextPageLink) {
+            window.location.href = nextPageLink;
+        }
+    } else if (endX - startX > threshold) {
+        // Swipe from left to right
+        var prevPageLink = document.getElementById('prevPage').href;
+        if (prevPageLink) {
+            window.location.href = prevPageLink;
+        }
+    }
+});
 
     </script>
 </body>

@@ -32,8 +32,8 @@
 
 <div class="scrollmenu">
     <a href="index.html "style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">Home 1</a>
-    <a href="home2.html" id="prevPage">Home 2</a>
-    <a href="home3.html" id ="nextPage">Home  3</a>
+    <a href="home2.html" id="nextPage">Home 2</a>
+    <a href="home3.html" >Home  3</a>
     <a href="home4.html">Home  4</a>
     <a href="home5.html">Home  5</a>
     <a href="home6.html">Home  6</a>
@@ -206,13 +206,7 @@ window.addEventListener('touchend', function(event) {
         if (nextPageLink) {
             window.location.href = nextPageLink;
         }
-    } else if (endX - startX > threshold) {
-        // Swipe from left to right
-        var prevPageLink = document.getElementById('prevPage').href;
-        if (prevPageLink) {
-            window.location.href = prevPageLink;
-        }
-    }
+    } 
 });
     </script>
 </body>
