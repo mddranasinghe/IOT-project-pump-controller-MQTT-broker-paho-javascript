@@ -10,6 +10,15 @@
         .box1,.box2{
               background-color: rgb(221, 237, 129);
           }
+body{
+
+          animation: loadingAnimation 0.1s linear forwards; }
+
+          @keyframes loadingAnimation {
+  from { width: 0; } /* Start width */
+  to { width: 100%; } /* End width */
+}
+
         </style>
 </head>
 <body>
@@ -41,7 +50,7 @@
 
 
     <br>
-<main style="margin-top: 2%;">
+<main style="margin-top: 2%;      width: 100%;" id="main1">
     <div class="box1" id="bedroom">
         <div class="circle"><img src="bedroom.png "  class="img" ></div>
         <h4>Bed Room</h4>
