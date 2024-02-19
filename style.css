@@ -6,7 +6,7 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
+/*
 body{
     position: absolute;
   top: 0;
@@ -14,12 +14,12 @@ body{
   width: 0;
   height: 100%;
 
-animation: loadingAnimation 0.5s linear forwards; }
-
+animation: loadingAnimation 0.5s linear forwards; }*/
+/*
 @keyframes loadingAnimation {
-from { width: 0; } /* Start width */
-to { width: 100%; } /* End width */
-}
+from { width: 0; } 
+to { width: 100%; } }
+*/
 
 .container {
 	width: 1000px;
@@ -147,6 +147,7 @@ margin-left: -80%;
        padding:40px;
        border-radius:  20px 20px;
        float: left;
+       margin-left: 10px;
      
   
        
@@ -246,7 +247,7 @@ display: inline-block;
         margin-bottom: 10px;
     }
     .box1,.box2 {
-        width: 45%; 
+        width: 42%; 
         margin-bottom: 20px;
         padding: 10px; 
         box-sizing: border-box;
@@ -269,7 +270,7 @@ display: inline-block;
         text-align: center;
     }
     
-   
+
 }
 
 @media only screen and (min-width: 600px) {
@@ -284,7 +285,7 @@ display: inline-block;
         margin-bottom: 10px;
     }
     .box1, .box2 {
-        width: 47%; 
+        width: 45%; 
         margin-bottom: 20px;
         margin-right: 10px;
         padding-left: 10px;
@@ -308,6 +309,7 @@ display: inline-block;
         margin: 0 auto;
         text-align: center;
     }
+ 
 }
 
 
@@ -323,7 +325,7 @@ display: inline-block;
         margin-bottom: 10px;
     }
     .box1, .box2 {
-        width: 48.5%; 
+        width: 47%; 
         margin-bottom: 20px;
         padding: 35px; 
         box-sizing: border-box;
