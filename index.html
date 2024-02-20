@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    
     <style>
 
 
@@ -13,9 +16,11 @@
     </style>  
 </head>
 <body>
+
+  
     <div class="container">
        
-        
+       
   
       <!-- <img src="log.jpg"  id="logo"style=" display:block;
         margin-left: auto;
@@ -108,17 +113,64 @@
             <div class="dot" id="page3"></div>
             <div class="dot" id="page4"></div>
             <div class="dot" id="page5"></div>
-            <div class="dot" id="page6"></div>
+            <div class="dot" id="page6"> </div>
+            <div style="margin-top: -15px; background-color:#e5e7eb ;" id="wifilog">
+                
+                <img src="disconnect.png"  id="disconnect" style=" background-color: aliceblue;width: 20px; height: 20px; margin-left: 40%;">
+            
+                <img src="connect.png"  id="green" style=" display:none; background-color: aliceblue;width: 40px; height: 20px; margin-left: 40%; " >
+            
             </div>
+            </div>
+          
         </mian>
     </div>
 
-
-  
+ 
+   
+<script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
     <script>
+       var disconnect=document.getElementById('disconnect');
+       var green=document.getElementById('green');
+
+        var client = new Paho.MQTT.Client('broker.hivemq.com', 8000, 'dinuka');
+
+        client.onConnectionLost = onConnectionLost;
+
+        client.connect({onSuccess:onConnect});
+
+        function onConnect() {
+  // Once a connection has been made, make a subscription and send a message.
+  console.log("onConnect");
+  client.subscribe("World");
+  message = new Paho.MQTT.Message("Hello");
+  message.destinationName = "World";
+  client.send(message);
+  //disconnect.style.display="none";
+  green.style.display="inline";
+  disconnect.style.display="none";
+}
+
+
+function onConnectionLost(responseObject) {
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost:"+responseObject.errorMessage);
+    
+    green.style.display="none";
+    disconnect.style.display="inline";
+  }
+  
+}
 
 
 
+
+/*function displayConnectionStatus(messages)
+{
+    var connection_status=document.getElementById('connection_status');
+    connection_status.textContent  = messages;
+}
+*/
 
 /*widgest*/
 document.getElementById("bedroom").onclick=function(){location.href="page1.html"}
@@ -150,45 +202,6 @@ specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
 };
 
 
-/*center the specified <a> tag*/
-
-
-
-    /*var box = document.getElementById('main');
-  
-
-    //var coordinatesDisplay = document.getElementById('coordinates');
-
-    // Variables to store starting and ending x-coordinates
-    var startX = 0;
-    var endX = 0;
-
-
-    box.addEventListener('touchstart', function(event) {
-        // Capture starting x-coordinate when touch starts
-        startX = event.touches[0].clientX - window.innerWidth / 2;
-    });
-
-    box.addEventListener('touchmove', function(event) {
-        // Update ending x-coordinate when touch is moved
-        endX = event.touches[0].clientX - window.innerWidth / 2;
-
-        // Update coordinates display
-    //    coordinatesDisplay.textContent = 'Start X: ' + startX + ', End X: ' + endX;
-  
-if (endX > startX) {
-   
-    location.href = "home2.html";
-}
-  
-if (endX < startX) {
-   
-   location.href = "home3.html";
-}
-
-
-  
-});*/
 	
 var startX = 0;
 
@@ -208,6 +221,7 @@ window.addEventListener('touchend', function(event) {
         }
     } 
 });
+
     </script>
 </body>
 </html>

@@ -16,7 +16,7 @@
         top: 10px;
         left: 10px;
     }
-        </style>
+    </style>
 </head>
 <body>
     <div class="container">
@@ -99,10 +99,6 @@
     <p> 6 Devices </p>
     </div>
 
-
-
-
-
     <br><br>
 
 
@@ -117,7 +113,29 @@
             </div>
         </mian>
     </div>
+   
     <script>
+        var client = mqtt.connect('mqtt://test.mosquitto.org');
+
+        client.on('connect', function () {
+            console.log('Connected to MQTT broker');
+            // Subscribe to topics or perform other actions once connected
+            client.subscribe('test/topic', function (err) {
+                if (!err) {
+                    console.log('Subscribed to topic: test/topic');
+                }
+            });
+        });
+
+        client.on('message', function (topic, message) {
+            // Handle incoming messages
+            console.log('Received message:', message.toString());
+            // Example: Update HTML content based on received message
+            document.getElementById('coordinates').innerHTML = message.toString();
+        });
+    </script>
+
+<script>
  
 
 
@@ -142,9 +160,11 @@ document.getElementById("page6").onclick=function(){location.href="home6.html"}
 
 /*center the specified <a> tag*/
 
+/*center the specified <a> tag*/
+
     window.onload=function()
 {
-var specifiedtag=document.querySelector('.scrollmenu a[href="home2.html"]');
+var specifiedtag=document.querySelector('.scrollmenu a[href="home3.html"]');
 if(specifiedtag)
 {
 specifiedtag.classList.add('centered');
@@ -153,6 +173,8 @@ specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 };
+
+
 
 	
 var startX = 0;
