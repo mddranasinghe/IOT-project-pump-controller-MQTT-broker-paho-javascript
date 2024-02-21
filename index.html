@@ -143,8 +143,11 @@ client = new Paho.MQTT.Client(brokerUrl, 'dinuka');*/
 
         client.onConnectionLost = onConnectionLost;
 
-        client.connect({onSuccess:onConnect});
-         useSSL: true;
+        client.connect({
+    onSuccess: onConnect,
+    useSSL: true 
+});
+        
 
         function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
