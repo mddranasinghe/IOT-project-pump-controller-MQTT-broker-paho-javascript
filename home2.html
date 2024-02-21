@@ -161,7 +161,12 @@ function onConnectionLost(responseObject) {
 }
 
 
-
+window.onload=function(){
+    var specifiedtag=document.querySelector('.scrollmenu a[href="home2.html"]');
+        if(specifiedtag){
+        specifiedtag.classList.add('centered');
+        specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
+        }};
 
 
  </script>

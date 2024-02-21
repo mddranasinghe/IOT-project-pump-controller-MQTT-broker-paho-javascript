@@ -60,7 +60,7 @@
         <h4>Bed Room</h4>
         <p> 7 Devices </p>
     </div>
-    
+
     <br><br>
         <div class="dotdiv">
             <div class="dot" id="page1"></div>
@@ -124,6 +124,14 @@
         disconnect.style.display="inline";
       }
     }
+
+
+    window.onload=function(){
+    var specifiedtag=document.querySelector('.scrollmenu a[href="home3.html"]');
+        if(specifiedtag){
+        specifiedtag.classList.add('centered');
+        specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
+        }};
 </script>
 </body>
  </html>
