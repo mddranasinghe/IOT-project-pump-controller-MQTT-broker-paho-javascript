@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    
+   
     <style>
         .box1,.box2{
               background-color: rgb(221, 237, 129);
@@ -14,6 +14,7 @@
         </style>
 </head>
 <body>
+    <script src="m.js"></script>
     <div class="container">
   
       <!-- <img src="log.jpg"  id="logo"style=" display:block;
@@ -98,7 +99,7 @@
             </div>
         </mian>
     </div>
-   
+
 <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
 <script>
    var disconnect=document.getElementById('disconnect');
@@ -133,46 +134,22 @@ disconnect.style.display="inline";
 
 }
 
- 
-
-
-/*widgest*/
-document.getElementById("bedroom").onclick=function(){location.href="page1.html"}
-document.getElementById("kitchen").onclick=function(){location.href="page1.html"}
-document.getElementById("livingroom").onclick=function(){location.href="page1.html"}
-document.getElementById("meeting").onclick=function(){location.href="page1.html"}
-
-
-/*dot---*/
-document.getElementById("page1").onclick=function(){location.href="index.html"}
-document.getElementById("page2").onclick=function(){location.href="home2.html"}
-document.getElementById("page3").onclick=function(){location.href="home3.html"}
-document.getElementById("page4").onclick=function(){location.href="home4.html"}
-document.getElementById("page5").onclick=function(){location.href="home5.html"}
-document.getElementById("page6").onclick=function(){location.href="home6.html"}
-
 
 /*center the specified <a> tag one screen*/
 
 /*center the specified <a> tag*/
-
-    window.onload=function()
+ window.onload=function()
 {
 var specifiedtag=document.querySelector('.scrollmenu a[href="home3.html"]');
 if(specifiedtag)
 {
 specifiedtag.classList.add('centered');
 specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
-
-}
-
-};
-
-
-
+}};
 	
-var startX = 0;
 
+// touch event js/////////////////////////////////////////////////////////////////////
+var startX = 0;
 window.addEventListener('touchstart', function(event) {
     startX = event.touches[0].clientX;
 });
@@ -196,6 +173,6 @@ window.addEventListener('touchend', function(event) {
     }
 });
 
-    </script>
+</script>
 </body>
 </html>
