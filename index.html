@@ -139,7 +139,7 @@ var brokerUrl = protocol + 'test.mosquitto.org:8080';
 
 client = new Paho.MQTT.Client(brokerUrl, 'dinuka');*/
 
-        var client = new Paho.MQTT.Client('broker.hivemq.com', 443 , 'dinuka');
+        var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');
 
         client.onConnectionLost = onConnectionLost;
 
