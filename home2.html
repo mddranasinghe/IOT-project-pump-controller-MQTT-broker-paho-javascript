@@ -6,19 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">  
-    
-    
-   
     <style>
         .box1,.box2{
               background-color: rgb(200, 242, 251);
           }
-
-          #coordinates {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-    }
     </style>
 </head>
 <body>
@@ -113,20 +104,14 @@
         </mian>
     </div>
 
+
     
-    
-<script src="m.js"></script>
-   
+<script src="main.js"></script>
 <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
     <script>
        var disconnect=document.getElementById('disconnect');
        var green=document.getElementById('green');
 
-       
-     /*  var protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
-var brokerUrl = protocol + 'test.mosquitto.org:8080';
-
-client = new Paho.MQTT.Client(brokerUrl, 'dinuka');*/
 var protocol = window.location.protocol
 console.log(protocol);
 

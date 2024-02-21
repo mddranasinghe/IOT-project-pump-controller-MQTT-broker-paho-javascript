@@ -14,19 +14,6 @@
 </head>
 <body>
     <div class="container">
-  
-      <!-- <img src="log.jpg"  id="logo"style=" display:block;
-        margin-left: auto;
-        margin-right: auto;"> --> 
-<main>
-
-   <!--<div class="b1"> <button id="dashboardsbutton" >Dashboards</button></div>
-
-    <div class="b1"><button id="scenebutton" >Sceneoooo</button></div>
-
-    <div class="b1"><button id="scenebutton" >Sceneoooo</button></div>-->
-
-</main>
 
 <div class="scrollmenu">
     <a href="index.html ">Home 1</a>
@@ -102,19 +89,39 @@
             </div>
         </mian>
     </div>
-  
-    <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
+     
+<script src="main.js"></script>
+   
+<script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
     <script>
        var disconnect=document.getElementById('disconnect');
        var green=document.getElementById('green');
 
-        var client = new Paho.MQTT.Client('broker.hivemq.com', 8000, 'dinuka');
+
+var protocol = window.location.protocol
+console.log(protocol);
+
+if(protocol == "https:"){
+        var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');
 
         client.onConnectionLost = onConnectionLost;
 
-        client.connect({onSuccess:onConnect});
+        client.connect({
+        onSuccess: onConnect,
+        useSSL: true 
+        });
+}else{
+    var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka');
 
-        function onConnect() {
+       client.onConnectionLost = onConnectionLost;
+
+       client.connect({
+       onSuccess: onConnect,
+
+});
+
+}        
+function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
   console.log("onConnect");
   client.subscribe("World");
@@ -137,76 +144,10 @@ function onConnectionLost(responseObject) {
   
 }
 
- 
- function startup() {
-        const el = document.getElementById("canvas");
-        el.addEventListener("touchstart", handleStart);
-        el.addEventListener("touchend", handleEnd);
-        el.addEventListener("touchcancel", handleCancel);
-        el.addEventListener("touchmove", handleMove);
-        log("Initialized.");
-      }
-      
-      document.addEventListener("DOMContentLoaded", startup);
-/*widgest*/
-document.getElementById("bedroom").onclick=function(){location.href="page1.html"}
-document.getElementById("kitchen").onclick=function(){location.href="page1.html"}
-document.getElementById("livingroom").onclick=function(){location.href="page1.html"}
-document.getElementById("meeting").onclick=function(){location.href="page1.html"}
-
-
-/*dot---*/
-document.getElementById("page1").onclick=function(){location.href="index.html"}
-document.getElementById("page2").onclick=function(){location.href="home2.html"}
-document.getElementById("page3").onclick=function(){location.href="home3.html"}
-document.getElementById("page4").onclick=function(){location.href="home4.html"}
-document.getElementById("page5").onclick=function(){location.href="home5.html"}
-document.getElementById("page6").onclick=function(){location.href="home6.html"}
-
-
-/*center the specified <a> tag one screen*/
-
-/*center the specified <a> tag*/
-
-    window.onload=function()
-{
-var specifiedtag=document.querySelector('.scrollmenu a[href="home5.html"]');
-if(specifiedtag)
-{
-specifiedtag.classList.add('centered');
-specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
-
-}
-
-};
 
 
 
-	
-var startX = 0;
 
-window.addEventListener('touchstart', function(event) {
-    startX = event.touches[0].clientX;
-});
-
-window.addEventListener('touchend', function(event) {
-    var endX = event.changedTouches[0].clientX;
-    var threshold = 50; // Minimum distance required to trigger navigation (in pixels)
-
-    if (startX - endX > threshold) {
-        // Swipe from right to left
-        var nextPageLink = document.getElementById('nextPage').href;
-        if (nextPageLink) {
-            window.location.href = nextPageLink;
-        }
-    } else if (endX - startX > threshold) {
-        // Swipe from left to right
-        var prevPageLink = document.getElementById('prevPage').href;
-        if (prevPageLink) {
-            window.location.href = prevPageLink;
-        }
-    }
-});
-    </script>
+ </script>
 </body>
 </html>

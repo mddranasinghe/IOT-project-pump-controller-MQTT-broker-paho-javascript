@@ -11,25 +11,10 @@
               background-color: rgb(221, 237, 129);
           }
 
-        </style>
+    </style>
 </head>
 <body>
-    <script src="m.js"></script>
-    <div class="container">
-  
-      <!-- <img src="log.jpg"  id="logo"style=" display:block;
-        margin-left: auto;
-        margin-right: auto;"> --> 
-<main>
-
-   <!--<div class="b1"> <button id="dashboardsbutton" >Dashboards</button></div>
-
-    <div class="b1"><button id="scenebutton" >Sceneoooo</button></div>
-
-    <div class="b1"><button id="scenebutton" >Sceneoooo</button></div>-->
-
-</main>
-
+<div class="container">
 <div class="scrollmenu">
     <a href="index.html ">Home 1</a>
     <a href="home2.html" id="prevPage" >Home  2</a>
@@ -75,11 +60,7 @@
         <h4>Bed Room</h4>
         <p> 7 Devices </p>
     </div>
-
-
-
-
-
+    
     <br><br>
         <div class="dotdiv">
             <div class="dot" id="page1"></div>
@@ -100,79 +81,49 @@
         </mian>
     </div>
 
-<script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
-<script>
-   var disconnect=document.getElementById('disconnect');
-   var green=document.getElementById('green');
-
-    var client = new Paho.MQTT.Client('broker.hivemq.com', 8000, 'dinuka');
-
-    client.onConnectionLost = onConnectionLost;
-
-    client.connect({onSuccess:onConnect});
-
-    function onConnect() {
-// Once a connection has been made, make a subscription and send a message.
-console.log("onConnect");
-client.subscribe("World");
-message = new Paho.MQTT.Message("Hello");
-message.destinationName = "World";
-client.send(message);
-//disconnect.style.display="none";
-green.style.display="inline";
-disconnect.style.display="none";
-}
 
 
-function onConnectionLost(responseObject) {
-if (responseObject.errorCode !== 0) {
-console.log("onConnectionLost:"+responseObject.errorMessage);
-
-green.style.display="none";
-disconnect.style.display="inline";
-}
-
-}
-
-
-/*center the specified <a> tag one screen*/
-
-/*center the specified <a> tag*/
- window.onload=function()
-{
-var specifiedtag=document.querySelector('.scrollmenu a[href="home3.html"]');
-if(specifiedtag)
-{
-specifiedtag.classList.add('centered');
-specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
-}};
-	
-
-// touch event js/////////////////////////////////////////////////////////////////////
-var startX = 0;
-window.addEventListener('touchstart', function(event) {
-    startX = event.touches[0].clientX;
-});
-
-window.addEventListener('touchend', function(event) {
-    var endX = event.changedTouches[0].clientX;
-    var threshold = 50; // Minimum distance required to trigger navigation (in pixels)
-
-    if (startX - endX > threshold) {
-        // Swipe from right to left
-        var nextPageLink = document.getElementById('nextPage').href;
-        if (nextPageLink) {
-            window.location.href = nextPageLink;
-        }
-    } else if (endX - startX > threshold) {
-        // Swipe from left to right
-        var prevPageLink = document.getElementById('prevPage').href;
-        if (prevPageLink) {
-            window.location.href = prevPageLink;
-        }
+   
+<script src="main.js"></script>
+ <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
+ <script>
+           var disconnect=document.getElementById('disconnect');
+           var green=document.getElementById('green');
+         
+    var protocol = window.location.protocol
+    console.log(protocol);
+    
+    if(protocol == "https:"){
+            var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');//wss.....
+            client.onConnectionLost = onConnectionLost;
+            client.connect({
+            onSuccess: onConnect,
+            useSSL: true 
+            });
+    }else{
+        var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka');//ws...
+           client.onConnectionLost = onConnectionLost;
+           client.connect({
+           onSuccess: onConnect, });
     }
-});
-
+            function onConnect() {
+      // Once a connection has been made, make a subscription and send a message.
+      console.log("onConnect");
+      client.subscribe("World");
+      message = new Paho.MQTT.Message("Hello");
+      message.destinationName = "World";
+      client.send(message);
+      //disconnect.style.display="none";
+      green.style.display="inline";
+      disconnect.style.display="none";
+    }
+    function onConnectionLost(responseObject) {
+      if (responseObject.errorCode !== 0) {
+        console.log("onConnectionLost:"+responseObject.errorMessage);
+        green.style.display="none";
+        disconnect.style.display="inline";
+      }
+    }
 </script>
 </body>
-</html>
+ </html>
