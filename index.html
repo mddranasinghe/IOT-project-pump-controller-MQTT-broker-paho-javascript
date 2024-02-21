@@ -138,15 +138,29 @@
 var brokerUrl = protocol + 'test.mosquitto.org:8080';
 
 client = new Paho.MQTT.Client(brokerUrl, 'dinuka');*/
+var protocol = window.location.protocol
+console.log(protocol);
 
+if(protocol == "https:"){
         var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');
 
         client.onConnectionLost = onConnectionLost;
 
         client.connect({
-    onSuccess: onConnect,
-    useSSL: true 
+        onSuccess: onConnect,
+        useSSL: true 
+        });
+}else{
+    var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka');
+
+       client.onConnectionLost = onConnectionLost;
+
+       client.connect({
+       onSuccess: onConnect,
+
 });
+
+}
         
 
         function onConnect() {
