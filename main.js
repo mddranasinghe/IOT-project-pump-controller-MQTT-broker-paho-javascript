@@ -44,7 +44,12 @@ window.addEventListener('touchend', function(event) {
 
 
 
-
+window.onload=function(){
+    var specifiedtag=document.querySelector('.scrollmenu a[href="index.html"]');
+        if(specifiedtag){
+        specifiedtag.classList.add('centered');
+        specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
+        }};
 window.onload=function(){
     var specifiedtag=document.querySelector('.scrollmenu a[href="home2.html"]');
         if(specifiedtag){
