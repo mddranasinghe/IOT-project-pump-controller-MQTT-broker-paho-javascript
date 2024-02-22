@@ -146,6 +146,13 @@ if(protocol == "https:"){
   //disconnect.style.display="none";
   green.style.display="inline";
   disconnect.style.display="none";
+
+  var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
+
+dot.forEach(function(element) {
+// Apply styles to each element
+element.style.backgroundColor = "green";
+});
 }
 
 

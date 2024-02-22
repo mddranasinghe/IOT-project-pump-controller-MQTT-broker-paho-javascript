@@ -70,7 +70,7 @@
             <div class="dot" id="page5"></div>
             <div class="dot" id="page6" ></div>
 
-            <div style="margin-top: -15px; background-color:#e5e7eb ;" id="wifilog">
+            <div style="margin-top: -15px; background-color:white ;" id="wifilog">
                 
                 <img src="disconnect.png"  id="disconnect" style=" background-color: aliceblue;width: 20px; height: 20px; margin-left: 40%;">
             
@@ -89,6 +89,8 @@
  <script>
            var disconnect=document.getElementById('disconnect');
            var green=document.getElementById('green');
+           var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
+
          
     var protocol = window.location.protocol
     console.log(protocol);
@@ -113,16 +115,28 @@
       message = new Paho.MQTT.Message("Hello");
       message.destinationName = "World";
       client.send(message);
-      //disconnect.style.display="none";
       green.style.display="inline";
       disconnect.style.display="none";
+
+      var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
+
+        dot.forEach(function(element) {
+    // Apply styles to each element
+       element.style.backgroundColor = "green";
+});
+
     }
     function onConnectionLost(responseObject) {
       if (responseObject.errorCode !== 0) {
         console.log("onConnectionLost:"+responseObject.errorMessage);
         green.style.display="none";
         disconnect.style.display="inline";
+          
+  
+
+
       }
+
     }
 
 
