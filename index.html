@@ -114,13 +114,13 @@
             <div class="dot" id="page4"></div>
             <div class="dot" id="page5"></div>
             <div class="dot" id="page6"> </div>
-            <div style="margin-top: -15px; background-color:#e5e7eb ;" id="wifilog">
+         <!--   <div style="margin-top: -15px; background-color:#e5e7eb ;" id="wifilog">
                 
                 <img src="disconnect.png"  id="disconnect" style=" background-color: aliceblue;width: 20px; height: 20px; margin-left: 40%;">
             
                 <img src="connect.png"  id="green" style=" display:none; background-color: aliceblue;width: 40px; height: 20px; margin-left: 40%; " >
             
-            </div>
+            </div>-->
             </div>
           
         </mian>
@@ -170,9 +170,9 @@ if(protocol == "https:"){
   message = new Paho.MQTT.Message("Hello");
   message.destinationName = "World";
   client.send(message);
+  
+ // green.style.display="inline";
   //disconnect.style.display="none";
-  green.style.display="inline";
-  disconnect.style.display="none";
 
   var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
 
@@ -189,11 +189,11 @@ function onConnectionLost(responseObject) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
     var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
     dot.forEach(function(element) {
-    // Apply styles to each element
-     element.style.backgroundColor="red";
+     element.style.backgroundColor="#b4b4b0";
     });
-    green.style.display="none";
-    disconnect.style.display="inline";
+
+    //green.style.display="none";
+    //disconnect.style.display="inline";
 
 
   }
