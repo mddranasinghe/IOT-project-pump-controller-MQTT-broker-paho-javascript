@@ -63,8 +63,8 @@
 
     <br><br>
         <div class="dotdiv">
-            <div class="dot" id="page1" style="background-color:#b4b4b0; display:none;"></div>
-            <div class="dot" id="page2" style="background-color:#b4b4b0; display:none;"></div>
+            <div class="dot" id="page1" style="background-color:#b4b4b0; display: none;"></div>
+            <div class="dot" id="page2" style="background-color:#b4b4b0; "></div>
             <div class="dot" id="page3"style="width: 10px; height: 10px; background-color:#b4b4b0;"></div>
             <div class="dot" id ="page4" style="background-color:#b4b4b0;"></div>
             <div class="dot" id="page5" style="background-color:#b4b4b0;"></div>
@@ -118,6 +118,7 @@
       client.send(message);
       green.style.display="inline";
       disconnect.style.display="none";
+      p.style.display="inline-block";
 
      var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
     dot.forEach(function(element) {
