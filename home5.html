@@ -145,8 +145,14 @@ function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
     
-   // green.style.display="none";
-   // disconnect.style.display="inline";
+    green.style.display="none";
+    disconnect.style.display="inline";
+
+    var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
+    dot.forEach(function(element) {
+    // Apply styles to each element
+     element.style.backgroundColor="red";
+    });
   }
   
 }

@@ -187,9 +187,15 @@ element.style.backgroundColor = "green";
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
-    
+    var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
+    dot.forEach(function(element) {
+    // Apply styles to each element
+     element.style.backgroundColor="red";
+    });
     green.style.display="none";
     disconnect.style.display="inline";
+
+
   }
   
 }
