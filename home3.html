@@ -63,18 +63,18 @@
 
     <br><br>
         <div class="dotdiv">
-            <div class="dot" id="page1"></div>
-            <div class="dot" id="page2" ></div>
-            <div class="dot" id="page3"style="width: 10px; height: 10px;"></div>
-            <div class="dot" id ="page4"></div>
-            <div class="dot" id="page5"></div>
-            <div class="dot" id="page6" ></div>
+            <div class="dot" id="page1" style="background-color:  #b4b4b0;"></div>
+            <div class="dot" id="page2" style="background-color:  #b4b4b0;"></div>
+            <div class="dot" id="page3"style="width: 10px; height: 10px; background-color:  #b4b4b0;"></div>
+            <div class="dot" id ="page4" style="background-color:  #b4b4b0;"></div>
+            <div class="dot" id="page5" style="background-color:  #b4b4b0;"></div>
+            <div class="dot" id="page6" style="background-color:  #b4b4b0;"></div>
 
             <div style="margin-top: -15px; background-color:white ;" id="wifilog">
                 
                 <img src="disconnect.png"  id="disconnect" style=" background-color: aliceblue;width: 20px; height: 20px; margin-left: 40%;">
             
-                <img src="connect.png"  id="green" style=" display:none; background-color: aliceblue;width: 40px; height: 20px; margin-left: 40%; " >
+                <img src="connect.png"  id="green"  style=" display: none; background-color: aliceblue;width: 40px; height: 20px; margin-left: 40%; " >
             
             </div>
             </div>
@@ -89,7 +89,7 @@
  <script>
            var disconnect=document.getElementById('disconnect');
            var green=document.getElementById('green');
-           var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
+          // var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
 
          
     var protocol = window.location.protocol
@@ -118,26 +118,19 @@
       green.style.display="inline";
       disconnect.style.display="none";
 
-      var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
-
-        dot.forEach(function(element) {
+     var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
+    dot.forEach(function(element) {
     // Apply styles to each element
-       element.style.backgroundColor = "green";
-});
+     element.style.backgroundColor = "green";
+    });
 
     }
+
     function onConnectionLost(responseObject) {
-      if (responseObject.errorCode !== 0) {
-        console.log("onConnectionLost:"+responseObject.errorMessage);
-        green.style.display="none";
-        disconnect.style.display="inline";
-          
-  
-
-
-      }
-
-    }
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost:"+responseObject.errorMessage);
+  }
+}
 
 
     window.onload=function(){
