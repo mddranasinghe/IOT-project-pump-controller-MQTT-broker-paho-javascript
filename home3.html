@@ -87,6 +87,7 @@
 <script src="main.js"></script>
  <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
  <script>
+    var p=document.getElementById('page1');
            var disconnect=document.getElementById('disconnect');
            var green=document.getElementById('green');
           // var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
@@ -132,6 +133,7 @@
 
     green.style.display="none";
     disconnect.style.display="inline";
+    p.style.backgroundColor='red';
   }
 }
 
