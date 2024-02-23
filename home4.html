@@ -101,6 +101,7 @@
    
 <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
     <script>
+             var page4=document.getElementById('page4');
        var disconnect=document.getElementById('disconnect');
        var green=document.getElementById('green');
 
@@ -136,22 +137,14 @@ if(protocol == "https:"){
   message = new Paho.MQTT.Message("Hello");
   message.destinationName = "World";
   client.send(message);
-  
-var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
-dot.forEach(function(element) {
-element.style.backgroundColor = "green";
-});
+  page4.style.backgroundColor="green";
 }
 
 
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
-    
-    var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
-    dot.forEach(function(element) {
-     element.style.backgroundColor="#b4b4b0";
-    });
+    page4.style.backgroundColor="red";
   }
   
 }
