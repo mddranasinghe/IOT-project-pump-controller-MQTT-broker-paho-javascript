@@ -1,7 +1,7 @@
 
 
 // index.html page water pump 
-document.getElementById("waterpump").onclick=function(){location.href="waterpump.html"}
+
 
 /*widgest*/
 document.getElementById("bedroom").onclick=function(){location.href="page1.html"}
