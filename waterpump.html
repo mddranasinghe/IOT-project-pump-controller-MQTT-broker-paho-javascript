@@ -239,6 +239,10 @@
           document.getElementById("pumppower_mainpump").disabled = true;
           document.getElementById("pumptimer_mainpump").disabled = true;
         }
+        else{
+          document.getElementById("pumppower_mainpump").disabled = false;
+          document.getElementById("pumptimer_mainpump").disabled = false;
+        }
         
 
       });
@@ -249,8 +253,12 @@
         if (this.checked) {
           document.getElementById("pumppower_tubewell").disabled = true;
           document.getElementById("pumptimer_tubewell").disabled = true;
-          
        } 
+       else{
+        document.getElementById("pumppower_tubewell").disabled = false;
+          document.getElementById("pumptimer_tubewell").disabled = false;
+
+       }
       });
 
 
