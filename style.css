@@ -143,9 +143,10 @@ margin-left: -80%;
      
       background-color:white;
        text-align:center;
-       border-style:groove;
+       box-shadow: 0.5px 0.5px 3px 0.5px gray;
+       
        padding:40px;
-       border-radius:  20px 20px;
+       border-radius:  10px 10px;
        float: left;
        margin-left: 10px;
      
