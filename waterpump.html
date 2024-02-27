@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>water pump</title>
+   
+
+
+    <style>
+
+.toggle {
+  position: relative;
+  box-sizing: border-box;
+}
+.toggle input[type="checkbox"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+}
+.toggle label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.toggle label:before {
+  content: '';
+  width: 50px;
+  height: 22px;
+  background: #ccc;
+  position: relative;
+  display: inline-block;
+  border-radius: 46px;
+  box-sizing: border-box;
+  transition: 0.2s ease-in;
+}
+.toggle label:after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  left: 2px;
+  top: 2px;
+  z-index: 2;
+  background: #fff;
+  box-sizing: border-box;
+  transition: 0.2s ease-in;
+}
+
+.toggle input[type="checkbox"]:checked + label:before {
+  background: #4BD865;
+}
+
+.toggle input[type="checkbox"]:checked + label:after {
+  left: 30px;
+}
+
+
+.controlpanels{
+
+    width: 95%;
+    margin: 0 auto;
+}
+
+    .mainpump{
+        width:100%;
+ 
+    }
+
+
+    .status_box {
+  
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 3px;
+        padding-top: 3px;
+        background-color:white;
+        border-style:groove;
+        border-radius: 20px 20px;
+        margin-top:10px;
+        display: flex; /* Use flexbox to align children */
+         align-items: center; /* Align children vertically */
+}
+
+.topic {
+  flex: 1; /* Expand to fill remaining space */
+}
+
+
+.option {
+  margin-left: center; /* Push to the right */
+}
+
+    </style>
+</head>
+<body>
+ 
+    <div class="controlpanels">
+      <table style="width: 100%;"><tr>
+       
+      <td><img src="image\less-than.png" style="width: 30px; height: 35px; "  id="backbutton"></td>
+      <td style="padding-left: 0px; padding-right: 0px;"> <h2 style="text-align: center;">  PUMP CONTROL STATUS</h2></td>
+    </tr></table>
+         <div class="mainpump">
+            <p style="font-size: 20px;">Main Pump Status</p>
+                
+
+                   <div class="status_box">
+                      <div class="topic"><p>AUTO MODE</p></div>
+                      <div class="option">  <div class="toggle">
+                      <input type="checkbox" checked/><label></label></div> 
+                   </div>
+                  </div>
+        
+                  <div class="status_box">
+                      <div class="topic"><p>PUMP POWER</p></div>
+                      <div class="option"> <div class="toggle">
+                      <input type="checkbox" /><label></label> </div>
+                  </div> 
+                </div>
+
+                <div class="status_box">
+                  <div class="topic"><p>O/H TANK FLOATER</p></div>
+                  <div class="option"><P style="color:rgb(70, 184, 110)">ON</P> </div>
+              </div> 
+          
+
+            <div class="status_box">
+              <div class="topic"><p>O/H TANK FLOATER</p></div>
+              <div class="option"><P style="color:rgb(156, 156, 156)">OFF</P> </div>
+          </div> 
+       
+
+        <div class="status_box">
+          <div class="topic"><p>PUMP TIMER</p></div>
+          <div class="option"> <div class="toggle">
+          <input type="checkbox"/><label></label> </div>
+      </div> 
+    </div>
+
+  </div>
+
+
+  <div class="mainpump">
+    <p style="font-size: 20px;">Tubewell Pump Status</p>
+        
+
+           <div class="status_box">
+              <div class="topic"><p>AUTO MODE</p></div>
+              <div class="option">  <div class="toggle">
+              <input type="checkbox"/><label></label></div> 
+           </div>
+          </div>
+
+          <div class="status_box">
+              <div class="topic"><p>PUMP POWER</p></div>
+              <div class="option"> <div class="toggle">
+              <input type="checkbox"/><label></label> </div>
+          </div> 
+        </div>
+
+    <div class="status_box">
+      <div class="topic"><p>TUMBEWELL FLOATER</p></div>
+      <div class="option"><P style="color:rgb(156, 156, 156)">OFF</P> </div>
+  </div> 
+
+
+<div class="status_box">
+  <div class="topic"><p>PUMP TIMER</p></div>
+  <div class="option"> <div class="toggle">
+  <input type="checkbox"/><label></label> </div>
+</div> 
+</div>
+
+</div>
+
+ 
+<div class="mainpump">
+  <p style="font-size: 20px;">System</p>
+      
+
+         <div class="status_box">
+            <div class="topic"><p>SOFT START</p></div>
+            <div class="option">  <div class="toggle">
+            <input type="checkbox"/><label></label></div> 
+         </div>
+        </div>
+
+  <div class="status_box">
+    <div class="topic"><p>FIRMWARE VERSION</p></div>
+    <div class="option"><P style="color:rgb(156, 156, 156)">V1.0</P> </div>
+</div> 
+
+<div class="status_box">
+  <div class="topic"><p>UPTIME</p></div>
+  <div class="option"><P style="color:rgb(156, 156, 156)">00.00.00</P> </div>
+</div> 
+
+
+<div class="status_box">
+  <div class="topic"><p>SSID</p></div>
+  <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
+</div> 
+
+<div class="status_box">
+  <div class="topic"><p>SIGNAL</p></div>
+  <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
+</div> 
+
+<div class="status_box">
+  <div class="topic"><p>TIME</p></div>
+  <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
+</div> 
+
+  </div>      
+    </div>
+
+    </script>
+
+    
+    <script>
+      document.getElementById("backbutton").onclick=function(){location.href="index.html"}
+      </script>
+</body>
+</html>
