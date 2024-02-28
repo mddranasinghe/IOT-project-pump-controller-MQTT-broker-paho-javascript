@@ -74,21 +74,23 @@
                                                 
 }
 
-    .mainpump{
+    .mainpump ,.System ,.Tubewell{
         width:100%;
       box-shadow: 0.5px 0.5px 3px 0.5px gray;
       border-radius: 3px 3px;
+      z-index: 1;
+  
         
     }
 
 
-    .status_box {
+    #status_box {
         padding-left: 20px;
         padding-right: 20px;
-        padding-bottom: 3px;
-        padding-top: 3px;
-        background-color:white;
-        margin-top:10px;
+  
+        background-color:#C2C2C2
+        ;
+      
         display: flex; /* Use flexbox to align children */
          align-items: center; 
 }
@@ -102,6 +104,7 @@
   margin-left: center; /* Push to the right */
 }
 
+
     </style>
 </head>
 <body>
@@ -112,37 +115,38 @@
       <td><img src="image\less-than.png" style="width: 30px; height: 35px; "  id="backbutton"></td>
       <td style="padding-left: 0px; padding-right: 0px;"> <h2 style="text-align: center;">  Pump Control Status</h2></td>
     </tr></table>
-         
-            <p style=" color:grey"><b>Main pump status</b></p>
-  
-            <div class="mainpump" >
-                   <div class="status_box">
+    
+
+            <p style=" color:grey;"><b>Main pump status</b></p>
+        
+            <div class="mainpump">
+                   <div id="status_box">
                       <div class="topic"><p>Auto Mode</p></div>
                       <div class="option">  <div class="toggle">
                       <input type="checkbox" id="automode_mainpump"/><label></label></div> 
                    </div>
                   </div>
         
-                  <div class="status_box">
+                  <div id="status_box">
                       <div class="topic"><p>Pump Power</p></div>
                       <div class="option"> <div class="toggle">
                       <input type="checkbox" id="pumppower_mainpump" /><label></label> </div>
                   </div> 
                 </div>
 
-                <div class="status_box">
+                <div id="status_box">
                   <div class="topic"><p>O/H Tank Floater</p></div>
                   <div class="option"><P style="color:rgb(70, 184, 110)">ON</P> </div>
               </div> 
           
 
-            <div class="status_box">
+            <div id="status_box">
               <div class="topic"><p>Sump Floater</p></div>
               <div class="option"><P style="color:rgb(156, 156, 156)">OFF</P> </div>
           </div> 
        
 
-        <div class="status_box">
+        <div id="status_box">
           <div class="topic"><p>Pump Timer</p></div>
           <div class="option"> <div class="toggle">
           <input type="checkbox" id="pumptimer_mainpump"/><label></label> </div>
@@ -151,33 +155,32 @@
 
   </div>
 
-
     <p style="color:grey"><b>Tubewell Pump Status</b></p>
         
-    <div class="mainpump">
+    <div class="Tubewell" id="s">
 
-           <div class="status_box">
-              <div class="topic"><p>AUTO MODE</p></div>
+           <div id="status_box">
+              <div class="topic"><p>Auto Mode</p></div>
               <div class="option">  <div class="toggle">
               <input type="checkbox" id="automode_tubewell"/><label></label></div> 
            </div>
           </div>
 
-          <div class="status_box">
-              <div class="topic"><p>PUMP POWER</p></div>
+          <div id="status_box">
+              <div class="topic"><p>Pump Power</p></div>
               <div class="option"> <div class="toggle">
               <input type="checkbox" id="pumppower_tubewell"/><label></label> </div>
           </div> 
         </div>
 
-    <div class="status_box">
-      <div class="topic"><p>TUMBEWELL FLOATER</p></div>
+    <div id="status_box">
+      <div class="topic"><p>Tubewell Floater</p></div>
       <div class="option"><P style="color:rgb(156, 156, 156)">OFF</P> </div>
   </div> 
 
 
-<div class="status_box">
-  <div class="topic"><p>PUMP TIMER</p></div>
+<div id="status_box">
+  <div class="topic"><p>Pump Timer</p></div>
   <div class="option"> <div class="toggle">
   <input type="checkbox" id="pumptimer_tubewell"/><label></label> </div>
 </div> 
@@ -188,37 +191,37 @@
  
   <p style="color:grey"><b>System</b></p>
       
-  <div class="mainpump">
+  <div class="System">
 
-         <div class="status_box">
-            <div class="topic"><p>SOFT START</p></div>
+         <div id="status_box">
+            <div class="topic"><p>Soft Start</p></div>
             <div class="option">  <div class="toggle">
             <input type="checkbox"/><label></label></div> 
          </div>
         </div>
 
-  <div class="status_box">
-    <div class="topic"><p>FIRMWARE VERSION</p></div>
+  <div id="status_box">
+    <div class="topic"><p>Firmware Version</p></div>
     <div class="option"><P style="color:rgb(156, 156, 156)">V1.0</P> </div>
 </div> 
 
-<div class="status_box">
+<div id="status_box">
   <div class="topic"><p>UPTIME</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)">00.00.00</P> </div>
 </div> 
 
 
-<div class="status_box">
+<div id="status_box">
   <div class="topic"><p>SSID</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
 </div> 
 
-<div class="status_box">
+<div id="status_box">
   <div class="topic"><p>SIGNAL</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
 </div> 
 
-<div class="status_box">
+<div id="status_box">
   <div class="topic"><p>TIME</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
 </div> 
@@ -226,7 +229,8 @@
   </div>      
     </div>
 
-    </script>
+    <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
+
  
     <script>
       document.getElementById("backbutton").onclick=function(){location.href="index.html"}
@@ -237,6 +241,7 @@
         {
           document.getElementById("pumppower_mainpump").disabled = true;
           document.getElementById("pumptimer_mainpump").disabled = true;
+         
         }
         else{
           document.getElementById("pumppower_mainpump").disabled = false;
@@ -262,10 +267,41 @@
 
 
 
+      //mqtt connection .......................................
+const controlTopic = "node/spc/n2b/7469308fcf871dad4d4/status";
+var protocol = window.location.protocol
 
 
+if(protocol == "https:"){
+        var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');
+        client.onConnectionLost = onConnectionLost;
+        client.connect({
+        onSuccess: onConnect,
+        useSSL: true});
+}else{
+    var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka');
+       client.onConnectionLost = onConnectionLost;
+       client.connect({
+       onSuccess: onConnect,});
+}
+        
+ function onConnect() {
+  console.log("onConnect");
+  client.subscribe(controlTopic);
 
 
-      </script>
+}
+
+function onMessageArrived(message) {}
+
+function onConnectionLost(responseObject) {
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost:"+responseObject.errorMessage);
+    document.getElementById("status_box").style.backgroundColor = "green";
+  }
+  
+}
+
+</script>
 </body>
 </html>
