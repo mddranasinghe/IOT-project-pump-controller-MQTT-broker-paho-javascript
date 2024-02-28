@@ -117,7 +117,7 @@
       <td style="padding-left: 0px; padding-right: 0px;"> <h2 style="text-align: center;">  Pump Control Status</h2></td>
     </tr></table>
     
-<table><tr><td><p style=" color:grey; flex: 1;"><b>Main pump status </b> </p></td><td style="width: 50%; text-align: right;">
+<table><tr style="width: 100%;"><td  style="width: 50%;"><p style=" color:grey; flex: 1;"><b>Main pump status </b> </p></td><td style="width: 50%; text-align: right;">
   <p style="font-size: 15px; color:red; display: none;" id="offline">offline</p> 
   <p style="font-size: 15px; color:#4BD865; display: none;" id="online">online</p></td>
   <td><img src="image\Screenshot (180).png" style="width: 25px; height: 20px; display: none;" id="lostimg">
@@ -137,8 +137,11 @@
         
                   <div id="status_box">
                       <div class="topic"><p>Pump Power</p></div>
-                      <div class="option"> <div class="toggle">
-                      <input type="checkbox" id="pumppower_mainpump" /><label></label> </div>
+                      <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump" >
+                      <input type="checkbox" id="pumppower_mainpump"  /><label></label> 
+                    </div>
+                    <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_mainpower">ON</P>
+                    <p style="display:none; color:rgb(156, 156, 156) ;" >OFF</p>
                   </div> 
                 </div>
 
@@ -169,15 +172,17 @@
 
            <div id="status_box">
               <div class="topic"><p>Auto Mode</p></div>
-              <div class="option">  <div class="toggle">
+              <div class="option">  <div class="toggle" >
               <input type="checkbox" id="automode_tubewell"/><label></label></div> 
            </div>
           </div>
 
           <div id="status_box">
               <div class="topic"><p>Pump Power</p></div>
-              <div class="option"> <div class="toggle">
+              <div class="option"> <div class="toggle" id="toggle_pumppower_tubewell">
               <input type="checkbox" id="pumppower_tubewell"/><label></label> </div>
+              <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_tubewell">ON</P>
+                    <p style="display:none; color:rgb(156, 156, 156) ;" >OFF</p>
           </div> 
         </div>
 
@@ -249,11 +254,16 @@
         {
           document.getElementById("pumppower_mainpump").disabled = true;
           document.getElementById("pumptimer_mainpump").disabled = true;
+          document.getElementById("pumppower_status_mainpower").style.display="inline";
+          document.getElementById("toggle_pumppower_mainpump").style.display="none";
+
          
         }
         else{
           document.getElementById("pumppower_mainpump").disabled = false;
           document.getElementById("pumptimer_mainpump").disabled = false;
+          document.getElementById("pumppower_status_mainpower").style.display="none";
+          document.getElementById("toggle_pumppower_mainpump").style.display="inline";
         }
         
 
@@ -265,11 +275,14 @@
         if (this.checked) {
           document.getElementById("pumppower_tubewell").disabled = true;
           document.getElementById("pumptimer_tubewell").disabled = true;
+          document.getElementById("pumppower_status_tubewell").style.display="inline";
+          document.getElementById("toggle_pumppower_tubewell").style.display="none";
        } 
        else{
         document.getElementById("pumppower_tubewell").disabled = false;
           document.getElementById("pumptimer_tubewell").disabled = false;
-
+          document.getElementById("pumppower_status_tubewell").style.display="none";
+          document.getElementById("toggle_pumppower_tubewell").style.display="inline";
        }
       });
 
