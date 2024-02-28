@@ -71,6 +71,8 @@
     width: 95%;
     margin: 0 auto;
     font-family: 'Avenir', sans-serif;
+   
+  
                                                 
 }
 
@@ -78,9 +80,8 @@
         width:100%;
       box-shadow: 0.5px 0.5px 3px 0.5px gray;
       border-radius: 3px 3px;
-      z-index: 1;
-  
-        
+   
+       
     }
 
 
@@ -88,11 +89,11 @@
         padding-left: 20px;
         padding-right: 20px;
   
-        background-color:#C2C2C2
-        ;
+        background-color:white;
       
         display: flex; /* Use flexbox to align children */
          align-items: center; 
+        
 }
 
 .topic {
@@ -116,10 +117,17 @@
       <td style="padding-left: 0px; padding-right: 0px;"> <h2 style="text-align: center;">  Pump Control Status</h2></td>
     </tr></table>
     
+<table><tr><td><p style=" color:grey; flex: 1;"><b>Main pump status </b> </p></td><td style="width: 50%; text-align: right;">
+  <p style="font-size: 15px; color:red; " id="offline ">offline</p> 
+  <p style="font-size: 15px; color:#4BD865; display: none;" id="online">online</p></td>
+  <td><img src="image\Screenshot (180).png" style="width: 25px; height: 20px;" id="lostimg">
+  <img src="image\connect.png" style="width: 25px; height: 20px; display: none;" id="connectimg">
 
-            <p style=" color:grey;"><b>Main pump status</b></p>
+  </td></tr></table>
+             
         
             <div class="mainpump">
+         
                    <div id="status_box">
                       <div class="topic"><p>Auto Mode</p></div>
                       <div class="option">  <div class="toggle">
@@ -270,7 +278,7 @@
       //mqtt connection .......................................
 const controlTopic = "node/spc/n2b/7469308fcf871dad4d4/status";
 var protocol = window.location.protocol
-
+var back=document.getElementById("status_box");
 
 if(protocol == "https:"){
         var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');
@@ -290,6 +298,14 @@ if(protocol == "https:"){
   client.subscribe(controlTopic);
 
 
+  document.getElementById("lostimg").style.display="none";
+  document.getElementById("offline").style.display="none";
+
+  
+  document.getElementById("connectimg").style.display="inline";
+  document.getElementById("online").style.display="inline";
+
+
 }
 
 function onMessageArrived(message) {}
@@ -297,9 +313,25 @@ function onMessageArrived(message) {}
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
-    document.getElementById("status_box").style.backgroundColor = "green";
-  }
+
+  document.getElementById("automode_tubewell").disabled = true;
+ document.getElementById("automode_mainpump").disabled = true;
+
+  document.getElementById("pumppower_tubewell").disabled = true;
+  document.getElementById("pumptimer_tubewell").disabled = true;
+
+  document.getElementById("pumppower_mainpump").disabled = true;
+ document.getElementById("pumptimer_mainpump").disabled = true;
+
+ document.getElementById("lostimg").style.display="inline";
+  document.getElementById("offline").style.display="inline";
+
   
+  document.getElementById("connectimg").style.display="none";
+  document.getElementById("online").style.display="none";
+
+  }
+ 
 }
 
 </script>
