@@ -287,19 +287,13 @@
 
       var pumptimer_mainpump=document.getElementById('pumptimer_mainpump');
       pumptimer_mainpump.addEventListener('change', function(){
-        if(this.checked)
-        {
+        if(this.checked){
           document.getElementById("label_timer_time").style.display="inline";
           document.getElementById("set_timer_time").style.display="inline"; 
-        }
-        else{
+        }else{
           document.getElementById("label_timer_time").style.display="none";
-          document.getElementById("set_timer_time").style.display="none"; 
-
-        }
-        
-
-      });
+          document.getElementById("set_timer_time").style.display="none"; }
+        });
 
       var pumptimer_tubewell=document.getElementById('pumptimer_tubewell');
       pumptimer_tubewell.addEventListener('change', function(){
@@ -396,13 +390,8 @@ function onConnectionLost(responseObject) {
   var ovarlay=  document.getElementsByClassName("status_box");
 
 for (var i = 0; i < ovarlay.length; i++) {
-ovarlay[i].style.backgroundColor = "#C2C2C2";
-}
-
-
-
+ovarlay[i].style.backgroundColor = "#C2C2C2";}
   }
- 
 }
 
 </script>
