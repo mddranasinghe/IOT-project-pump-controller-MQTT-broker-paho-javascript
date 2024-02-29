@@ -80,14 +80,15 @@
         width:100%;
       box-shadow: 0.5px 0.5px 3px 0.5px gray;
       border-radius: 3px 3px;
-   
+    
        
     }
 
 
-    #status_box {
+    .status_box {
         padding-left: 20px;
         padding-right: 20px;
+        
   
         background-color:white;
       
@@ -103,8 +104,11 @@
 
 .option {
   margin-left: center; /* Push to the right */
+  
 }
 
+#set_timer_time{display: none; border-top: none; border-left: none;border-right:none ;}
+#set_timer_time_tubewell{display: none; border-top: none; border-left: none;border-right:none ;}
 
     </style>
 </head>
@@ -114,10 +118,10 @@
       <table style="width: 100%;"><tr>
        
       <td><img src="image\less-than.png" style="width: 30px; height: 35px; "  id="backbutton"></td>
-      <td style="padding-left: 0px; padding-right: 0px;"> <h2 style="text-align: center;">  Pump Control Status</h2></td>
+      <td> <h2 style="text-align: center;">  Pump Control Status</h2></td>
     </tr></table>
     
-<table><tr style="width: 100%;"><td  style="width: 50%;"><p style=" color:grey; flex: 1;"><b>Main pump status </b> </p></td><td style="width: 50%; text-align: right;">
+<table><tr style="width: 100%;"><td  style="width: 50%;"><p style=" color:grey; margin-bottom: -2px; margin-top: 3px;"><b>Main pump status </b> </p></td><td style="width: 50%; text-align: right;">
   <p style="font-size: 15px; color:red; display: none;" id="offline">offline</p> 
   <p style="font-size: 15px; color:#4BD865; display: none;" id="online">online</p></td>
   <td><img src="image\Screenshot (180).png" style="width: 25px; height: 20px; display: none;" id="lostimg">
@@ -128,14 +132,14 @@
         
             <div class="mainpump">
          
-                   <div id="status_box">
+                   <div class="status_box">
                       <div class="topic"><p>Auto Mode</p></div>
                       <div class="option">  <div class="toggle">
                       <input type="checkbox" id="automode_mainpump"/><label></label></div> 
                    </div>
                   </div>
         
-                  <div id="status_box">
+                  <div class="status_box">
                       <div class="topic"><p>Pump Power</p></div>
                       <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump" >
                       <input type="checkbox" id="pumppower_mainpump"  /><label></label> 
@@ -145,39 +149,46 @@
                   </div> 
                 </div>
 
-                <div id="status_box">
+                <div class="status_box">
                   <div class="topic"><p>O/H Tank Floater</p></div>
                   <div class="option"><P style="color:rgb(70, 184, 110)">ON</P> </div>
               </div> 
           
 
-            <div id="status_box">
+            <div class="status_box">
               <div class="topic"><p>Sump Floater</p></div>
               <div class="option"><P style="color:rgb(156, 156, 156)">OFF</P> </div>
           </div> 
        
 
-        <div id="status_box">
+        <div class="status_box">
           <div class="topic"><p>Pump Timer</p></div>
           <div class="option"> <div class="toggle">
           <input type="checkbox" id="pumptimer_mainpump"/><label></label> </div>
       </div> 
     </div>
 
+         <div class="status_box">
+          <div class="topic"><p id="label_timer_time" style=" padding-bottom: 20; display:none;">Timer Time</p></div>
+          <div class="option" style="padding-bottom:20px ; ">
+          <input type="number" min="1" max="60" id="set_timer_time" /><label></label> </div>
+    
+    </div>
+
   </div>
 
-    <p style="color:grey"><b>Tubewell Pump Status</b></p>
+    <p style="color:grey; margin-bottom: 3px; margin-top: 30px;"><b>Tubewell Pump Status</b></p>
         
     <div class="Tubewell" id="s">
 
-           <div id="status_box">
+           <div class="status_box">
               <div class="topic"><p>Auto Mode</p></div>
               <div class="option">  <div class="toggle" >
               <input type="checkbox" id="automode_tubewell"/><label></label></div> 
            </div>
           </div>
 
-          <div id="status_box">
+          <div class="status_box">
               <div class="topic"><p>Pump Power</p></div>
               <div class="option"> <div class="toggle" id="toggle_pumppower_tubewell">
               <input type="checkbox" id="pumppower_tubewell"/><label></label> </div>
@@ -186,55 +197,60 @@
           </div> 
         </div>
 
-    <div id="status_box">
+    <div class="status_box">
       <div class="topic"><p>Tubewell Floater</p></div>
       <div class="option"><P style="color:rgb(156, 156, 156)">OFF</P> </div>
   </div> 
 
 
-<div id="status_box">
+<div class="status_box">
   <div class="topic"><p>Pump Timer</p></div>
   <div class="option"> <div class="toggle">
   <input type="checkbox" id="pumptimer_tubewell"/><label></label> </div>
 </div> 
 </div>
 
-</div>
+<div class="status_box">
+  <div class="topic"><p id="label_timer_time_tubewell" style=" padding-bottom: 20; display:none;">Timer Time</p></div>
+  <div class="option" style="padding-bottom:20px ; ">
+  <input type="number" min="1" max="60" id="set_timer_time_tubewell" /><label></label> </div>
 
+</div>
+</div>
  
-  <p style="color:grey"><b>System</b></p>
+  <p style="color:grey ; margin-bottom: 3px; margin-top: 30px;"><b>System</b></p>
       
   <div class="System">
 
-         <div id="status_box">
+         <div class="status_box">
             <div class="topic"><p>Soft Start</p></div>
             <div class="option">  <div class="toggle">
             <input type="checkbox"/><label></label></div> 
          </div>
         </div>
 
-  <div id="status_box">
+  <div class="status_box">
     <div class="topic"><p>Firmware Version</p></div>
     <div class="option"><P style="color:rgb(156, 156, 156)">V1.0</P> </div>
 </div> 
 
-<div id="status_box">
+<div class="status_box">
   <div class="topic"><p>UPTIME</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)">00.00.00</P> </div>
 </div> 
 
 
-<div id="status_box">
+<div class="status_box">
   <div class="topic"><p>SSID</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
 </div> 
 
-<div id="status_box">
+<div class="status_box">
   <div class="topic"><p>SIGNAL</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
 </div> 
 
-<div id="status_box">
+<div class="status_box">
   <div class="topic"><p>TIME</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
 </div> 
@@ -264,6 +280,38 @@
           document.getElementById("pumptimer_mainpump").disabled = false;
           document.getElementById("pumppower_status_mainpower").style.display="none";
           document.getElementById("toggle_pumppower_mainpump").style.display="inline";
+        }
+        
+
+      });
+
+      var pumptimer_mainpump=document.getElementById('pumptimer_mainpump');
+      pumptimer_mainpump.addEventListener('change', function(){
+        if(this.checked)
+        {
+          document.getElementById("label_timer_time").style.display="inline";
+          document.getElementById("set_timer_time").style.display="inline"; 
+        }
+        else{
+          document.getElementById("label_timer_time").style.display="none";
+          document.getElementById("set_timer_time").style.display="none"; 
+
+        }
+        
+
+      });
+
+      var pumptimer_tubewell=document.getElementById('pumptimer_tubewell');
+      pumptimer_tubewell.addEventListener('change', function(){
+        if(this.checked)
+        {
+          document.getElementById("label_timer_time_tubewell").style.display="inline";
+          document.getElementById("set_timer_time_tubewell").style.display="inline"; 
+        }
+        else{
+          document.getElementById("label_timer_time_tubewell").style.display="none";
+          document.getElementById("set_timer_time_tubewell").style.display="none"; 
+
         }
         
 
