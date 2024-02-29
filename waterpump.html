@@ -339,7 +339,8 @@
       //mqtt connection .......................................
 const controlTopic = "node/spc/n2b/7469308fcf871dad4d4/status";
 var protocol = window.location.protocol
-var back=document.getElementById("status_box");
+var ovarlay=  document.getElementsByClassName("status_box");
+//var back=document.getElementById("status_box");
 
 if(protocol == "https:"){
         var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');
@@ -390,6 +391,15 @@ function onConnectionLost(responseObject) {
   
   document.getElementById("connectimg").style.display="none";
   document.getElementById("online").style.display="none";
+
+
+  var ovarlay=  document.getElementsByClassName("status_box");
+
+for (var i = 0; i < ovarlay.length; i++) {
+ovarlay[i].style.backgroundColor = "#C2C2C2";
+}
+
+
 
   }
  
