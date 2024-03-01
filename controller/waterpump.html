@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>water pump</title>
    
-
+    <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
 
     <style>
+
 
 .toggle {
   position: relative;
@@ -117,15 +118,15 @@
     <div class="controlpanels">
       <table style="width: 100%;"><tr>
        
-      <td><img src="image\less-than.png" style="width: 30px; height: 35px; "  id="backbutton"></td>
+      <td><img src="../resources/image/less-than.png" style="width: 30px; height: 35px; "  id="backbutton"></td>
       <td> <h2 style="text-align: center;">  Pump Control Status</h2></td>
     </tr></table>
     
 <table><tr style="width: 100%;"><td  style="width: 50%;"><p style=" color:grey; margin-bottom: -2px; margin-top: 3px;"><b>Main pump status </b> </p></td><td style="width: 50%; text-align: right;">
   <p style="font-size: 15px; color:red; display: none;" id="offline">offline</p> 
   <p style="font-size: 15px; color:#4BD865; display: none;" id="online">online</p></td>
-  <td><img src="image\Screenshot (180).png" style="width: 25px; height: 20px; display: none;" id="lostimg">
-  <img src="image\connect.png" style="width: 25px; height: 20px; display: none;" id="connectimg">
+  <td><img src="../resources/image/Screenshot (180).png" style="width: 25px; height: 20px; display: none;" id="lostimg">
+  <img src="../resources/image/connect.png" style="width: 25px; height: 20px; display: none;" id="connectimg">
 
   </td></tr></table>
              
@@ -147,8 +148,8 @@
                     <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_mainpower">ON</P>
                     <p style="display:none; color:rgb(156, 156, 156) ;" >OFF</p>
                   </div> 
-                </div>
 
+                </div>
                 <div class="status_box">
                   <div class="topic"><p>O/H Tank Floater</p></div>
                   <div class="option"><P style="color:rgb(70, 184, 110)">ON</P> </div>
@@ -159,8 +160,7 @@
               <div class="topic"><p>Sump Floater</p></div>
               <div class="option"><P style="color:rgb(156, 156, 156)">OFF</P> </div>
           </div> 
-       
-
+          
         <div class="status_box">
           <div class="topic"><p>Pump Timer</p></div>
           <div class="option"> <div class="toggle">
@@ -258,11 +258,11 @@
   </div>      
     </div>
 
-    <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
+    
 
  
     <script>
-      document.getElementById("backbutton").onclick=function(){location.href="index.html"}
+      document.getElementById("backbutton").onclick=function(){location.href="../index.html"}
 
       var automode_mainpump=document.getElementById('automode_mainpump');
       automode_mainpump.addEventListener('change', function(){
@@ -346,7 +346,7 @@ if(protocol == "https:"){
     var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka');
        client.onConnectionLost = onConnectionLost;
        client.connect({
-       onSuccess: onConnect,});
+       onSuccess: onConnect});
 }
         
  function onConnect() {

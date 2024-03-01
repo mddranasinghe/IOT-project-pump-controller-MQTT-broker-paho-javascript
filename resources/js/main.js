@@ -4,10 +4,11 @@
 
 
 /*widgest*/
-document.getElementById("bedroom").onclick=function(){location.href="page1.html"}
-document.getElementById("kitchen").onclick=function(){location.href="page1.html"}
-document.getElementById("livingroom").onclick=function(){location.href="page1.html"}
-document.getElementById("meeting").onclick=function(){location.href="page1.html"}
+
+document.getElementById("bedroom").onclick=function(){location.href="controller/page1.html"}
+document.getElementById("kitchen").onclick=function(){location.href="controller/page1.html"}
+document.getElementById("livingroom").onclick=function(){location.href="controller/page1.html"}
+document.getElementById("meeting").onclick=function(){location.href="controller/page1.html"}
 
 
 /*dot---*/
