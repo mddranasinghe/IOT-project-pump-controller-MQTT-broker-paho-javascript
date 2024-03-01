@@ -333,17 +333,15 @@ var protocol = window.location.protocol
 var ovarlay=  document.getElementsByClassName("status_box");
 //var back=document.getElementById("status_box");
 
-if(protocol == "https:"){
-        var client = new Paho.MQTT.Client(host, port_wss,'wss/'+Math.random());
-        client.onConnectionLost = onConnectionLost;
-        client.connect({ onSuccess: onConnect,useSSL: true,userName,password });
-}else{
-    var client = new Paho.MQTT.Client(host, port_ws ,'ws/'+Math.random());
-       client.onConnectionLost = onConnectionLost;
-       client.connect({ onSuccess: onConnect,userName, password});
-}
+function connect(){
+var client = new Paho.MQTT.Client(mqttBroker, port, mqttClientId);
+client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
+client.onConnectionLost = onConnectionLost;}
         
- function onConnect() {
+ 
+connect();
+
+function onConnect() {
   console.log("onConnect");
   client.subscribe(controlTopic);
 
@@ -386,6 +384,8 @@ function onConnectionLost(responseObject) {
 for (var i = 0; i < ovarlay.length; i++) {
 ovarlay[i].style.backgroundColor = "#C2C2C2";}
   }
+
+  setTimeout(connect, 5000);
 }
 
 </script>
