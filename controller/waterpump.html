@@ -259,6 +259,7 @@
     <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
     <script src="../resources/js/connection.js"></script>
     <script>
+    
       document.getElementById("backbutton").onclick=function(){location.href="../index.html"}
 
       var automode_mainpump=document.getElementById('automode_mainpump');
@@ -329,17 +330,16 @@
 
       //mqtt connection .......................................
 const controlTopic = "node/spc/n2b/7469308fcf871dad4d4/status";
-var protocol = window.location.protocol
 var ovarlay=  document.getElementsByClassName("status_box");
-//var back=document.getElementById("status_box");
+var client 
 
 function connect(){
-var client = new Paho.MQTT.Client(mqttBroker, port, mqttClientId);
+   client = new Paho.MQTT.Client(mqttBroker, port, mqttClientId);
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
 client.onConnectionLost = onConnectionLost;}
         
- 
-connect();
+
+//connect();
 
 function onConnect() {
   console.log("onConnect");
@@ -387,6 +387,7 @@ ovarlay[i].style.backgroundColor = "#C2C2C2";}
 
   setTimeout(connect, 5000);
 }
+connect();
 
 </script>
 </body>
