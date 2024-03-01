@@ -108,7 +108,7 @@ var protocol = window.location.protocol
 console.log(protocol);
 
 if(protocol == "https:"){
-        var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');
+        var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka'+ Math.random());
 
         client.onConnectionLost = onConnectionLost;
 
@@ -117,7 +117,7 @@ if(protocol == "https:"){
         useSSL: true 
         });
 }else{
-    var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka');
+    var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka'+ Math.random());
 
        client.onConnectionLost = onConnectionLost;
 

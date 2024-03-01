@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>water pump</title>
-   
-    <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
-
     <style>
 
 
@@ -259,8 +256,8 @@
     </div>
 
     
-
- 
+    <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
+    <script src="../resources/js/connection.js"></script>
     <script>
       document.getElementById("backbutton").onclick=function(){location.href="../index.html"}
 
@@ -337,16 +334,13 @@ var ovarlay=  document.getElementsByClassName("status_box");
 //var back=document.getElementById("status_box");
 
 if(protocol == "https:"){
-        var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');
+        var client = new Paho.MQTT.Client(host, port_wss,'wss/'+Math.random());
         client.onConnectionLost = onConnectionLost;
-        client.connect({
-        onSuccess: onConnect,
-        useSSL: true});
+        client.connect({ onSuccess: onConnect,useSSL: true,userName,password });
 }else{
-    var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka');
+    var client = new Paho.MQTT.Client(host, port_ws ,'ws/'+Math.random());
        client.onConnectionLost = onConnectionLost;
-       client.connect({
-       onSuccess: onConnect});
+       client.connect({ onSuccess: onConnect,userName, password});
 }
         
  function onConnect() {
