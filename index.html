@@ -101,16 +101,14 @@
 
 document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
 
+
+function connect(){
 var client = new Paho.MQTT.Client(mqttBroker, port,mqttClientId);
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
-client.onConnectionLost = onConnectionLost;
+client.onConnectionLost = onConnectionLost;}
 //............................................................................................
   function onConnect() {
   console.log("onConnect");
-  client.subscribe("World");
-  message = new Paho.MQTT.Message("Hello");
-  message.destinationName = "World";
-  client.send(message);
 document.getElementById('page1').style.backgroundColor="green";
 }
 
@@ -119,8 +117,10 @@ function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
     document.getElementById('page1').style.backgroundColor="red";}
-  
+    setTimeout(connect, 5000);
 }
+
+connect();
 
 window.onload=function(){
     var specifiedtag=document.querySelector('.scrollmenu a[href="index.html"]');
