@@ -104,8 +104,7 @@ document.getElementById("waterpump").onclick=function(){location.href="controlle
 
 function connect(){
 var client = new Paho.MQTT.Client(mqttBroker, port,mqttClientId);
-client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password , onSuccess: function () {
-            onConnect()}});
+client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password});
 client.onConnectionLost = onConnectionLost;
 
 }
@@ -121,6 +120,10 @@ function onConnectionLost(responseObject) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
     document.getElementById('page1').style.backgroundColor="red";}
     setTimeout(connect, 5000);
+    while(responseObject.errorCode !== 0)
+    {
+        connect();
+    }
 }
 
 connect();
