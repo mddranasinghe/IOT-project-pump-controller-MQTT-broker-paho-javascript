@@ -94,8 +94,8 @@ client.onConnectionLost = onConnectionLost;
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
     document.getElementById('page3').style.backgroundColor="red";
-
   }
+  setTimeout(connect, 5000);
 }
 
 connect();

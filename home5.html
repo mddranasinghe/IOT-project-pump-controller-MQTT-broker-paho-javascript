@@ -107,7 +107,7 @@ function onConnectionLost(responseObject) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
     document.getElementById('page5').style.backgroundColor="red";
   }
-  
+  setTimeout(connect, 5000);
 }
 window.onload=function(){
     var specifiedtag=document.querySelector('.scrollmenu a[href="home5.html"]');
