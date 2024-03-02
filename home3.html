@@ -76,52 +76,38 @@
 
     <script src="resources/js/main.js"></script>
  <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
+ <script src="resources/js/connection.js"></script>
  <script>
-           var page3=document.getElementById('page3');
-        
-          // var dot = document.querySelectorAll('#page1, #page2, #page3, #page4, #page5, #page6');
+       
+function connect(){
+var client = new Paho.MQTT.Client(mqttBroker, port,mqttClientId);
+client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password});
+client.onConnectionLost = onConnectionLost;
 
-         
-    var protocol = window.location.protocol
-    console.log(protocol);
-    
-    if(protocol == "https:"){
-            var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');//wss.....
-            client.onConnectionLost = onConnectionLost;
-            client.connect({
-            onSuccess: onConnect,
-            useSSL: true 
-            });
-    }else{
-        var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka');//ws...
-           client.onConnectionLost = onConnectionLost;
-           client.connect({
-           onSuccess: onConnect, });
-    }
-            function onConnect() {
+}
+ function onConnect() {
       console.log("onConnect");
-      client.subscribe("World");
-      message = new Paho.MQTT.Message("Hello");
-      message.destinationName = "World";
-      client.send(message);
-      page3.style.backgroundColor="green";
+      document.getElementById('page3').style.backgroundColor="green";
     }
 
     function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
-    page3.style.backgroundColor="red";
+    document.getElementById('page3').style.backgroundColor="red";
 
   }
 }
 
-
+connect();
     window.onload=function(){
     var specifiedtag=document.querySelector('.scrollmenu a[href="home3.html"]');
         if(specifiedtag){
         specifiedtag.classList.add('centered');
         specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
         }};
+
+
+      
 </script>
 </body>
  </html>

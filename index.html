@@ -81,13 +81,6 @@
             <div class="dot" id="page4"></div>
             <div class="dot" id="page5"></div>
             <div class="dot" id="page6"> </div>
-         <!--   <div style="margin-top: -15px; background-color:#e5e7eb ;" id="wifilog">
-                
-                <img src="disconnect.png"  id="disconnect" style=" background-color: aliceblue;width: 20px; height: 20px; margin-left: 40%;">
-            
-                <img src="connect.png"  id="green" style=" display:none; background-color: aliceblue;width: 40px; height: 20px; margin-left: 40%; " >
-            
-            </div>-->
             </div>
           
         </mian>
@@ -98,10 +91,6 @@
 <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
 <script src="resources/js/connection.js"></script>
     <script>
-
-document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
-
-
 function connect(){
 var client = new Paho.MQTT.Client(mqttBroker, port,mqttClientId);
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password});
@@ -120,10 +109,7 @@ function onConnectionLost(responseObject) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
     document.getElementById('page1').style.backgroundColor="red";}
     setTimeout(connect, 5000);
-    while(responseObject.errorCode !== 0)
-    {
-        connect();
-    }
+ 
 }
 
 connect();
@@ -134,6 +120,10 @@ window.onload=function(){
         specifiedtag.classList.add('centered');
         specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
         }};
+
+
+ document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
+
     </script>
 </body>
 </html>

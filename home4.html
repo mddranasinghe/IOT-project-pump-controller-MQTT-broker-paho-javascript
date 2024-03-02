@@ -99,57 +99,26 @@
     
     <script src="resources/js/main.js"></script>
 <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
+<script src="resources/js/connection.js"></script>
     <script>
-             var page4=document.getElementById('page4');
-       var disconnect=document.getElementById('disconnect');
-       var green=document.getElementById('green');
 
-var protocol = window.location.protocol
-console.log(protocol);
-
-if(protocol == "https:"){
-        var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka');
-
-        client.onConnectionLost = onConnectionLost;
-
-        client.connect({
-        onSuccess: onConnect,
-        useSSL: true 
-        });
-}else{
-    var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka');
-
-       client.onConnectionLost = onConnectionLost;
-
-       client.connect({
-       onSuccess: onConnect,
-
-});
+ function connect(){
+var client = new Paho.MQTT.Client(mqttBroker, port,mqttClientId);
+client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password});
+client.onConnectionLost = onConnectionLost;
 
 }
-        
-
-        function onConnect() {
- 
-  console.log("onConnect");
-  client.subscribe("World");
-  message = new Paho.MQTT.Message("Hello");
-  message.destinationName = "World";
-  client.send(message);
-  page4.style.backgroundColor="green";
+function onConnect() {
+ console.log("onConnect");
+document.getElementById('page4').style.backgroundColor="green";
 }
-
 
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
     page4.style.backgroundColor="red";
   }
-  
 }
-
-
-
 
 window.onload=function(){
     var specifiedtag=document.querySelector('.scrollmenu a[href="home4.html"]');
@@ -157,6 +126,9 @@ window.onload=function(){
         specifiedtag.classList.add('centered');
         specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
         }};
+
+
+        connect();
  </script>
 </body>
 </html>

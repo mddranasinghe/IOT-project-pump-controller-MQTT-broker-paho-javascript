@@ -101,51 +101,27 @@
     
 <script src="resources/js/main.js"></script>
 <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
+<script src="resources/js/connection.js"></script>
     <script>
-             var page2=document.getElementById('page2');
 
-var protocol = window.location.protocol
-console.log(protocol);
-
-if(protocol == "https:"){
-        var client = new Paho.MQTT.Client('broker.hivemq.com', 8884 , 'dinuka'+ Math.random());
-
-        client.onConnectionLost = onConnectionLost;
-
-        client.connect({
-        onSuccess: onConnect,
-        useSSL: true 
-        });
-}else{
-    var client = new Paho.MQTT.Client('broker.hivemq.com', 8000 , 'dinuka'+ Math.random());
-
-       client.onConnectionLost = onConnectionLost;
-
-       client.connect({
-       onSuccess: onConnect,
-
-});
+function connect(){
+var client = new Paho.MQTT.Client(mqttBroker, port,mqttClientId);
+client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password});
+client.onConnectionLost = onConnectionLost;
 
 }
         
 
-        function onConnect() {
+ function onConnect() {
   console.log("onConnect");
-  client.subscribe("World");
-  message = new Paho.MQTT.Message("Hello");
-  message.destinationName = "World";
-  client.send(message);
-  page2.style.backgroundColor="green";
+  document.getElementById('page2').style.backgroundColor="green";
 }
 
 
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
-    
-    green.style.display="none";
-    disconnect.style.display="inline";
-    page2.style.backgroundColor="red";
+    document.getElementById('page2').style.backgroundColor="red";
   }
   
 }
@@ -157,7 +133,8 @@ window.onload=function(){
         specifiedtag.classList.add('centered');
         specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
         }};
-
+    
+        connect();
 
  </script>
 </body>
