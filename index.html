@@ -89,20 +89,37 @@
  
  <script src="resources/js/main.js"></script>
 <script src="paho.javascript-1.0.3\paho-mqtt.js"></script>
-<script src="resources/js/connection.js"></script>
-    <script>
-function connect(){
-var client = new Paho.MQTT.Client(mqttBroker, port,mqttClientId);
+<script>
+
+var protocol = window.location.protocol;
+ 
+ var mqttBroker='home.onesmartapi.com';
+ var userName='dinuka';
+ var password='dinuka';
+ var port = protocol === 'https:' ? 8084 :  1884;
+var mqttClientId = Math.random();
+var mqttUseSSL = protocol === 'https:';
+
+if(protocol === 'https')
+{
+    var mqttClientId ='wss/'+Math.random();
+}else{
+ 
+    var mqttClientId ='ws/'+Math.random();
+}
+
+
+
+function connect(){    
+var client = new Paho.MQTT.Client(mqttBroker,port,mqttClientId);
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password});
 client.onConnectionLost = onConnectionLost;
-
 }
 //............................................................................................
   function onConnect() {
   console.log("onConnect");
 document.getElementById('page1').style.backgroundColor="green";
 }
-
 
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {

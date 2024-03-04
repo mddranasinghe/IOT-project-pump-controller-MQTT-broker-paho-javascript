@@ -270,8 +270,7 @@
           document.getElementById("pumptimer_mainpump").disabled = true;
           document.getElementById("pumppower_status_mainpower").style.display="inline";
           document.getElementById("toggle_pumppower_mainpump").style.display="none";
-
-         
+ 
         }
         else{
           document.getElementById("pumppower_mainpump").disabled = false;
@@ -279,8 +278,6 @@
           document.getElementById("pumppower_status_mainpower").style.display="none";
           document.getElementById("toggle_pumppower_mainpump").style.display="inline";
         }
-        
-
       });
 
       var pumptimer_mainpump=document.getElementById('pumptimer_mainpump');
@@ -329,12 +326,11 @@
 
 
       //mqtt connection .......................................
-const controlTopic = "node/spc/n2b/7469308fcf871dad4d4/status";
+const controlTopic = "node/spc/n2b/7469308fcf871dad4d4";
 var ovarlay=  document.getElementsByClassName("status_box");
 var client 
 
 function connect(){
- client = new Paho.MQTT.Client(mqttBroker, port, mqttClientId);
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
 client.onConnectionLost = onConnectionLost;}
         
