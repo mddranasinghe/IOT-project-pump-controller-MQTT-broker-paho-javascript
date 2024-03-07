@@ -124,7 +124,16 @@
 
 
 
+.signal-bars {
+            display: flex;
+            margin: 2px;
+        }
 
+        .bar {
+            width: 3px;
+            margin-right: 1px;
+            background-color: #ccc;
+        }
     </style>
 </head>
 <body>
@@ -139,8 +148,16 @@
 <table><tr style="width: 100%;"><td  style="width: 50%;"><p style=" color:grey; margin-bottom: -2px; margin-top: 3px;"><b>Main pump status </b> </p></td><td style="width: 50%; text-align: right;">
   <p style="font-size: 15px; color:red; display: none;" id="offline">offline</p> 
   <p style="font-size: 15px; color:#4BD865; display: none;" id="online">online</p></td>
-  <td><img src="../resources/image/Screenshot (180).png" style="width: 25px; height: 20px; display: none;" id="lostimg">
-  <img src="../resources/image/connect.png" style="width: 25px; height: 20px; display: none;" id="connectimg">
+  <td>
+    <div class="signal-bars" id="signalBars">
+      <div class="bar" id="bar1" style="height:2px; margin-top:8px;"></div>
+      <div class="bar" id="bar2"style="height:4px;margin-top:6px;" ></div>
+      <div class="bar" id="bar3"style="height:6px;margin-top:4px;"></div>
+      <div class="bar" id="bar4"style="height:8px;margin-top:2px;"></div>
+      <div class="bar" id="bar5"style="height:10px;"></div>
+  </div>
+  <!-- <img src="../resources/image/Screenshot (180).png" style="width: 25px; height: 20px; display: none;" id="lostimg">
+  <img src="../resources/image/connect.png" style="width: 25px; height: 20px; display: none;" id="connectimg">-->
 
   </td></tr></table>
              
@@ -253,7 +270,7 @@
 
 <div class="status_box">
   <div class="topic"><p>UPTIME</p></div>
-  <div class="option"><P style="color:rgb(156, 156, 156)">00.00.00</P> </div>
+  <div class="option"><P style="color:rgb(156, 156, 156)" id="up">00.00.00</P> </div>
 </div> 
 
 
@@ -282,7 +299,7 @@
 //..............................................................................................................
 var payload; var companyID="node/"; var deviceType="spc/"; var deviceID="7469308fcf871dad4d4/" ;
 var publish_topic=companyID+deviceType+"b2n/"+deviceID;// publish topic
-const subTopic = companyID+deviceType+"+/"+deviceID+"status";// subscribe topic
+const subTopic = companyID+deviceType+"n2b/"+deviceID+"status";// subscribe topic
 
 var ovarlay=  document.getElementsByClassName("status_box");
 //..............................................................................................................
@@ -299,11 +316,12 @@ function onConnect() {
   try {
     console.log("onConnect");    
     client.subscribe(subTopic);
+    sendCommandToDevice("node/spc/b2n/7469308fcf871dad4d4/info","read");
   
 
-  document.getElementById("lostimg").style.display="none";
+  //document.getElementById("lostimg").style.display="none";
   document.getElementById("offline").style.display="none";
-  document.getElementById("connectimg").style.display="inline";
+ // document.getElementById("connectimg").style.display="inline";
   document.getElementById("online").style.display="inline";
   for (var i = 0; i < ovarlay.length; i++) {
   ovarlay[i].style.backgroundColor = "white";}
@@ -347,11 +365,11 @@ function onConnectionLost(responseObject) {
   document.getElementById("pumppower_mainpump").disabled = true;
  document.getElementById("pumptimer_mainpump").disabled = true;
 
- document.getElementById("lostimg").style.display="inline";
+ //document.getElementById("lostimg").style.display="inline";
   document.getElementById("offline").style.display="inline";
 
   
-  document.getElementById("connectimg").style.display="none";
+ // document.getElementById("connectimg").style.display="none";
   document.getElementById("online").style.display="none";
 
 for (var i = 0; i < ovarlay.length; i++) {
@@ -498,28 +516,37 @@ ovarlay[i].style.backgroundColor = "#C2C2C2";}
         sendCommandToDevice(topic,payload);
       });
     
- document.getElementById('set_timer_time').addEventListener('input', function(){
-        var topic=publish_topic+"sw/on_time_all";
-        payload = this.value;
-         payload += ",-";
-        sendCommandToDevice(topic,payload);
+         var timer; 
+         document.getElementById('set_timer_time').addEventListener('input', function(){
+         clearTimeout(timer); 
+         topic = publish_topic + "sw/on_time_all";
+          payload = this.value;
+
+         timer = setTimeout(function() {
+        
+         payload = payload + ",-";
+        sendCommandToDevice(topic, payload);
         console.log(payload);
-      })
+    }, 1000); 
+});
+var timer; 
+         document.getElementById('set_timer_time_tubewell').addEventListener('input', function(){
+         clearTimeout(timer); 
+          topic = publish_topic + "sw/on_time_all";
+          payload = this.value;
 
-    
-      document.getElementById('set_timer_time_tubewell').addEventListener('input', function(){
-        var topic=publish_topic+"sw/on_time_all";
-        payload = this.value;
-
-         payload ="-,"+payload;
-
-        sendCommandToDevice(topic,payload);
+         timer = setTimeout(function() {
+        
+        payload = payload + ",-";
+        sendCommandToDevice(topic, payload);
         console.log(payload);
-      })
+    }, 1000); 
+});
 
-      
 function displayFunction(payload) {
       payload = JSON.parse(payload);
+
+      
     if (payload.sw_mode && payload.sw_mode.length > 0) {
         switch (payload.sw_mode[0]) {
             case 1:
@@ -668,10 +695,14 @@ function displayFunction(payload) {
             case 1:
                 document.getElementById('pumptimer_mainpump').checked = true;
                 document.getElementById('toggleLabel_pumptimer_mainpump').style.left = '0px';
+                document.getElementById("label_timer_time").style.display="inline";
+                document.getElementById("set_timer_time").style.display="inline"; 
                 break;
             case 0:
                 document.getElementById('pumptimer_mainpump').checked = false;
                 document.getElementById('toggleLabel_pumptimer_mainpump').style.left = '2px';
+                document.getElementById("label_timer_time").style.display="none";
+                document.getElementById("set_timer_time").style.display="none"; 
                 break;
         }
     }
@@ -682,14 +713,55 @@ function displayFunction(payload) {
             case 1:
                 document.getElementById('pumptimer_tubewell').checked = true;
                 document.getElementById('toggleLabel_pumptimer_tubewell').style.left = '0px';
+                document.getElementById("label_timer_time_tubewell").style.display="inline";
+                document.getElementById("set_timer_time_tubewell").style.display="inline"; 
                 break;
             case 0:
                 document.getElementById('pumptimer_tubewell').checked = false;
                 document.getElementById('toggleLabel_pumptimer_tubewell').style.left = '2px';
+                document.getElementById("label_timer_time_tubewell").style.display="none";
+          document.getElementById("set_timer_time_tubewell").style.display="none"; 
                 break;
         }
     }
+    function formatTime(seconds) {
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
+    var remainingSeconds = seconds % 60;
+    return hours + ": " + minutes + ": " + remainingSeconds;
 }
+
+document.getElementById('up').innerHTML = formatTime(payload["up"]);
+
+updateSignalStrength(payload['rssi']);
+
+}
+
+
+var bar=  document.getElementsByClassName("bar");
+    function updateSignalStrength(rssi) {
+      
+
+        if (rssi >= -55) {
+		        bar[0].style.backgroundColor="green";
+			    bar[1].style.backgroundColor="green";
+				bar[2].style.backgroundColor="green";
+				bar[3].style.backgroundColor="green";
+				bar[4].style.backgroundColor="green";
+				
+          
+        } else if (rssi >= -70) {
+		    bar[0].style.backgroundColor="green";
+			bar[1].style.backgroundColor="green";
+			bar[2].style.backgroundColor="green";
+         
+        } else if (rssi >= -80) {
+			bar[0].style.backgroundColor="green";
+         
+        } else if (rssi >= -100) {
+           
+        } 
+    }
 
   connect();
 </script>
