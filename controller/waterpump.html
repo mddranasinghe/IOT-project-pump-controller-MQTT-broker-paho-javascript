@@ -176,7 +176,7 @@
                   <div class="status_box">
                       <div class="topic"><p>Pump Power1</p></div>
                       <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump" >
-                      <input type="checkbox" id="pumppower_mainpump" style="width:50px;height:50px;"/><label for="pumppower_mainpump" id="toggleLabel_pumppower_mainpump"></label></div>  
+                      <input type="checkbox" id="pumppower_mainpump" /><label for="pumppower_mainpump" id="toggleLabel_pumppower_mainpump"></label></div>  
                     </div>
                     <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_mainpower">ON</P>
                     <p style="display:none; color:rgb(156, 156, 156) ;" >OFF</p>
@@ -225,7 +225,7 @@
           <div class="status_box">
               <div class="topic"><p>Pump Power</p></div>
               <div class="option"> <div class="toggle" id="toggle_pumppower_tubewell">
-              <input type="checkbox" id="pumppower_tubewell" style="width:50px;height:50px;"/><label for="pumppower_tubewell" id="toggleLabel_pumppower_tubewell"></label></div> 
+              <input type="checkbox" id="pumppower_tubewell"/><label for="pumppower_tubewell" id="toggleLabel_pumppower_tubewell"></label></div> 
               <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_tubewell">ON</P>
                     <p style="display:none; color:rgb(156, 156, 156) ;" >OFF</p>
           </div> 
@@ -524,7 +524,8 @@ ovarlay[i].style.backgroundColor = "#C2C2C2";}
         }
         sendCommandToDevice(topic,payload);
       });
-    
+
+
          var timer; 
          document.getElementById('set_timer_time').addEventListener('input', function(){
          clearTimeout(timer); 
@@ -538,6 +539,8 @@ ovarlay[i].style.backgroundColor = "#C2C2C2";}
         console.log(payload);
     }, 1000); 
 });
+
+
 var timer; 
          document.getElementById('set_timer_time_tubewell').addEventListener('input', function(){
          clearTimeout(timer); 
@@ -734,13 +737,12 @@ function displayFunction(payload) {
         }
     }
     function formatTime(seconds) {
-    var hours = Math.floor(seconds / 3600);
-    var minutes = Math.floor((seconds % 3600) / 60);
-    var remainingSeconds = seconds % 60;
-    return hours + ": " + minutes + ": " + remainingSeconds;
-}
+    var hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
+    var minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+    var remainingSeconds = (seconds % 60).toString().padStart(2, '0');
+    return hours + ":" + minutes + ":" + remainingSeconds;}
 
-document.getElementById('up').innerHTML = formatTime(payload["up"]);
+     document.getElementById('up').innerHTML = formatTime(payload["up"]);
 
 updateSignalStrength(payload['rssi']);
 
@@ -749,8 +751,6 @@ updateSignalStrength(payload['rssi']);
 
 var bar=  document.getElementsByClassName("bar");
     function updateSignalStrength(rssi) {
-      
-
         if (rssi >= -55) {
 		        bar[0].style.backgroundColor="green";
 			    bar[1].style.backgroundColor="green";
