@@ -17,7 +17,7 @@ if(protocol === 'https')
 
 var client = new Paho.MQTT.Client(mqttBroker, port,mqttClientId);
 
-
+console.log("client ID:-"+mqttClientId);
 
 /*var protocol = window.location.protocol;
 var client  = null;

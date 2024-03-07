@@ -187,7 +187,7 @@
          <div class="status_box">
           <div class="topic"><p id="label_timer_time" style=" padding-bottom: 20; display:none;">Timer Time</p></div>
           <div class="option" style="padding-bottom:20px ; ">
-          <input type="number" min="5" max="3600" id="set_timer_time" value="1000" /><label></label> </div>
+          <input type="number" min="5" max="3600" id="set_timer_time" value="1000" /><label for="set_timer_time" id="toggleLabel_set_timer_time_mainpump"></label></div> 
     
     </div>
 
@@ -221,16 +221,16 @@
 
 
 <div class="status_box">
-  <div class="topic"><p>Pump Timer 2</p></div>
+  <div class="topic"><p>Pump Timer </p></div>
   <div class="option"> <div class="toggle">
-  <input type="checkbox" id="pumptimer_tubewell"/><label></label> </div>
+  <input type="checkbox" id="pumptimer_tubewell"/><label for="pumptimer_tubewell" id="toggleLabel_pumptimer_tubewell"></label></div> 
 </div> 
 </div>
 
 <div class="status_box">
   <div class="topic"><p id="label_timer_time_tubewell" style=" padding-bottom: 20; display:none;">Timer Time</p></div>
   <div class="option" style="padding-bottom:20px ; ">
-  <input type="number" min="1" max="60" id="set_timer_time_tubewell" value="60"/><label></label> </div>
+  <input type="number" min="1" max="60" id="set_timer_time_tubewell" value="60"/><label for="set_timer_time_tubewell" id="toggleLabel_set_timer_time_tubewelll"></label></div> 
 
 </div>
 </div>
@@ -279,15 +279,92 @@
     <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
     <script src="../resources/js/connection.js"></script>
     <script  type="text/javascript" defer="true">
-   var keys;
- var payload;
+//..............................................................................................................
+var payload; var companyID="node/"; var deviceType="spc/"; var deviceID="7469308fcf871dad4d4/" ;
+var publish_topic=companyID+deviceType+"b2n/"+deviceID;// publish topic
+const subTopic = companyID+deviceType+"+/"+deviceID+"status";// subscribe topic
 
-      document.getElementById("backbutton").onclick=function(){location.href="../index.html"}
+var ovarlay=  document.getElementsByClassName("status_box");
+//..............................................................................................................
+document.getElementById("backbutton").onclick=function(){location.href="../index.html"}        
+
+function connect(){
+client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
+client.onConnectionLost = onConnectionLost;
+client.onMessageArrived = onMessageArrived;
+
+}
+
+function onConnect() {
+  try {
+    console.log("onConnect");    
+    client.subscribe(subTopic);
+  
+
+  document.getElementById("lostimg").style.display="none";
+  document.getElementById("offline").style.display="none";
+  document.getElementById("connectimg").style.display="inline";
+  document.getElementById("online").style.display="inline";
+  for (var i = 0; i < ovarlay.length; i++) {
+  ovarlay[i].style.backgroundColor = "white";}
+
+  }
+  catch (error){
+
+    console.log(error);
+  }
+}
+
+function sendCommandToDevice(topic,payload) {
+    if (client.isConnected()) {
+        console.log("sendCommandToDevice: " + topic + ", Payload: " + payload);
+        //client.subscribe(topic);
+        var message = new Paho.MQTT.Message(payload);
+        message.destinationName = topic;
+        client.send(message);
+    }
+}
+
+
+function onMessageArrived(message) {
+  payload=message.payloadString;
+    console.log("Payload: " + payload);
+    displayFunction(payload);  
+  
+}
+
+
+function onConnectionLost(responseObject) {
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost:"+responseObject.errorMessage);
+
+  document.getElementById("automode_tubewell").disabled = true;
+ document.getElementById("automode_mainpump").disabled = true;
+
+  document.getElementById("pumppower_tubewell").disabled = true;
+  document.getElementById("pumptimer_tubewell").disabled = true;
+
+  document.getElementById("pumppower_mainpump").disabled = true;
+ document.getElementById("pumptimer_mainpump").disabled = true;
+
+ document.getElementById("lostimg").style.display="inline";
+  document.getElementById("offline").style.display="inline";
+
+  
+  document.getElementById("connectimg").style.display="none";
+  document.getElementById("online").style.display="none";
+
+for (var i = 0; i < ovarlay.length; i++) {
+ovarlay[i].style.backgroundColor = "#C2C2C2";}
+  }
+
+  setTimeout(connect, 10000);
+}
 
       var automode_mainpump=document.getElementById('automode_mainpump');
       automode_mainpump.addEventListener('change', function(){
-        var topic="node/spc/b2n/7469308fcf871dad4d4/sw/mode/1";
-        var payload;
+        var topic=publish_topic+"sw/mode/1";
+      
         if(this.checked)
         {
           payload="1";
@@ -331,14 +408,12 @@
           document.getElementById("set_timer_time_tubewell").style.display="none"; 
 
         }
-        
-
       });
 
       var automode_tubewell = document.getElementById('automode_tubewell');
       automode_tubewell.addEventListener('change', function() {
-        var topic="node/spc/b2n/7469308fcf871dad4d4/sw/mode/2";
-        var payload;
+        var topic=publish_topic+"sw/mode/2";
+      
         if (this.checked) {
           document.getElementById("pumppower_tubewell").disabled = true;
           document.getElementById("pumptimer_tubewell").disabled = true;
@@ -359,8 +434,8 @@
 
       
       document.getElementById('pumppower_mainpump').addEventListener('change', function(){
-        var topic="node/spc/b2n/7469308fcf871dad4d4/sw/set/1";
-        var payload;
+        var topic=publish_topic+"sw/set/1";
+      
         if (this.checked) {
           payload="1";
         }
@@ -373,8 +448,8 @@
 
 
       document.getElementById('pumppower_tubewell').addEventListener('change', function(){
-        var topic="node/spc/b2n/7469308fcf871dad4d4/sw/set/2";
-        var payload;
+        var topic=publish_topic+"sw/set/2";
+      
         if (this.checked) {
           payload="1";
         }
@@ -386,8 +461,8 @@
       });
 
       document.getElementById('Soft_Start1').addEventListener('change', function(){
-        var topic="node/spc/b2n/7469308fcf871dad4d4/sw/soft_start";
-        var payload;
+        var topic=publish_topic+"sw/soft_start";
+      
         if (this.checked) {
           payload="1";
         }
@@ -398,141 +473,53 @@
         sendCommandToDevice(topic,payload);
       });
       document.getElementById('pumptimer_mainpump').addEventListener('change', function(){
-        var topic="node/spc/b2n/7469308fcf871dad4d4/sw/timer_mode_all";
-        var payload;
+        var topic=publish_topic+"sw/timer_mode_all";
+       
         if (this.checked) {
-          payload="1 ";
+          payload="1-";
         }
         else{
-          payload="0 ";
+          payload="0,-";
          
 
         }
         sendCommandToDevice(topic,payload);
       });
       document.getElementById('pumptimer_tubewell').addEventListener('change', function(){
-        var topic="node/spc/b2n/7469308fcf871dad4d4/sw/timer_mode_all";
-        var payload;
+        var topic=publish_topic+"sw/timer_mode_all";
+      
         if (this.checked) {
-          payload="-1";
+          payload="-,1";
         }
         else{
-          payload="-0";
+          payload="-,0";
 
         }
         sendCommandToDevice(topic,payload);
       });
     
-/* document.getElementById('set_timer_time').addEventListener('input', function(){
-        var topic="node/spc/b2n/7469308fcf871dad4d4/sw/soft_delay";
-        var value = this.value;
-        
-          payload=value;
-      
-     
+ document.getElementById('set_timer_time').addEventListener('input', function(){
+        var topic=publish_topic+"sw/on_time_all";
+        payload = this.value;
+         payload += ",-";
         sendCommandToDevice(topic,payload);
+        console.log(payload);
       })
-*/
 
-
-          //mqtt connection .......................................    
-var ovarlay=  document.getElementsByClassName("status_box");
-
-
-function connect(){
-client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
-client.onConnectionLost = onConnectionLost;
-client.onMessageArrived = onMessageArrived;
-}
-        
-const controlTopic = "node/spc/n2b/7469308fcf871dad4d4/status";
-
-function onConnect() {
-  try {
-    console.log("onConnect");    
-    client.subscribe(controlTopic);
     
+      document.getElementById('set_timer_time_tubewell').addEventListener('input', function(){
+        var topic=publish_topic+"sw/on_time_all";
+        payload = this.value;
 
-  document.getElementById("lostimg").style.display="none";
-  document.getElementById("offline").style.display="none";
-  document.getElementById("connectimg").style.display="inline";
-  document.getElementById("online").style.display="inline";
+         payload ="-,"+payload;
 
-  }
-  catch (error){
+        sendCommandToDevice(topic,payload);
+        console.log(payload);
+      })
 
-    console.log(error);
-  }
-}
-
-function sendCommandToDevice(topic,payload) {
-
-    if (client.isConnected()) {
-        console.log("sendCommandToDevice: " + topic + ", Payload: " + payload);
-        client.subscribe(topic);
-        var message = new Paho.MQTT.Message(payload);
-        message.destinationName = topic;
-        client.send(message);
-    }
-}
-
-function getDataFromDevice(topic , callbackfun) {
-    if(client.isConnected()){
-        console.log(excuteTime()+" getDataFromDevice : "+topic);
-        client.onMessageArrived = callbackfun;
-        client.subscribe(topic);
-        var message = new Paho.MQTT.Message(JSON.stringify(''));
-        message.destinationName = topic;
-        client.send(message);
-    }
-    
-}
-
-function onMessageArrived(message) {
-  payload=message.payloadString;
-    console.log("Payload: " + payload);
-    
-    payload = JSON.parse(payload);
-//keys = Object.keys(payload);
-      //console.log(payload);
-    soft_start(payload);  
-   // soft_start2(payload); 
- // sw_mode(payload);   
-  //console.log(payload['sw_mode'][0]);
-  //sw(payload);
-}
-
-
-
-
-/*function waterPumpCallBack(message) {
-    console.log("waterPumpCallBack ");
-    var payloadString = JSON.parse(message.payloadString);
-    console.log(payloadString);
-
-
-    payload = JSON.parse(payload);
-    // keys = Object.keys(payload);
-  //  sw(payload);
-    soft_start(payload);   
-     // sw_mode(payload); 
-}*/
-
- 
-/*function sw(payload)
-{if (payload && payload.sw && Array.isArray(payload.sw) && payload.sw.length > 0) {
-    if (payload.sw[0] === 1) {
-      document.getElementById('pumppower_mainpump').checked = true; 
-      document.getElementById('toggleLabel_pumppower_mainpump').style.left = '0px'; 
-
-  } else if (payload.sw[0] === 0) {
-    document.getElementById('pumppower_mainpump').checked = false; 
-      document.getElementById('toggleLabel_pumppower_mainpump').style.left = '2px'; 
-  }
-    
-}}*/
-
-function soft_start(payload) {
+      
+function displayFunction(payload) {
+      payload = JSON.parse(payload);
     if (payload.sw_mode && payload.sw_mode.length > 0) {
         switch (payload.sw_mode[0]) {
             case 1:
@@ -580,8 +567,6 @@ function soft_start(payload) {
                 break;
         }
     }
-
-
     
     switch (payload['soft_start']) {
             case 1:
@@ -678,104 +663,35 @@ function soft_start(payload) {
     }
 
 
-}
-
-
-
-  /*function soft_start(payload)
-{
-    if (payload['soft_start'] === 1) {
-      document.getElementById('Soft_Start1').checked = true; 
-      document.getElementById('toggleLabel').style.left = '0px'; 
-  } else if (payload['soft_start'] === 1){
-    document.getElementById('Soft_Start1').checked = true; 
-      document.getElementById('toggleLabel').style.left = '2px'; 
-  } 
-}
-
-function soft_start2(payload)
-{
-  if (payload['sw_mode'][0] === 1){
-    document.getElementById('automode_mainpump').checked = true; 
-      document.getElementById('toggleLabel_mainpump_auto').style.left = '0px'; 
-  } else if(payload['sw_mode'][0] === 0){
-    document.getElementById('automode_mainpump').checked = false; 
-      document.getElementById('toggleLabel_mainpump_auto').style.left = '2px'; 
-  }
-}*/
-    
-/*function sw_mode(payload) {
-    if (payload && payload.sw_mode && Array.isArray(payload.sw_mode) && payload.sw_mode.length > 0) {
-        if (payload.sw_mode[0] === 1) {
-            document.getElementById('automode_mainpump').checked = true; 
-            document.getElementById('toggleLabel_mainpump_auto').style.left = '0px'; 
-            document.getElementById('automode_mainpump').dispatchEvent(new Event('change'));
-        } else if (payload.sw_mode[0] === 0) {
-            document.getElementById('automode_mainpump').checked = false; 
-            document.getElementById('toggleLabel_mainpump_auto').style.left = '2px'; 
+    if (payload.pmp_timer && payload.pmp_timer.length > 0) {
+        switch (payload.pmp_timer[0]) {
+            case 1:
+                document.getElementById('pumptimer_mainpump').checked = true;
+                document.getElementById('toggleLabel_pumptimer_mainpump').style.left = '0px';
+                break;
+            case 0:
+                document.getElementById('pumptimer_mainpump').checked = false;
+                document.getElementById('toggleLabel_pumptimer_mainpump').style.left = '2px';
+                break;
         }
-    } 
-}
-*/
+    }
 
 
-function onConnectionLost(responseObject) {
-  if (responseObject.errorCode !== 0) {
-    console.log("onConnectionLost:"+responseObject.errorMessage);
-
-  document.getElementById("automode_tubewell").disabled = true;
- document.getElementById("automode_mainpump").disabled = true;
-
-  document.getElementById("pumppower_tubewell").disabled = true;
-  document.getElementById("pumptimer_tubewell").disabled = true;
-
-  document.getElementById("pumppower_mainpump").disabled = true;
- document.getElementById("pumptimer_mainpump").disabled = true;
-
- document.getElementById("lostimg").style.display="inline";
-  document.getElementById("offline").style.display="inline";
-
-  
-  document.getElementById("connectimg").style.display="none";
-  document.getElementById("online").style.display="none";
-
-
-  var ovarlay=  document.getElementsByClassName("status_box");
-
-for (var i = 0; i < ovarlay.length; i++) {
-ovarlay[i].style.backgroundColor = "#C2C2C2";}
-  }
-
-  setTimeout(connect, 5000);
-}
-connect();
-
-//getDataFromDevice("node/spc/n2b/7469308fcf871dad4d4/status",waterPumpCallBack);
-
-//getDataFromDevice("node/spc/n2b/7469308fcf871dad4d4/status",waterPumpCallBack);
-
-/*function waterPumpCallBack(message) {
-    console.log("waterPumpCallBack ");
-    var payloadString = JSON.parse(message.payloadString);
-    console.log(payloadString);
-}
-
-connectMQTT(waterPumpOnConnect);
-function waterPumpCallBack(message) {
-   try {
-        var jsonData = JSON.parse(message.payloadString);
-        if(jsonData != ''){
-          console.log(excuteTime()+" "+message.payloadString);
+    if (payload.pmp_timer && payload.pmp_timer.length > 0) {
+        switch (payload.pmp_timer[1]) {
+            case 1:
+                document.getElementById('pumptimer_tubewell').checked = true;
+                document.getElementById('toggleLabel_pumptimer_tubewell').style.left = '0px';
+                break;
+            case 0:
+                document.getElementById('pumptimer_tubewell').checked = false;
+                document.getElementById('toggleLabel_pumptimer_tubewell').style.left = '2px';
+                break;
         }
-    } catch (e) {
-
     }
 }
 
-function waterPumpOnConnect(message) {
-  console.log(excuteTime()+" waterPumponConnect :" + client.isConnected());
-  getDataFromDevice("node/spc/n2b/7469308fcf871dad4d4/status",waterPumpCallBack);
-}*/
+  connect();
 </script>
 </body>
 </html>
