@@ -168,19 +168,19 @@
                
                 <div class="status_box">
                   <div class="topic"><p>O/H Tank Floater</p></div>
-                  <div class="option"><P style="color:rgb(70, 184, 110)">ON</P> </div>
+                  <div class="option"><P style="display:none;color:rgb(70, 184, 110)" id="o/h_on">ON</P><P id="o/h_off" style="color:rgb(156, 156, 156)">OFF</P> </div>
               </div> 
           
 
             <div class="status_box">
               <div class="topic"><p>Sump Floater</p></div>
-              <div class="option"><P style="color:rgb(156, 156, 156)">OFF</P> </div>
+              <div class="option"><P style="display:none;color:rgb(70, 184, 110)" id="sump_on">ON</P><P id="sump_off" style="color:rgb(156, 156, 156)">OFF</P></div>
           </div> 
           
         <div class="status_box">
           <div class="topic"><p>Pump Timer</p></div>
           <div class="option"> <div class="toggle">
-          <input type="checkbox" id="pumptimer_mainpump"/><label id="la"></label> </div>
+          <input type="checkbox" id="pumptimer_mainpump"/><label for="pumptimer_mainpump" id="toggleLabel_pumptimer_mainpump"></label> </div>
       </div> 
     </div>
 
@@ -201,14 +201,14 @@
            <div class="status_box">
               <div class="topic"><p>Auto Mode</p></div>
               <div class="option">  <div class="toggle" >
-              <input type="checkbox" id="automode_tubewell"/><label></label></div> 
+              <input type="checkbox" id="automode_tubewell"/><label for="automode_tubewell" id="toggleLabel_automode_tubewell"></label></div> 
            </div>
           </div>
 
           <div class="status_box">
               <div class="topic"><p>Pump Power</p></div>
               <div class="option"> <div class="toggle" id="toggle_pumppower_tubewell">
-              <input type="checkbox" id="pumppower_tubewell" style="width:50px;height:50px;"/><label></label> </div>
+              <input type="checkbox" id="pumppower_tubewell" style="width:50px;height:50px;"/><label for="pumppower_tubewell" id="toggleLabel_pumppower_tubewell"></label></div> 
               <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_tubewell">ON</P>
                     <p style="display:none; color:rgb(156, 156, 156) ;" >OFF</p>
           </div> 
@@ -216,7 +216,7 @@
 
     <div class="status_box">
       <div class="topic"><p>Tubewell Floater</p></div>
-      <div class="option"><P style="color:rgb(156, 156, 156)">OFF</P> </div>
+      <div class="option"><P style="display:none;color:rgb(70, 184, 110)" id="Tubewell_floater_on">ON</P><P id="Tubewell_floater_off" style="color:rgb(156, 156, 156)">OFF</P></div>
   </div> 
 
 
@@ -538,13 +538,49 @@ function soft_start(payload) {
             case 1:
                 document.getElementById('automode_mainpump').checked = true;
                 document.getElementById('toggleLabel_mainpump_auto').style.left = '0px';
+
+                document.getElementById("pumppower_mainpump").disabled = true;
+                document.getElementById("pumptimer_mainpump").disabled = true;
+                document.getElementById("pumppower_status_mainpower").style.display="inline";
+                document.getElementById("toggle_pumppower_mainpump").style.display="none";
+                document.getElementById("label_timer_time").disabled = false;
+                document.getElementById("set_timer_time").disabled = false;
                 break;
             case 0:
                 document.getElementById('automode_mainpump').checked = false;
                 document.getElementById('toggleLabel_mainpump_auto').style.left = '2px';
+
+                document.getElementById("pumppower_mainpump").disabled = false;
+                document.getElementById("pumptimer_mainpump").disabled = false;
+                document.getElementById("pumppower_status_mainpower").style.display="none";
+                document.getElementById("toggle_pumppower_mainpump").style.display="inline";
                 break;
         }
     }
+
+    if (payload.sw_mode && payload.sw_mode.length > 0) {
+        switch (payload.sw_mode[1]) {
+            case 1:
+                document.getElementById('automode_tubewell').checked = true;
+                document.getElementById('toggleLabel_automode_tubewell').style.left = '0px';
+
+                document.getElementById("pumppower_tubewell").disabled = true;
+                document.getElementById("pumptimer_tubewell").disabled = true;
+                document.getElementById("pumppower_status_tubewell").style.display="inline";
+                document.getElementById("toggle_pumppower_tubewell").style.display="none";
+                break;
+            case 0:
+                document.getElementById('automode_tubewell').checked = false;
+                document.getElementById('toggleLabel_automode_tubewell').style.left = '2px';
+
+                document.getElementById("pumppower_tubewell").disabled = false;
+                document.getElementById("pumptimer_tubewell").disabled = false;
+                document.getElementById("pumppower_status_tubewell").style.display="none";
+                document.getElementById("toggle_pumppower_tubewell").style.display="inline";
+                break;
+        }
+    }
+
 
     
     switch (payload['soft_start']) {
@@ -558,6 +594,90 @@ function soft_start(payload) {
                 break;
         }
     
+
+
+        if (payload.sw && payload.sw.length > 0) {
+        switch (payload.sw[0]) {
+            case 1:
+                document.getElementById('pumppower_mainpump').checked = true;
+                document.getElementById('toggleLabel_pumppower_mainpump').style.left = '0px';
+                break;
+            case 0:
+                document.getElementById('pumppower_mainpump').checked = false;
+                document.getElementById('toggleLabel_pumppower_mainpump').style.left = '2px';
+                break;
+        }
+    }
+
+
+    if (payload.sw && payload.sw.length > 0) {
+        switch (payload.sw[1]) {
+            case 1:
+                document.getElementById('pumppower_tubewell').checked = true;
+                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '0px';
+                break;
+            case 0:
+                document.getElementById('pumppower_tubewell').checked = false;
+                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '2px';
+                break;
+        }
+    }
+
+    if (payload.sw && payload.sw.length > 0) {
+        switch (payload.sw[1]) {
+            case 1:
+                document.getElementById('pumppower_tubewell').checked = true;
+                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '0px';
+                break;
+            case 0:
+                document.getElementById('pumppower_tubewell').checked = false;
+                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '2px';
+                break;
+        }
+    }
+
+    if (payload.floater && payload.floater.length > 0) {
+        switch (payload.floater[0]) {
+            case 1:
+                document.getElementById('o/h_on').style.display="inline";
+                document.getElementById('o/h_off').style.display="none";
+               
+                break;
+            case 0:
+                document.getElementById('o/h_on').style.display="none";
+                document.getElementById('o/h_off').style.display="inline";
+                break;
+        }
+    }
+    if (payload.floater && payload.floater.length > 0) {
+        switch (payload.floater[1]) {
+            case 1:
+                document.getElementById('sump_on').style.display="inline";
+                document.getElementById('sump_off').style.display="none";
+               
+                break;
+            case 0:
+                document.getElementById('sump_on').style.display="none";
+                document.getElementById('sump_off').style.display="inline";
+                break;
+        }
+    }
+
+    if (payload.floater && payload.floater.length > 0) {
+        switch (payload.floater[2]) {
+            case 1:
+                document.getElementById('Tubewell_floater_on').style.display="inline";
+                document.getElementById('Tubewell_floater_off').style.display="none";
+               
+                break;
+            case 0:
+                document.getElementById('Tubewell_floater_on').style.display="none";
+                document.getElementById('Tubewell_floater_off').style.display="inline";
+                break;
+        }
+    }
+
+
 }
 
 
