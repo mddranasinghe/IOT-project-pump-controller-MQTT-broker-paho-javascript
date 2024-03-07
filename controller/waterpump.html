@@ -326,6 +326,15 @@ function onConnect() {
   for (var i = 0; i < ovarlay.length; i++) {
   ovarlay[i].style.backgroundColor = "white";}
 
+  document.getElementById("automode_tubewell").disabled = false;
+ document.getElementById("automode_mainpump").disabled = false;
+
+  document.getElementById("pumppower_tubewell").disabled = false;
+  document.getElementById("pumptimer_tubewell").disabled = false;
+
+  document.getElementById("pumppower_mainpump").disabled = false;
+ document.getElementById("pumptimer_mainpump").disabled = false;
+
   }
   catch (error){
 
