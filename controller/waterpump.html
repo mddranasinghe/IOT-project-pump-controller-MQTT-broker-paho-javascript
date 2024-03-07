@@ -546,7 +546,7 @@ var timer;
 
          timer = setTimeout(function() {
         
-        payload = payload+",-";
+        payload = "-,"+payload;
         sendCommandToDevice(topic, payload);
         console.log(payload);
     }, 1000); 
