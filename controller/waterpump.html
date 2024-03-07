@@ -165,7 +165,7 @@
                     <p style="display:none; color:rgb(156, 156, 156) ;" >OFF</p>
                   </div> 
 
-                </div>
+               
                 <div class="status_box">
                   <div class="topic"><p>O/H Tank Floater</p></div>
                   <div class="option"><P style="color:rgb(70, 184, 110)">ON</P> </div>
@@ -192,6 +192,7 @@
     </div>
 
   </div>
+
 
     <p style="color:grey; margin-bottom: 3px; margin-top: 30px;"><b>Tubewell Pump Status</b></p>
         
@@ -273,6 +274,8 @@
 
   </div>      
     </div>
+  
+
     <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
     <script src="../resources/js/connection.js"></script>
     <script  type="text/javascript" defer="true">
@@ -419,26 +422,17 @@
         }
         sendCommandToDevice(topic,payload);
       });
-
-    /*  document.getElementById('set_timer_time').addEventListener('input', function(){
-    var value = this.value;
-    var topic="node/spc/b2n/7469308fcf871dad4d4/sw/soft_delay";
-        var payload;
     
-      setTimeout(function(currentValue) {
-        if (currentValue > 0) {
-            //console.log("Value greater than 0: " + currentValue);
-            payload = value.toString();
-        } else {
-            //console.log("Value is not greater than 0: " + currentValue);
-            
-        }
-    }.bind(null, value), 1000); 
-
-    sendCommandToDevice(topic,payload);
-});
+/* document.getElementById('set_timer_time').addEventListener('input', function(){
+        var topic="node/spc/b2n/7469308fcf871dad4d4/sw/soft_delay";
+        var value = this.value;
+        
+          payload=value;
+      
+     
+        sendCommandToDevice(topic,payload);
+      })
 */
-
 
 
           //mqtt connection .......................................    
@@ -500,18 +494,18 @@ function onMessageArrived(message) {
     
     payload = JSON.parse(payload);
 //keys = Object.keys(payload);
-      console.log(payload);
-
-    soft_start(payload);   
-   sw_mode(payload);   
+      //console.log(payload);
+    soft_start(payload);  
+   // soft_start2(payload); 
+ // sw_mode(payload);   
   //console.log(payload['sw_mode'][0]);
-
+  //sw(payload);
 }
 
 
 
 
-function waterPumpCallBack(message) {
+/*function waterPumpCallBack(message) {
     console.log("waterPumpCallBack ");
     var payloadString = JSON.parse(message.payloadString);
     console.log(payloadString);
@@ -519,38 +513,78 @@ function waterPumpCallBack(message) {
 
     payload = JSON.parse(payload);
     // keys = Object.keys(payload);
-    sw(payload);
+  //  sw(payload);
     soft_start(payload);   
-      sw_mode(payload); 
-}
+     // sw_mode(payload); 
+}*/
 
  
-function sw(payload)
+/*function sw(payload)
 {if (payload && payload.sw && Array.isArray(payload.sw) && payload.sw.length > 0) {
     if (payload.sw[0] === 1) {
       document.getElementById('pumppower_mainpump').checked = true; 
       document.getElementById('toggleLabel_pumppower_mainpump').style.left = '0px'; 
-      document.getElementById('pumppower_mainpump').dispatchEvent(new Event('change'));
+
   } else if (payload.sw[0] === 0) {
     document.getElementById('pumppower_mainpump').checked = false; 
       document.getElementById('toggleLabel_pumppower_mainpump').style.left = '2px'; 
   }
     
-}}
+}}*/
 
-  function soft_start(payload)
+function soft_start(payload) {
+    if (payload.sw_mode && payload.sw_mode.length > 0) {
+        switch (payload.sw_mode[0]) {
+            case 1:
+                document.getElementById('automode_mainpump').checked = true;
+                document.getElementById('toggleLabel_mainpump_auto').style.left = '0px';
+                break;
+            case 0:
+                document.getElementById('automode_mainpump').checked = false;
+                document.getElementById('toggleLabel_mainpump_auto').style.left = '2px';
+                break;
+        }
+    }
+
+    
+    switch (payload['soft_start']) {
+            case 1:
+                document.getElementById('Soft_Start1').checked = true;
+                document.getElementById('toggleLabel').style.left = '0px';
+                break;
+            case 0:
+                document.getElementById('Soft_Start1').checked = false;
+                document.getElementById('toggleLabel').style.left = '2px';
+                break;
+        }
+    
+}
+
+
+
+  /*function soft_start(payload)
 {
     if (payload['soft_start'] === 1) {
       document.getElementById('Soft_Start1').checked = true; 
       document.getElementById('toggleLabel').style.left = '0px'; 
-  } else if (payload['soft_start'] === 0) {
-    document.getElementById('Soft_Start1').checked = false; 
+  } else if (payload['soft_start'] === 1){
+    document.getElementById('Soft_Start1').checked = true; 
       document.getElementById('toggleLabel').style.left = '2px'; 
-  }
-    
+  } 
 }
+
+function soft_start2(payload)
+{
+  if (payload['sw_mode'][0] === 1){
+    document.getElementById('automode_mainpump').checked = true; 
+      document.getElementById('toggleLabel_mainpump_auto').style.left = '0px'; 
+  } else if(payload['sw_mode'][0] === 0){
+    document.getElementById('automode_mainpump').checked = false; 
+      document.getElementById('toggleLabel_mainpump_auto').style.left = '2px'; 
+  }
+}*/
     
-function sw_mode(payload) {
+/*function sw_mode(payload) {
     if (payload && payload.sw_mode && Array.isArray(payload.sw_mode) && payload.sw_mode.length > 0) {
         if (payload.sw_mode[0] === 1) {
             document.getElementById('automode_mainpump').checked = true; 
@@ -562,7 +596,7 @@ function sw_mode(payload) {
         }
     } 
 }
-
+*/
 
 
 function onConnectionLost(responseObject) {
@@ -596,7 +630,7 @@ ovarlay[i].style.backgroundColor = "#C2C2C2";}
 }
 connect();
 
-getDataFromDevice("node/spc/n2b/7469308fcf871dad4d4/status",waterPumpCallBack);
+//getDataFromDevice("node/spc/n2b/7469308fcf871dad4d4/status",waterPumpCallBack);
 
 //getDataFromDevice("node/spc/n2b/7469308fcf871dad4d4/status",waterPumpCallBack);
 
