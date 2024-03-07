@@ -169,7 +169,7 @@
                    <div class="status_box">
                       <div class="topic"><p>Auto Mode</p></div>
                       <div class="option">  <div class="toggle">
-                      <input type="checkbox" id="automode_mainpump"style="width:50px;height:50px;" ><label for="automode_mainpump" id="toggleLabel_mainpump_auto"></label></div> 
+                      <input type="checkbox" id="automode_mainpump" ><label for="automode_mainpump" id="toggleLabel_mainpump_auto"></label></div> 
                    </div>
                   </div>
         
@@ -218,7 +218,7 @@
            <div class="status_box">
               <div class="topic"><p>Auto Mode</p></div>
               <div class="option">  <div class="toggle" >
-              <input type="checkbox" id="automode_tubewell" style="width:50px;height:50px;"/><label for="automode_tubewell" id="toggleLabel_automode_tubewell"></label></div> 
+              <input type="checkbox" id="automode_tubewell" /><label for="automode_tubewell" id="toggleLabel_automode_tubewell"></label></div> 
            </div>
           </div>
 
@@ -355,7 +355,7 @@ function sendCommandToDevice(topic,payload) {
 
 function onMessageArrived(message) {
   payload=message.payloadString;
-    console.log("Payload: " + payload);
+    console.log("Payload:" + payload);
     displayFunction(payload);  
   
 }
@@ -503,7 +503,7 @@ ovarlay[i].style.backgroundColor = "#C2C2C2";}
         var topic=publish_topic+"sw/timer_mode_all";
        
         if (this.checked) {
-          payload="1-";
+          payload="1,-";
         }
         else{
           payload="0,-";
@@ -546,7 +546,7 @@ var timer;
 
          timer = setTimeout(function() {
         
-        payload = payload + ",-";
+        payload = payload+",-";
         sendCommandToDevice(topic, payload);
         console.log(payload);
     }, 1000); 
