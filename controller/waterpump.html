@@ -64,7 +64,7 @@
 .topic {flex: 1;} /* Expand to fill remaining space */
 .option { margin-left: center;} /* Push to the right */
 
-#set_timer_time{display: none; width: 45px;height: 20px;  text-align:center;}
+#set_timer_time{display: none; width: 45px;height: 20px;  text-align:center; }
 #set_timer_time_tubewell{display: none; width: 45px;height: 20px; text-align:center;}
 #set_timer_time_soft{display: none; width: 45px;height: 20px; text-align:center;}
 
@@ -133,8 +133,8 @@
     </div>
 
          <div class="status_box">
-          <div class="topic"><p id="label_timer_time" style=" padding-bottom: 20; display:none;">Timer Time</p></div>
-          <div class="option" style="padding-bottom:20px ; ">
+          <div class="topic"><p id="label_timer_time" style=" padding-bottom: 20px;  display:none;">Timer Time</p></div>
+          <div class="option"  style="padding-bottom:15px ; ">
           <input type="number" min="5" max="3600" id="set_timer_time"  /><label for="set_timer_time" id="toggleLabel_set_timer_time_mainpump"></label></div> 
     
     </div>
@@ -177,7 +177,7 @@
 
 <div class="status_box">
   <div class="topic"><p id="label_timer_time_tubewell" style=" padding-bottom: 20px; display:none;">Timer Time</p></div>
-  <div class="option" style="padding-bottom:5px ; ">
+  <div class="option" style="padding-bottom:15px ; ">
   <input type="number" min="5" max="18000" id="set_timer_time_tubewell" value="60"/><label for="set_timer_time_tubewell" id="toggleLabel_set_timer_time_tubewelll"></label></div> 
 
 </div>
@@ -195,8 +195,8 @@
         </div>
         
 <div class="status_box">
-  <div class="topic"><p id="label_timer_time_soft" style=" padding-bottom: 0px; display:none;">Timer Time</p></div>
-  <div class="option" style="padding-bottom:5px ; ">
+  <div class="topic"><p id="label_timer_time_soft" style="  display:none;">Timer Time</p></div>
+  <div class="option" >
   <input type="number" min="5" max="18000" id="set_timer_time_soft" value=""/><label for="set_timer_time_soft" id="toggleLabel_set_timer_time_soft"></label></div> 
 </div>
 
@@ -211,7 +211,7 @@
 </div> 
 
 
-<div class="status_box">
+<!--<div class="status_box">
   <div class="topic"><p>SSID</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
 </div> 
@@ -219,11 +219,11 @@
 <div class="status_box">
   <div class="topic"><p>SIGNAL</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
-</div> 
+</div> -->
 
 <div class="status_box">
   <div class="topic"><p>TIME</p></div>
-  <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
+  <div class="option"><P style="color:rgb(156, 156, 156)" id="time"></P> </div>
 </div> 
 
   </div>      
@@ -718,14 +718,15 @@ function displayFunction(payload) {
     var hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
     var minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
     var remainingSeconds = (seconds % 60).toString().padStart(2, '0');
-    return hours + ":" + minutes + ":" + remainingSeconds;}
+    return hours + "H: " + minutes + "M: " + remainingSeconds + "S ";}
 
-     if(payload['fw']){ document.getElementById('fw').innerHTML = (payload["fw"]);}//  version 
-
- 
+    
+    if(payload['fw']){ document.getElementById('fw').innerHTML = (payload["fw"]);}//  version 
+    if(payload['time']){ document.getElementById('time').innerHTML = (payload["time"]);}//device location time
 
 document.getElementById('set_timer_time').value=payload.timer_val[0];// main pump time
 document.getElementById('set_timer_time_tubewell').value=payload.timer_val[1];// tubewell time
+document.getElementById('set_timer_time_soft').value=payload['soft_delay'];// soft time
 
 updateSignalStrength(payload['rssi']);//rssi
 }
@@ -733,21 +734,26 @@ updateSignalStrength(payload['rssi']);//rssi
 
 var bar=  document.getElementsByClassName("bar");  //signal bar.
     function updateSignalStrength(rssi) {
-        if (rssi >= -55) {
+        if (rssi >= -50) {
 		        bar[0].style.backgroundColor="green";
 			    bar[1].style.backgroundColor="green";
 				bar[2].style.backgroundColor="green";
 				bar[3].style.backgroundColor="green";
-				bar[4].style.backgroundColor="green";
-				
+				bar[4].style.backgroundColor="green";}
+				else if(rssi >= -60)
+        {
+          bar[0].style.backgroundColor="green";
+			    bar[1].style.backgroundColor="green";
+				  bar[2].style.backgroundColor="green";
+				  bar[3].style.backgroundColor="green";
           
         } else if (rssi >= -70) {
 		    bar[0].style.backgroundColor="green";
-			bar[1].style.backgroundColor="green";
-			bar[2].style.backgroundColor="green";
+			  bar[1].style.backgroundColor="green";
+			  bar[2].style.backgroundColor="green";
          
         } else if (rssi >= -80) {
-			bar[0].style.backgroundColor="green";
+			   bar[0].style.backgroundColor="green";
          
         } else if (rssi >= -100) {
            
