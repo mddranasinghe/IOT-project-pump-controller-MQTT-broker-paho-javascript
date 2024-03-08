@@ -271,7 +271,7 @@
 
   <div class="status_box">
     <div class="topic"><p>Firmware Version</p></div>
-    <div class="option"><P style="color:rgb(156, 156, 156)">V1.0</P> </div>
+    <div class="option"><P style="color:rgb(156, 156, 156)" id="fw">V1.0</P> </div>
 </div> 
 
 <div class="status_box">
@@ -304,7 +304,7 @@
 //..............................................................................................................
 var payload; var companyID="node/"; var deviceType="spc/"; var deviceID="7469308fcf871dad4d4/" ;
 var publish_topic=companyID+deviceType+"b2n/"+deviceID;// publish topic
-const subTopic = companyID+deviceType+"n2b/"+deviceID+"status";// subscribe topic
+const subTopic = companyID+deviceType+"n2b/"+deviceID+"+";// subscribe topic
 
 var ovarlay=  document.getElementsByClassName("status_box");
 //..............................................................................................................
@@ -319,10 +319,12 @@ client.onMessageArrived = onMessageArrived;
 }
 function onConnect() {
   try {
+   // sendCommandToDevice("node/spc/b2n/7469308fcf871dad4d4/ntp_info","read");
+    onlinestatus();
     console.log("onConnect");    
     client.subscribe(subTopic);
-   // sendCommandToDevice("node/spc/b2n/7469308fcf871dad4d4/info","read");
-    onlinestatus();
+    sendCommandToDevice("node/spc/b2n/7469308fcf871dad4d4/info","read");
+    
   }
   catch (error){
 
@@ -332,11 +334,16 @@ function onConnect() {
 
 
 function sendCommandToDevice(topic,payload) {
+  try{
     if (client.isConnected()) {
         console.log("sendCommandToDevice: " + topic + ", Payload: " + payload);
         var message = new Paho.MQTT.Message(payload);
         message.destinationName = topic;
         client.send(message);
+    }}
+    catch(error)
+    {
+      console.log(error);
     }
 }
 
@@ -519,8 +526,7 @@ setTimeout(connect, 10000);
           payload="0";
 
         }
-       // sendCommandToDevice(topic,payload);
-       sendCommandToDevice("node/spc/b2n/7469308fcf871dad4d4/info","read");
+       sendCommandToDevice(topic,payload);
       });
       document.getElementById('pumptimer_mainpump').addEventListener('change', function(){
         var topic=publish_topic+"sw/timer_mode_all";
@@ -580,6 +586,18 @@ var timer;
   }
 });
 
+var timer; 
+         document.getElementById('set_timer_time_soft').addEventListener('input', function(){
+         clearTimeout(timer); 
+          topic = publish_topic + "sw/soft_delay";
+          payload = this.value.trim();
+        if(payload !== ""){
+         timer = setTimeout(function() {
+        sendCommandToDevice(topic, payload);
+        console.log(payload);
+    }, 1000); 
+  }
+});
 function displayFunction(payload) {
       payload = JSON.parse(payload);
 
@@ -593,8 +611,8 @@ function displayFunction(payload) {
           break;
       }
 
-    if (payload.sw_mode && payload.sw_mode.length > 0) {
-        switch (payload.sw_mode[0]) {
+    if (payload.sw_mode && payload.sw_mode.length > 0) { // auto mode main pump
+        switch (payload.sw_mode[0]) { 
             case 1:
                 document.getElementById('automode_mainpump').checked = true;
                 document.getElementById('toggleLabel_mainpump_auto').style.left = '0px';
@@ -618,7 +636,7 @@ function displayFunction(payload) {
         }
     }
 
-    if (payload.sw_mode && payload.sw_mode.length > 0) {
+    if (payload.sw_mode && payload.sw_mode.length > 0) { // auto mpode tubewell
         switch (payload.sw_mode[1]) {
             case 1:
                 document.getElementById('automode_tubewell').checked = true;
@@ -641,7 +659,7 @@ function displayFunction(payload) {
         }
     }
     
-    switch (payload['soft_start']) {
+    switch (payload['soft_start']) { 
             case 1:
                 document.getElementById('Soft_Start1').checked = true;
                 document.getElementById('toggleLabel').style.left = '0px';
@@ -659,7 +677,7 @@ function displayFunction(payload) {
     
 
 
-        if (payload.sw && payload.sw.length > 0) {
+        if (payload.sw && payload.sw.length > 0) {  //   main pump switch
         switch (payload.sw[0]) {
             case 1:
                 document.getElementById('pumppower_mainpump').checked = true;
@@ -673,7 +691,7 @@ function displayFunction(payload) {
     }
 
 
-    if (payload.sw && payload.sw.length > 0) {
+    if (payload.sw && payload.sw.length > 0) {  // tubewell pump switch
         switch (payload.sw[1]) {
             case 1:
                 document.getElementById('pumppower_tubewell').checked = true;
@@ -686,20 +704,7 @@ function displayFunction(payload) {
         }
     }
 
-    if (payload.sw && payload.sw.length > 0) {
-        switch (payload.sw[1]) {
-            case 1:
-                document.getElementById('pumppower_tubewell').checked = true;
-                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '0px';
-                break;
-            case 0:
-                document.getElementById('pumppower_tubewell').checked = false;
-                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '2px';
-                break;
-        }
-    }
-
-    if (payload.floater && payload.floater.length > 0) {
+    if (payload.floater && payload.floater.length > 0) { // o/h floater
         switch (payload.floater[0]) {
             case 1:
                 document.getElementById('o/h_on').style.display="inline";
@@ -712,7 +717,7 @@ function displayFunction(payload) {
                 break;
         }
     }
-    if (payload.floater && payload.floater.length > 0) {
+    if (payload.floater && payload.floater.length > 0) { // sump floater
         switch (payload.floater[1]) {
             case 1:
                 document.getElementById('sump_on').style.display="inline";
@@ -726,7 +731,7 @@ function displayFunction(payload) {
         }
     }
 
-    if (payload.floater && payload.floater.length > 0) {
+    if (payload.floater && payload.floater.length > 0) { //tubewell floater
         switch (payload.floater[2]) {
             case 1:
                 document.getElementById('Tubewell_floater_on').style.display="inline";
@@ -741,7 +746,7 @@ function displayFunction(payload) {
     }
 
 
-    if (payload.pmp_timer && payload.pmp_timer.length > 0) {
+    if (payload.pmp_timer && payload.pmp_timer.length > 0) { // main pump timer
         switch (payload.pmp_timer[0]) {
             case 1:
                 document.getElementById('pumptimer_mainpump').checked = true;
@@ -759,7 +764,7 @@ function displayFunction(payload) {
     }
 
 
-    if (payload.pmp_timer && payload.pmp_timer.length > 0) {
+    if (payload.pmp_timer && payload.pmp_timer.length > 0) { // tubewell timer
         switch (payload.pmp_timer[1]) {
             case 1:
                 document.getElementById('pumptimer_tubewell').checked = true;
@@ -775,22 +780,27 @@ function displayFunction(payload) {
                 break;
         }
     }
+
+
+    document.getElementById('up').innerHTML = formatTime(payload["up"]);// runing time
     function formatTime(seconds) {
     var hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
     var minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
     var remainingSeconds = (seconds % 60).toString().padStart(2, '0');
     return hours + ":" + minutes + ":" + remainingSeconds;}
 
-     document.getElementById('up').innerHTML = formatTime(payload["up"]);
+     if(payload['fw']){ document.getElementById('fw').innerHTML = (payload["fw"]);}//  version 
 
-updateSignalStrength(payload['rssi']);
+ 
 
-document.getElementById('set_timer_time').value=payload.timer_val[0];
-document.getElementById('set_timer_time_tubewell').value=payload.timer_val[1];
+document.getElementById('set_timer_time').value=payload.timer_val[0];// main pump time
+document.getElementById('set_timer_time_tubewell').value=payload.timer_val[1];// tubewell time
+
+updateSignalStrength(payload['rssi']);//rssi
 }
 
 
-var bar=  document.getElementsByClassName("bar");
+var bar=  document.getElementsByClassName("bar");  //signal bar.
     function updateSignalStrength(rssi) {
         if (rssi >= -55) {
 		        bar[0].style.backgroundColor="green";
