@@ -110,7 +110,7 @@
 
 #set_timer_time{display: none; width: 45px;height: 20px; }
 #set_timer_time_tubewell{display: none; width: 45px;height: 20px;}
-
+#set_timer_time_soft{display: none; width: 45px;height: 20px;}
 
 
 #pumppower_mainpump
@@ -204,7 +204,7 @@
          <div class="status_box">
           <div class="topic"><p id="label_timer_time" style=" padding-bottom: 20; display:none;">Timer Time</p></div>
           <div class="option" style="padding-bottom:20px ; ">
-          <input type="number" min="5" max="3600" id="set_timer_time" value="1000" /><label for="set_timer_time" id="toggleLabel_set_timer_time_mainpump"></label></div> 
+          <input type="number" min="5" max="3600" id="set_timer_time"  /><label for="set_timer_time" id="toggleLabel_set_timer_time_mainpump"></label></div> 
     
     </div>
 
@@ -245,8 +245,8 @@
 </div>
 
 <div class="status_box">
-  <div class="topic"><p id="label_timer_time_tubewell" style=" padding-bottom: 20; display:none;">Timer Time</p></div>
-  <div class="option" style="padding-bottom:20px ; ">
+  <div class="topic"><p id="label_timer_time_tubewell" style=" padding-bottom: 20px; display:none;">Timer Time</p></div>
+  <div class="option" style="padding-bottom:5px ; ">
   <input type="number" min="1" max="60" id="set_timer_time_tubewell" value="60"/><label for="set_timer_time_tubewell" id="toggleLabel_set_timer_time_tubewelll"></label></div> 
 
 </div>
@@ -262,6 +262,12 @@
             <input type="checkbox"  id="Soft_Start1" ><label for="Soft_Start1" id="toggleLabel"></label></div> 
          </div>
         </div>
+        
+<div class="status_box">
+  <div class="topic"><p id="label_timer_time_soft" style=" padding-bottom: 0px; display:none;">Timer Time</p></div>
+  <div class="option" style="padding-bottom:5px ; ">
+  <input type="number" min="1" max="60" id="set_timer_time_soft" value="60"/><label for="set_timer_time_soft" id="toggleLabel_set_timer_time_soft"></label></div> 
+</div>
 
   <div class="status_box">
     <div class="topic"><p>Firmware Version</p></div>
@@ -291,7 +297,6 @@
 
   </div>      
     </div>
-  
 
     <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
     <script src="../resources/js/connection.js"></script>
@@ -304,6 +309,7 @@ const subTopic = companyID+deviceType+"n2b/"+deviceID+"status";// subscribe topi
 var ovarlay=  document.getElementsByClassName("status_box");
 //..............................................................................................................
 document.getElementById("backbutton").onclick=function(){location.href="../index.html"}        
+sendCommandToDevice("node/spc/b2n/7469308fcf871dad4d4/info","read");
 
 function connect(){
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
@@ -311,30 +317,12 @@ client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
 }
-
 function onConnect() {
   try {
     console.log("onConnect");    
     client.subscribe(subTopic);
     sendCommandToDevice("node/spc/b2n/7469308fcf871dad4d4/info","read");
-  
-
-  //document.getElementById("lostimg").style.display="none";
-  document.getElementById("offline").style.display="none";
- // document.getElementById("connectimg").style.display="inline";
-  document.getElementById("online").style.display="inline";
-  for (var i = 0; i < ovarlay.length; i++) {
-  ovarlay[i].style.backgroundColor = "white";}
-
-  document.getElementById("automode_tubewell").disabled = false;
- document.getElementById("automode_mainpump").disabled = false;
-
-  document.getElementById("pumppower_tubewell").disabled = false;
-  document.getElementById("pumptimer_tubewell").disabled = false;
-
-  document.getElementById("pumppower_mainpump").disabled = false;
- document.getElementById("pumptimer_mainpump").disabled = false;
-
+    onlinestatus();
   }
   catch (error){
 
@@ -342,10 +330,10 @@ function onConnect() {
   }
 }
 
+
 function sendCommandToDevice(topic,payload) {
     if (client.isConnected()) {
         console.log("sendCommandToDevice: " + topic + ", Payload: " + payload);
-        //client.subscribe(topic);
         var message = new Paho.MQTT.Message(payload);
         message.destinationName = topic;
         client.send(message);
@@ -364,6 +352,31 @@ function onMessageArrived(message) {
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
+    offlinestatus();
+  }
+
+  setTimeout(connect, 10000);
+}
+
+function onlinestatus()
+{
+  document.getElementById("offline").style.display="none";
+  document.getElementById("online").style.display="inline";
+  for (var i = 0; i < ovarlay.length; i++) {
+  ovarlay[i].style.backgroundColor = "white";}
+  document.getElementById("automode_tubewell").disabled = false;
+ document.getElementById("automode_mainpump").disabled = false;
+
+  document.getElementById("pumppower_tubewell").disabled = false;
+  document.getElementById("pumptimer_tubewell").disabled = false;
+
+  document.getElementById("pumppower_mainpump").disabled = false;
+ document.getElementById("pumptimer_mainpump").disabled = false;
+
+}
+
+function offlinestatus()
+{
 
   document.getElementById("automode_tubewell").disabled = true;
  document.getElementById("automode_mainpump").disabled = true;
@@ -374,20 +387,19 @@ function onConnectionLost(responseObject) {
   document.getElementById("pumppower_mainpump").disabled = true;
  document.getElementById("pumptimer_mainpump").disabled = true;
 
- //document.getElementById("lostimg").style.display="inline";
   document.getElementById("offline").style.display="inline";
-
-  
- // document.getElementById("connectimg").style.display="none";
   document.getElementById("online").style.display="none";
 
 for (var i = 0; i < ovarlay.length; i++) {
 ovarlay[i].style.backgroundColor = "#C2C2C2";}
-  }
 
-  setTimeout(connect, 10000);
+for(var x = 0; x < bar.length; x++)
+{
+bar[x].style.backgroundColor = "#ccc";
 }
 
+setTimeout(connect, 10000);
+}
       var automode_mainpump=document.getElementById('automode_mainpump');
       automode_mainpump.addEventListener('change', function(){
         var topic=publish_topic+"sw/mode/1";
@@ -525,40 +537,51 @@ ovarlay[i].style.backgroundColor = "#C2C2C2";}
         sendCommandToDevice(topic,payload);
       });
 
+      var timer; 
+document.getElementById('set_timer_time').addEventListener('input', function(){
+    clearTimeout(timer); 
+    topic = publish_topic + "sw/on_time_all";
+    payload = this.value.trim(); 
 
-         var timer; 
-         document.getElementById('set_timer_time').addEventListener('input', function(){
-         clearTimeout(timer); 
-         topic = publish_topic + "sw/on_time_all";
-          payload = this.value;
-
-         timer = setTimeout(function() {
-        
-         payload = payload + ",-";
-        sendCommandToDevice(topic, payload);
-        console.log(payload);
-    }, 1000); 
+    if (payload !== "") { 
+        timer = setTimeout(function() {
+             payload = payload + ",-";
+            sendCommandToDevice(topic, payload);
+            console.log(payload);
+        }, 1000); 
+    }
 });
+
 
 
 var timer; 
          document.getElementById('set_timer_time_tubewell').addEventListener('input', function(){
          clearTimeout(timer); 
           topic = publish_topic + "sw/on_time_all";
-          payload = this.value;
-
+          payload = this.value.trim();
+        if(payload !== ""){
          timer = setTimeout(function() {
         
         payload = "-,"+payload;
         sendCommandToDevice(topic, payload);
         console.log(payload);
     }, 1000); 
+  }
 });
 
 function displayFunction(payload) {
       payload = JSON.parse(payload);
 
-      
+      switch (payload['stat'])
+      {
+        case "online":
+          onlinestatus();
+          break;
+        case "offline":
+          offlinestatus();
+          break;
+      }
+
     if (payload.sw_mode && payload.sw_mode.length > 0) {
         switch (payload.sw_mode[0]) {
             case 1:
@@ -611,10 +634,15 @@ function displayFunction(payload) {
             case 1:
                 document.getElementById('Soft_Start1').checked = true;
                 document.getElementById('toggleLabel').style.left = '0px';
+                document.getElementById("label_timer_time_soft").style.display="inline";
+                document.getElementById("set_timer_time_soft").style.display="inline"; 
+
                 break;
             case 0:
                 document.getElementById('Soft_Start1').checked = false;
                 document.getElementById('toggleLabel').style.left = '2px';
+                document.getElementById("label_timer_time_soft").style.display="none";
+                document.getElementById("set_timer_time_soft").style.display="none"; 
                 break;
         }
     
@@ -746,6 +774,8 @@ function displayFunction(payload) {
 
 updateSignalStrength(payload['rssi']);
 
+document.getElementById('set_timer_time').value=payload.timer_val[0];
+document.getElementById('set_timer_time_tubewell').value=payload.timer_val[1];
 }
 
 
