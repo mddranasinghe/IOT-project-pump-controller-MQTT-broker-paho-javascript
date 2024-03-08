@@ -740,22 +740,27 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
 				bar[2].style.backgroundColor="green";
 				bar[3].style.backgroundColor="green";
 				bar[4].style.backgroundColor="green";}
-				else if(rssi >= -60)
+				else if(rssi >= -55)
         {
           bar[0].style.backgroundColor="green";
 			    bar[1].style.backgroundColor="green";
 				  bar[2].style.backgroundColor="green";
 				  bar[3].style.backgroundColor="green";
           
-        } else if (rssi >= -70) {
+        } else if (rssi >= -65) {
 		    bar[0].style.backgroundColor="green";
 			  bar[1].style.backgroundColor="green";
 			  bar[2].style.backgroundColor="green";
          
         } else if (rssi >= -80) {
 			   bar[0].style.backgroundColor="green";
+         bar[1].style.backgroundColor="green";
          
-        } else if (rssi >= -100) {
+        } 
+      else if (rssi >= -85) {
+			   bar[0].style.backgroundColor="green";
+         
+        }else if (rssi >= -100) {
            
         } 
     }
