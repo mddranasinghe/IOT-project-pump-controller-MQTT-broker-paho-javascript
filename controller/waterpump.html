@@ -7,11 +7,7 @@
     <style>
 
 
-.toggle {
-  position: relative;
-  box-sizing: border-box;
-}
-
+.toggle { position: relative; box-sizing: border-box;}
 .toggle input[type="checkbox"] {
   position: absolute;
   left: 2px;
@@ -20,17 +16,14 @@
   width: 85%;
   height: 70%;
   cursor: pointer;
-  opacity: 0;
-  
-
-}
+  opacity: 0;}
 
 .toggle label {
   position: relative;
   display: flex;
   align-items: center;
-  box-sizing: border-box;
-}
+  box-sizing: border-box;}
+
 .toggle label:before {
   content: '';
   width: 50px;
@@ -55,68 +48,28 @@
   box-sizing: border-box;
   transition: 0.2s ease-in;
 }
-
-.toggle input[type="checkbox"]:checked + label:before {
-  background: #4BD865;
-
-}
-
-.toggle input[type="checkbox"]:checked + label:after {
-  left: 30px;
-
-}
+.toggle input[type="checkbox"]:checked + label:before { background: #4BD865;}
+.toggle input[type="checkbox"]:checked + label:after {left: 30px;}
 
 
-.controlpanels{
-
-    width: 95%;
-    margin: 0 auto;
-    font-family: 'Avenir', sans-serif;
-   
-  
-                                                
-}
-
-    .mainpump ,.System ,.Tubewell{
-        width:100%;
-      box-shadow: 0.5px 0.5px 3px 0.5px gray;
-      border-radius: 3px 3px;
-    
-       
-    }
-
-
-    .status_box {
+.controlpanels{   width: 95%;   margin: 0 auto;  font-family: 'Avenir', sans-serif;}
+.mainpump ,.System ,.Tubewell{ width:100%;box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 3px 3px;}
+.status_box {
         padding-left: 20px;
         padding-right: 20px;
-        
-  
         background-color:white;
-      
         display: flex; /* Use flexbox to align children */
-         align-items: center; 
-        
-}
+         align-items: center; }
 
-.topic {
-  flex: 1; /* Expand to fill remaining space */
-}
-
-
-.option {
-  margin-left: center; /* Push to the right */
-  
-}
+.topic {flex: 1;} /* Expand to fill remaining space */
+.option { margin-left: center;} /* Push to the right */
 
 #set_timer_time{display: none; width: 45px;height: 20px;  text-align:center;}
 #set_timer_time_tubewell{display: none; width: 45px;height: 20px; text-align:center;}
 #set_timer_time_soft{display: none; width: 45px;height: 20px; text-align:center;}
 
-
 #pumppower_mainpump{z-index: 4;}
 #pumppower_status_tubewell{z-index: 8;}
-
-
 
 .signal-bars {display: flex; margin: 2px; }
  .bar {width: 3px;margin-right: 1px;background-color: #ccc;}
@@ -141,15 +94,7 @@
       <div class="bar" id="bar3"style="height:6px;margin-top:4px;"></div>
       <div class="bar" id="bar4"style="height:8px;margin-top:2px;"></div>
       <div class="bar" id="bar5"style="height:10px;"></div>
-  </div>
-  <!-- <img src="../resources/image/Screenshot (180).png" style="width: 25px; height: 20px; display: none;" id="lostimg">
-  <img src="../resources/image/connect.png" style="width: 25px; height: 20px; display: none;" id="connectimg">-->
-
-  </td></tr></table>
-             
-
-   
-  
+  </div></td></tr></table>
             <div class="mainpump">
          
                    <div class="status_box">
@@ -233,7 +178,7 @@
 <div class="status_box">
   <div class="topic"><p id="label_timer_time_tubewell" style=" padding-bottom: 20px; display:none;">Timer Time</p></div>
   <div class="option" style="padding-bottom:5px ; ">
-  <input type="number" min="1" max="60" id="set_timer_time_tubewell" value="60"/><label for="set_timer_time_tubewell" id="toggleLabel_set_timer_time_tubewelll"></label></div> 
+  <input type="number" min="5" max="18000" id="set_timer_time_tubewell" value="60"/><label for="set_timer_time_tubewell" id="toggleLabel_set_timer_time_tubewelll"></label></div> 
 
 </div>
 </div>
@@ -252,7 +197,7 @@
 <div class="status_box">
   <div class="topic"><p id="label_timer_time_soft" style=" padding-bottom: 0px; display:none;">Timer Time</p></div>
   <div class="option" style="padding-bottom:5px ; ">
-  <input type="number" min="1" max="60" id="set_timer_time_soft" value="60"/><label for="set_timer_time_soft" id="toggleLabel_set_timer_time_soft"></label></div> 
+  <input type="number" min="5" max="18000" id="set_timer_time_soft" value=""/><label for="set_timer_time_soft" id="toggleLabel_set_timer_time_soft"></label></div> 
 </div>
 
   <div class="status_box">
