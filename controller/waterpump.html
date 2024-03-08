@@ -133,12 +133,12 @@
     </div>
 
          <div class="status_box">
-          <div class="topic"><p id="label_timer_time" style=" padding-bottom: 20px;  display:none;">Timer Time</p></div>
-          <div class="option"  style="padding-bottom:15px ; ">
+          <div class="topic"><p id="label_timer_time" >Timer Time</p></div>
+          <div class="option" ><div style=" margin-top:12.6px;margin-bottom: 12.6px;">
           <input type="number" min="5" max="3600" id="set_timer_time"  /><label for="set_timer_time" id="toggleLabel_set_timer_time_mainpump"></label></div> 
     
     </div>
-
+  </div>
   </div>
 
 
@@ -176,10 +176,10 @@
 </div>
 
 <div class="status_box">
-  <div class="topic"><p id="label_timer_time_tubewell" style=" padding-bottom: 20px; display:none;">Timer Time</p></div>
-  <div class="option" style="padding-bottom:15px ; ">
+  <div class="topic"><p id="label_timer_time_tubewell" >Timer Time</p></div>
+  <div class="option" ><div style=" margin-top:12.6px;margin-bottom: 12.6px;">
   <input type="number" min="5" max="18000" id="set_timer_time_tubewell" value="60"/><label for="set_timer_time_tubewell" id="toggleLabel_set_timer_time_tubewelll"></label></div> 
-
+</div>
 </div>
 </div>
  
@@ -194,10 +194,11 @@
          </div>
         </div>
         
-<div class="status_box">
-  <div class="topic"><p id="label_timer_time_soft" style="  display:none;">Timer Time</p></div>
-  <div class="option" >
+<div class="status_box" id="soft_box">
+  <div class="topic"><p id="label_timer_time_soft">Timer Time</p></div>
+  <div class="option" ><div style=" margin-top:12.6px;margin-bottom: 12.6px;">
   <input type="number" min="5" max="18000" id="set_timer_time_soft" value=""/><label for="set_timer_time_soft" id="toggleLabel_set_timer_time_soft"></label></div> 
+</div>
 </div>
 
   <div class="status_box">
@@ -594,8 +595,9 @@ function displayFunction(payload) {
             case 1:
                 document.getElementById('Soft_Start1').checked = true;
                 document.getElementById('toggleLabel').style.left = '0px';
-                document.getElementById("label_timer_time_soft").style.display="inline";
-                document.getElementById("set_timer_time_soft").style.display="inline"; 
+               document.getElementById("label_timer_time_soft").style.display="inline";
+              document.getElementById("set_timer_time_soft").style.display="inline";
+                document.getElementById("soft_box").style.display="flex"; 
 
                 break;
             case 0:
@@ -603,6 +605,7 @@ function displayFunction(payload) {
                 document.getElementById('toggleLabel').style.left = '2px';
                 document.getElementById("label_timer_time_soft").style.display="none";
                 document.getElementById("set_timer_time_soft").style.display="none"; 
+                document.getElementById("soft_box").style.display="none";
                 break;
         }
     
