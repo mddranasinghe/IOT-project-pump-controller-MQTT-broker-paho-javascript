@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>water pump</title>
+    <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
+    <script src="../resources/js/connection.js"></script>
     <style>
-
 
 .toggle { position: relative; box-sizing: border-box;}
 .toggle input[type="checkbox"] {
@@ -80,7 +81,7 @@
     <div class="controlpanels">
       <table style="width: 100%;"><tr>
        
-      <td><img src="../resources/image/less-than.png" style="width: 30px; height: 35px; "  id="backbutton"></td>
+      <td><a href="../index.html"><img src="../resources/image/less-than.png" style="width: 30px; height: 35px; "></a></td>
       <td> <h2 style="text-align: center;">  Pump Control Status</h2></td>
     </tr></table>
     
@@ -132,7 +133,7 @@
       </div> 
     </div>
 
-         <div class="status_box">
+         <div class="status_box" id="set_timer_time_box">
           <div class="topic"><p id="label_timer_time" >Timer Time</p></div>
           <div class="option" ><div style=" margin-top:12.6px;margin-bottom: 12.6px;">
           <input type="number" min="5" max="3600" id="set_timer_time"  /><label for="set_timer_time" id="toggleLabel_set_timer_time_mainpump"></label></div> 
@@ -211,17 +212,6 @@
   <div class="option"><P style="color:rgb(156, 156, 156)" id="up">00.00.00</P> </div>
 </div> 
 
-
-<!--<div class="status_box">
-  <div class="topic"><p>SSID</p></div>
-  <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
-</div> 
-
-<div class="status_box">
-  <div class="topic"><p>SIGNAL</p></div>
-  <div class="option"><P style="color:rgb(156, 156, 156)"></P> </div>
-</div> -->
-
 <div class="status_box">
   <div class="topic"><p>TIME</p></div>
   <div class="option"><P style="color:rgb(156, 156, 156)" id="time"></P> </div>
@@ -230,20 +220,15 @@
   </div>      
     </div>
 
-    <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
-    <script src="../resources/js/connection.js"></script>
-    <script  type="text/javascript" defer="true">
+ <script  type="text/javascript" defer="true">
 //..............................................................................................................
 var payload; var companyID="node"; var deviceType="spc"; var deviceID="7469308fcf871dad4d4" ;
 var publish_topic=companyID+"/"+deviceType+"/"+"b2n/"+deviceID+"/";// publish topic
 const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";// subscribe topic
-var imfoTopic="node/spc/b2n/7469308fcf871dad4d4/info";
+var info_Topic=publish_topic+"info";
 
 var ovarlay=  document.getElementsByClassName("status_box");
 //..............................................................................................................
-document.getElementById("backbutton").onclick=function(){location.href="../index.html"}        
-
-
 function connect(){
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
 client.onConnectionLost = onConnectionLost;
@@ -256,7 +241,7 @@ function onConnect() {
     onlinestatus();
     console.log("onConnect");    
     client.subscribe(subTopic);
-    sendCommandToDevice(imfoTopic,"read");
+    sendCommandToDevice(info_Topic,"read");
   }
   catch (error){
 
@@ -349,6 +334,7 @@ bar[x].style.backgroundColor = "#ccc";
 
 setTimeout(connect, 10000);
 }
+
       var automode_mainpump=document.getElementById('automode_mainpump');
       automode_mainpump.addEventListener('change', function(){
         var topic=publish_topic+"sw/mode/1";
@@ -360,8 +346,8 @@ setTimeout(connect, 10000);
           document.getElementById("pumptimer_mainpump").disabled = true;
           document.getElementById("pumppower_status_mainpower").style.display="inline";
           document.getElementById("toggle_pumppower_mainpump").style.display="none";
-          document.getElementById("label_timer_time").disabled = false;
-          document.getElementById("set_timer_time").disabled = false;
+    
+
         }
         else{
           payload="0";
@@ -553,8 +539,8 @@ function displayFunction(payload) {
                 document.getElementById("pumptimer_mainpump").disabled = true;
                 document.getElementById("pumppower_status_mainpower").style.display="inline";
                 document.getElementById("toggle_pumppower_mainpump").style.display="none";
-                document.getElementById("label_timer_time").disabled = false;
-                document.getElementById("set_timer_time").disabled = false;
+        
+                document.getElementById("set_timer_time").disabled = true;
                 break;
             case 0:
                 document.getElementById('automode_mainpump').checked = false;
@@ -578,6 +564,8 @@ function displayFunction(payload) {
                 document.getElementById("pumptimer_tubewell").disabled = true;
                 document.getElementById("pumppower_status_tubewell").style.display="inline";
                 document.getElementById("toggle_pumppower_tubewell").style.display="none";
+
+                document.getElementById("set_timer_time_tubewell").disabled = true;
                 break;
             case 0:
                 document.getElementById('automode_tubewell').checked = false;
