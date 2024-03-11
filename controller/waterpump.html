@@ -241,7 +241,7 @@ function onConnect() {
     onlinestatus();
     console.log("onConnect");    
     client.subscribe(subTopic);
-    sendCommandToDevice(publish_topic+"/info","read");
+    sendCommandToDevice(publish_topic+"info","read");
   }
   catch (error){
 
