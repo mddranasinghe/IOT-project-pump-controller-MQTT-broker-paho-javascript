@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>water pump</title>
-    <script src="../paho.javascript-1.0.3/paho-mqtt.js"></script>
+    <script src="../resources/js/paho.javascript-1.0.3/paho-mqtt-min.js"></script>
     <script src="../resources/js/connection.js"></script>
     <style>
 
@@ -543,7 +543,7 @@ function displayFunction(payload) {
                 break;
             case 0:
                 document.getElementById('automode_mainpump').checked = false;
-                document.getElementById('toggleLabel_mainpump_auto').style.left = '2px';
+                document.getElementById('toggleLabel_mainpump_auto').style.left = '0px';
 
                 document.getElementById("pumppower_mainpump").disabled = false;
                 document.getElementById("pumptimer_mainpump").disabled = false;
@@ -568,7 +568,7 @@ function displayFunction(payload) {
                 break;
             case 0:
                 document.getElementById('automode_tubewell').checked = false;
-                document.getElementById('toggleLabel_automode_tubewell').style.left = '2px';
+                document.getElementById('toggleLabel_automode_tubewell').style.left = '0px';
 
                 document.getElementById("pumppower_tubewell").disabled = false;
                 document.getElementById("pumptimer_tubewell").disabled = false;
@@ -589,7 +589,7 @@ function displayFunction(payload) {
                 break;
             case 0:
                 document.getElementById('Soft_Start1').checked = false;
-                document.getElementById('toggleLabel').style.left = '2px';
+                document.getElementById('toggleLabel').style.left = '0px';
                 document.getElementById("label_timer_time_soft").style.display="none";
                 document.getElementById("set_timer_time_soft").style.display="none"; 
                 document.getElementById("soft_box").style.display="none";
@@ -606,7 +606,7 @@ function displayFunction(payload) {
                 break;
             case 0:
                 document.getElementById('pumppower_mainpump').checked = false;
-                document.getElementById('toggleLabel_pumppower_mainpump').style.left = '2px';
+                document.getElementById('toggleLabel_pumppower_mainpump').style.left = '0px';
                 break;
         }
     }
@@ -620,7 +620,7 @@ function displayFunction(payload) {
                 break;
             case 0:
                 document.getElementById('pumppower_tubewell').checked = false;
-                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '2px';
+                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '0px';
                 break;
         }
     }
@@ -677,7 +677,7 @@ function displayFunction(payload) {
                 break;
             case 0:
                 document.getElementById('pumptimer_mainpump').checked = false;
-                document.getElementById('toggleLabel_pumptimer_mainpump').style.left = '2px';
+                document.getElementById('toggleLabel_pumptimer_mainpump').style.left = '0px';
                 document.getElementById("label_timer_time").style.display="none";
                 document.getElementById("set_timer_time").style.display="none"; 
                 break;
@@ -695,7 +695,7 @@ function displayFunction(payload) {
                 break;
             case 0:
                 document.getElementById('pumptimer_tubewell').checked = false;
-                document.getElementById('toggleLabel_pumptimer_tubewell').style.left = '2px';
+                document.getElementById('toggleLabel_pumptimer_tubewell').style.left = '0px';
                 document.getElementById("label_timer_time_tubewell").style.display="none";
           document.getElementById("set_timer_time_tubewell").style.display="none"; 
                 break;
@@ -707,8 +707,8 @@ function displayFunction(payload) {
     function formatTime(seconds) {
     var hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
     var minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
-    var remainingSeconds = (seconds % 60).toString().padStart(2, '0');
-    return hours + "H: " + minutes + "M: " + remainingSeconds + "S ";}
+   // var remainingSeconds = (seconds % 60).toString().padStart(2, '0');
+    return hours + "H: " + minutes + "M" ;}
 
     
     if(payload['fw']){ document.getElementById('fw').innerHTML = (payload["fw"]);}//  version 
