@@ -204,17 +204,17 @@
 
   <div class="status_box">
     <div class="topic"><p>Firmware Version</p></div>
-    <div class="option"><P style="color:rgb(156, 156, 156)" id="fw">V1.0</P> </div>
+    <div class="option"><P style="color:rgb(156, 156, 156)" id="fw">--</P> </div>
 </div> 
 
 <div class="status_box">
-  <div class="topic"><p>UPTIME</p></div>
-  <div class="option"><P style="color:rgb(156, 156, 156)" id="up">00.00.00</P> </div>
+  <div class="topic"><p>Up Time</p></div>
+  <div class="option"><P style="color:rgb(156, 156, 156)" id="up">--</P> </div>
 </div> 
 
 <div class="status_box">
-  <div class="topic"><p>TIME</p></div>
-  <div class="option"><P style="color:rgb(156, 156, 156)" id="time"></P> </div>
+  <div class="topic"><p>Time</p></div>
+  <div class="option"><P style="color:rgb(156, 156, 156)" id="time">--</P> </div>
 </div> 
 
   </div>      
@@ -225,10 +225,10 @@
 var payload; var companyID="node"; var deviceType="spc"; var deviceID="7469308fcf871dad4d4" ;
 var publish_topic=companyID+"/"+deviceType+"/"+"b2n/"+deviceID+"/";// publish topic
 const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";// subscribe topic
-var info_Topic=publish_topic+"info";
 
 var ovarlay=  document.getElementsByClassName("status_box");
 //..............................................................................................................
+
 function connect(){
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
 client.onConnectionLost = onConnectionLost;
@@ -241,14 +241,13 @@ function onConnect() {
     onlinestatus();
     console.log("onConnect");    
     client.subscribe(subTopic);
-    sendCommandToDevice(info_Topic,"read");
+    sendCommandToDevice(publish_topic+"/info","read");
   }
   catch (error){
 
     console.log(error);
   }
 }
-
 
 function sendCommandToDevice(topic,payload) {
   try{
