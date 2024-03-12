@@ -532,19 +532,14 @@ function displayFunction(payload) {
         switch (payload.sw_mode[0]) { 
             case 1:
                 document.getElementById('automode_mainpump').checked = true;
-                document.getElementById('toggleLabel_mainpump_auto').style.left = '0px';
-
                 document.getElementById("pumppower_mainpump").disabled = true;
                 document.getElementById("pumptimer_mainpump").disabled = true;
                 document.getElementById("pumppower_status_mainpower").style.display="inline";
                 document.getElementById("toggle_pumppower_mainpump").style.display="none";
-        
                 document.getElementById("set_timer_time").disabled = true;
                 break;
             case 0:
                 document.getElementById('automode_mainpump').checked = false;
-                document.getElementById('toggleLabel_mainpump_auto').style.left = '0px';
-
                 document.getElementById("pumppower_mainpump").disabled = false;
                 document.getElementById("pumptimer_mainpump").disabled = false;
                 document.getElementById("pumppower_status_mainpower").style.display="none";
@@ -557,19 +552,14 @@ function displayFunction(payload) {
         switch (payload.sw_mode[1]) {
             case 1:
                 document.getElementById('automode_tubewell').checked = true;
-                document.getElementById('toggleLabel_automode_tubewell').style.left = '0px';
-
                 document.getElementById("pumppower_tubewell").disabled = true;
                 document.getElementById("pumptimer_tubewell").disabled = true;
                 document.getElementById("pumppower_status_tubewell").style.display="inline";
                 document.getElementById("toggle_pumppower_tubewell").style.display="none";
-
-                document.getElementById("set_timer_time_tubewell").disabled = true;
+                 document.getElementById("set_timer_time_tubewell").disabled = true;
                 break;
             case 0:
                 document.getElementById('automode_tubewell').checked = false;
-                document.getElementById('toggleLabel_automode_tubewell').style.left = '0px';
-
                 document.getElementById("pumppower_tubewell").disabled = false;
                 document.getElementById("pumptimer_tubewell").disabled = false;
                 document.getElementById("pumppower_status_tubewell").style.display="none";
@@ -581,7 +571,6 @@ function displayFunction(payload) {
     switch (payload['soft_start']) { 
             case 1:
                 document.getElementById('Soft_Start1').checked = true;
-                document.getElementById('toggleLabel').style.left = '0px';
                document.getElementById("label_timer_time_soft").style.display="inline";
               document.getElementById("set_timer_time_soft").style.display="inline";
                 document.getElementById("soft_box").style.display="flex"; 
@@ -589,7 +578,6 @@ function displayFunction(payload) {
                 break;
             case 0:
                 document.getElementById('Soft_Start1').checked = false;
-                document.getElementById('toggleLabel').style.left = '0px';
                 document.getElementById("label_timer_time_soft").style.display="none";
                 document.getElementById("set_timer_time_soft").style.display="none"; 
                 document.getElementById("soft_box").style.display="none";
@@ -602,11 +590,9 @@ function displayFunction(payload) {
         switch (payload.sw[0]) {
             case 1:
                 document.getElementById('pumppower_mainpump').checked = true;
-                document.getElementById('toggleLabel_pumppower_mainpump').style.left = '0px';
                 break;
             case 0:
                 document.getElementById('pumppower_mainpump').checked = false;
-                document.getElementById('toggleLabel_pumppower_mainpump').style.left = '0px';
                 break;
         }
     }
@@ -616,11 +602,9 @@ function displayFunction(payload) {
         switch (payload.sw[1]) {
             case 1:
                 document.getElementById('pumppower_tubewell').checked = true;
-                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '0px';
                 break;
             case 0:
                 document.getElementById('pumppower_tubewell').checked = false;
-                document.getElementById('toggleLabel_pumppower_tubewell').style.left = '0px';
                 break;
         }
     }
@@ -671,13 +655,11 @@ function displayFunction(payload) {
         switch (payload.pmp_timer[0]) {
             case 1:
                 document.getElementById('pumptimer_mainpump').checked = true;
-                document.getElementById('toggleLabel_pumptimer_mainpump').style.left = '0px';
                 document.getElementById("label_timer_time").style.display="inline";
                 document.getElementById("set_timer_time").style.display="inline"; 
                 break;
             case 0:
                 document.getElementById('pumptimer_mainpump').checked = false;
-                document.getElementById('toggleLabel_pumptimer_mainpump').style.left = '0px';
                 document.getElementById("label_timer_time").style.display="none";
                 document.getElementById("set_timer_time").style.display="none"; 
                 break;
@@ -689,13 +671,11 @@ function displayFunction(payload) {
         switch (payload.pmp_timer[1]) {
             case 1:
                 document.getElementById('pumptimer_tubewell').checked = true;
-                document.getElementById('toggleLabel_pumptimer_tubewell').style.left = '0px';
                 document.getElementById("label_timer_time_tubewell").style.display="inline";
                 document.getElementById("set_timer_time_tubewell").style.display="inline"; 
                 break;
             case 0:
                 document.getElementById('pumptimer_tubewell').checked = false;
-                document.getElementById('toggleLabel_pumptimer_tubewell').style.left = '0px';
                 document.getElementById("label_timer_time_tubewell").style.display="none";
           document.getElementById("set_timer_time_tubewell").style.display="none"; 
                 break;
@@ -704,10 +684,9 @@ function displayFunction(payload) {
 
 
     document.getElementById('up').innerHTML = formatTime(payload["up"]);// runing time
-    function formatTime(seconds) {
-    var hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
-    var minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
-   // var remainingSeconds = (seconds % 60).toString().padStart(2, '0');
+    function formatTime(minutes) {
+    var hours = Math.floor(minutes / 60).toString().padStart(2, '0');
+    var minutes = Math.floor(minutes % 60) .toString().padStart(2, '0');
     return hours + "H: " + minutes + "M" ;}
 
     
