@@ -29,8 +29,8 @@ table{ border-collapse: separate; border-spacing: 15px }
 td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 20px;padding-right: 20px; padding-top:10px; padding-bottom:10px ;}
 
 .img_td{
-    width:55px;
-     height:45px;
+    width:50px;
+     height:40px;
     display:block;
    
     margin-right:auto;
@@ -41,7 +41,7 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
  .caption{margin-right: 15px;margin-left: 15px;  border-bottom: 1px solid gray; margin-top: 10px;
 
  }
- p{font-size: 15px; font-weight: bold;
+ p{font-size: 13px; font-weight: bold;
 }
 
 
@@ -52,7 +52,6 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
    height:7px;
    border-radius:5px 5px;
     background-color:#b4b4b0;
- 
    margin: 0 auto;
    
    }
@@ -97,8 +96,8 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
     <div class="main_div">
 <table> <div class="caption"> <h3 style="text-align: left;margin-left: 10px;margin-bottom:10px">Home 1</h3></div>
 
-    <tr><td id="waterpump"><img src="resources\image\pump.png"  class="img_td" ><p>Water Pump</p></td>  
-        <td id="w2" style="opacity: 0.5;"><img src="resources\image\pump.png"  class="img_td" > <p>Water Pump</p></td>
+    <tr><td id="waterpump"><img src="resources\image\pump.png"  class="img_td" ><p>Water Pump</p> <div class="dot" id="device_status"style="width: 5px; height: 5px; float:right ;margin-top:-10px"></div></td>  
+        <td id="w2" style="opacity: 0.5;"><img src="resources\image\power.png"  class="img_td" > <p>power Source</p></td>
     </tr>
     <tr><td id="w3"  style="opacity: 0.5;"><img src="resources\image\pump.png"  class="img_td" ><p>Water Pump</p></td>  
         <td id="w4" style="opacity: 0.5;"><img src="resources\image\pump.png"  class="img_td" > <p>Water Pump</p></td>
@@ -119,15 +118,20 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
 
 
     <script>
+        var payload; var companyID="node"; var deviceType="spc"; var deviceID="7469308fcf871dad4d4" ;
+
+        const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";
     
         function connect(){    
         client.connect({ onSuccess: onConnect,useSSL:mqttUseSSL,userName,password});
         client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived;
         }
         //............................................................................................
           function onConnect() {
           console.log("onConnect");
         document.getElementById('page1').style.backgroundColor="green";
+        client.subscribe(subTopic);
         }
         
         function onConnectionLost(responseObject) {
@@ -137,7 +141,28 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
             setTimeout(connect, 5000);
            
         }
-        
+        function onMessageArrived(message) {
+        payload=message.payloadString;
+        console.log("Payload:" + payload);
+        displayFunction(payload)
+   
+  
+}
+function displayFunction(payload) {
+      payload = JSON.parse(payload);
+
+      switch (payload['stat'])
+      {
+        case "online":
+        document.getElementById('device_status').style.backgroundColor="green";
+      
+          break;
+        case "offline":
+        document.getElementById('device_status').style.backgroundColor="red";
+         
+          break;
+      }
+    }
         connect();
         
         window.onload=function(){
