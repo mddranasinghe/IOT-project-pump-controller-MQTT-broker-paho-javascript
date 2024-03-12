@@ -124,9 +124,8 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
         function onConnectionLost(responseObject) {
           if (responseObject.errorCode !== 0) {
             console.log("onConnectionLost:"+responseObject.errorMessage);
-            document.getElementById('page1').style.backgroundColor="red";
-            document.getElementById('device_status').style.backgroundColor="#b4b4b0";
-";}
+            document.getElementById('page1').style.backgroundColor="red"
+            document.getElementById('device_status').style.backgroundColor="red";}
             setTimeout(connect, 5000);
            
         }
