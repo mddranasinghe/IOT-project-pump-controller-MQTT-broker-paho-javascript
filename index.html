@@ -38,7 +38,7 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
     
  }
 
- .caption{margin-right: 15px;margin-left: 15px; border-bottom-style: ridge; border-right-style: none; margin-top: 10px;
+ .caption{margin-right: 15px;margin-left: 15px;  border-bottom: 1px solid gray; margin-top: 10px;
 
  }
  p{font-size: 15px; font-weight: bold;
@@ -83,6 +83,13 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
        z-index: 1; /* Ensure it stays above other content */
    
    }
+  .water:hover
+   {
+    box-shadow: none;
+    opacity: 0.2;
+    background-color: #EEEEEE;
+    
+   }
     </style>
 </head>
 <body>
@@ -90,7 +97,7 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
     <div class="main_div">
 <table> <div class="caption"> <h3 style="text-align: left;margin-left: 10px;margin-bottom:10px">Home 1</h3></div>
     <tr>
-        <td>
+        <td class="water">
             <div id="waterpump">
             <img src="resources\image\pump.png"  class="img" >
                 <p>Water Pump</p>
