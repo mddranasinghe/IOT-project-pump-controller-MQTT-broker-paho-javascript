@@ -83,8 +83,8 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 1
     <div class="main_div">
 <table> <div class="caption"> <h3 style="text-align: left;margin-left: 10px;margin-bottom:10px">Home 1</h3></div>
 
-    <tr><td id="waterpump"> <div class="dot" id="device_status"style="width: 5px; height: 5px; float:left"></div><img src="resources\image\pump.png"  class="img_td" ><p>Water Pump</p><small style="font-size: 10px;">Pump room</small></td>  
-        <td id="w2" style="opacity: 0.5;"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\power.png"  class="img_td" > <p>power Source</p><small style="font-size: 10px;">Home</small></td>
+    <tr><td id="waterpump" > <div class="dot" id="device_status"style="width: 5px; height: 5px; float:left"></div><img src="resources\image\pump.png"  class="img_td" ><p>Water Pump</p><small style="font-size: 10px;">Pump room</small></td>  
+        <td id="w2" style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\power.png"  class="img_td" > <p>power Source</p><small style="font-size: 10px;">Home</small></td>
     </tr>
     <tr><td id="w3"  style="opacity: 0.5;"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\siren.svg"  class="img_td" ><p>Siren</p><small style="font-size: 10px;">Graden</small></td>  
         <td id="w4" style="opacity: 0.5;"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\cctv.png"  class="img_td" > <p>CCTV </p><small style="font-size: 10px;">Home</small></td>
@@ -105,6 +105,11 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 1
 
 
     <script>
+
+function showPopup() {
+    // Display a popup message
+    alert("This is a popup message!");
+}
         var payload; var companyID="node"; var deviceType="spc"; var deviceID="7469308fcf871dad4d4" ;
 
         const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID;
