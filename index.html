@@ -26,7 +26,7 @@ table{ margin: 0 auto; width: 100%; }
 
 table{ border-collapse: separate; border-spacing: 15px }
 
-td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 20px;padding-right: 20px; padding-top:10px; padding-bottom:10px ;}
+td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 10px;padding-right: 20px; padding-top:10px; padding-bottom:10px ;}
 
 .img_td{
     width:50px;
@@ -38,7 +38,7 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
     
  }
 
- .caption{margin-right: 15px;margin-left: 15px;  border-bottom: 1px solid gray; margin-top: 10px;
+ .caption{margin-right: 15px;margin-left: 15px;  border-bottom: 1px solid gray; margin-top: 10px; border-bottom-color: gray;
 
  }
  p{font-size: 13px; font-weight: bold;
@@ -83,11 +83,11 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
     <div class="main_div">
 <table> <div class="caption"> <h3 style="text-align: left;margin-left: 10px;margin-bottom:10px">Home 1</h3></div>
 
-    <tr><td id="waterpump"><img src="resources\image\pump.png"  class="img_td" ><p>Water Pump</p> <div class="dot" id="device_status"style="width: 5px; height: 5px; float:right ;margin-top:-10px"></div></td>  
-        <td id="w2" style="opacity: 0.5;"><img src="resources\image\power.png"  class="img_td" > <p>power Source</p></td>
+    <tr><td id="waterpump"> <div class="dot" id="device_status"style="width: 5px; height: 5px; float:left"></div><img src="resources\image\pump.png"  class="img_td" ><p>Water Pump</p><small style="font-size: 10px;">Pump room</small></td>  
+        <td id="w2" style="opacity: 0.5;"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\power.png"  class="img_td" > <p>power Source</p><small style="font-size: 10px;">Home</small></td>
     </tr>
-    <tr><td id="w3"  style="opacity: 0.5;"><img src="resources\image\pump.png"  class="img_td" ><p>Water Pump</p></td>  
-        <td id="w4" style="opacity: 0.5;"><img src="resources\image\pump.png"  class="img_td" > <p>Water Pump</p></td>
+    <tr><td id="w3"  style="opacity: 0.5;"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\siren.svg"  class="img_td" ><p>Siren</p><small style="font-size: 10px;">Graden</small></td>  
+        <td id="w4" style="opacity: 0.5;"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\cctv.png"  class="img_td" > <p>CCTV </p><small style="font-size: 10px;">Home</small></td>
     </tr>
    
 </table>
@@ -107,8 +107,8 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
     <script>
         var payload; var companyID="node"; var deviceType="spc"; var deviceID="7469308fcf871dad4d4" ;
 
-        const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";
-    
+        const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID;
+         var t;
         function connect(){    
         client.connect({ onSuccess: onConnect,useSSL:mqttUseSSL,userName,password});
         client.onConnectionLost = onConnectionLost;
@@ -118,14 +118,14 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
           function onConnect() {
           console.log("onConnect");
         document.getElementById('page1').style.backgroundColor="green";
-        client.subscribe(subTopic);
+        getDataFromDevice(subTopic);
         }
         
         function onConnectionLost(responseObject) {
           if (responseObject.errorCode !== 0) {
             console.log("onConnectionLost:"+responseObject.errorMessage);
             document.getElementById('page1').style.backgroundColor="red"
-            document.getElementById('device_status').style.backgroundColor="red";}
+            document.getElementById('device_status').style.backgroundColor="b4b4b0";}
             setTimeout(connect, 5000);
            
         }
@@ -136,17 +136,33 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 2
    
   
 }
+
+
+function getDataFromDevice(topic) {
+    console.log("getDataFromDevice "+topic);
+  //client.onMessageArrived = callbackfun;
+  client.subscribe(topic+"/+");
+  t=topic;
+ // var message = new Paho.MQTT.Message();
+ // message.destinationName = topic;
+ // client.send(message);
+
+}
+
+
+
+
 function displayFunction(payload) {
       payload = JSON.parse(payload);
 
       switch (payload['stat'])
       {
         case "online":
-        document.getElementById('device_status').style.backgroundColor="green";
+        document.getElementById("device_status").style.backgroundColor="green";
       
           break;
         case "offline":
-        document.getElementById('device_status').style.backgroundColor="red";
+      //  document.getElementById("").style.backgroundColor="red";
          
           break;
       }
