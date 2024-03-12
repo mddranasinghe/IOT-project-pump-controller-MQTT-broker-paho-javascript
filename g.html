@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+  
+</head>
+<body>
+
+  
+ <div class="container">     
+<div class="scrollmenu">
+    <a href="index.html "style=" background-color:rgb(70, 184, 110); border-radius:5px 5px;">Home 1</a>
+    <a href="home2.html" id="nextPage">Home 2</a>
+    <a href="home3.html" >Home  3</a>
+    <a href="home4.html">Home  4</a>
+    <a href="home5.html">Home  5</a>
+    <a href="home6.html">Home  6</a> </div>
+    <br>
+<main id="main" style="margin-top: 2%;">
+    <div class="box1" id="waterpump">
+        <div class="circle"><img src="resources\image\pump.png"  class="img" ></div>
+        <h4>Water Pump</h4>
+        <p> 7 Devices </p>
+    </div>
+
+    <div class="box1"  id="kitchen">
+        <div class="circle"><img src="resources\image\kitchn.png"  class="img" ></div>
+    <h4>Kitchen</h4>
+    <p> 6 Devices </p>
+    </div>
+
+ 
+    <div class="box2"  id="livingroom">
+        <div class="circle" ><img src="resources\image\livingroom.png"  class="img" ></div>
+        <h4> Living Room</h4>
+        <p> 5 Devices </p>
+    </div>
+
+
+    <div class="box2" id="meeting">
+        <div class="circle"  ><img src="resources\image\meeting.png"  class="img" ></div>
+        <h4>Meeting Room</h4>
+        <p> 8 Devices </p>
+    </div>
+
+    <div class="box1" id="bedroom">
+        <div class="circle"><img src="resources\image\bedroom.png "  class="img" ></div>
+        <h4>Bed Room</h4>
+        <p> 7 Devices </p>
+    </div>
+
+    <div class="box1"  id="kitchen">
+        <div class="circle"><img src="resources\image\kitchn.png"  class="img" ></div>
+    <h4>Kitchen</h4>
+    <p> 6 Devices </p>
+    </div>
+
+    <div class="box1" id="bedroom">
+        <div class="circle"><img src="resources\image\bedroom.png "  class="img" ></div>
+        <h4>Bed Room</h4>
+        <p> 7 Devices </p>
+    </div>
+
+    <div class="box1"  id="kitchen">
+        <div class="circle"><img src="resources\image\kitchn.png"  class="img" ></div>
+    <h4>Kitchen</h4>
+    <p> 6 Devices </p>
+    </div><br><br>
+
+
+
+        <div class="dotdiv">
+            <div class="dot" id="page1"style="width: 10px; height: 10px;"></div>
+            <div class="dot" id="page2" ></div>
+            <div class="dot" id="page3"></div>
+            <div class="dot" id="page4"></div>
+            <div class="dot" id="page5"></div>
+            <div class="dot" id="page6"> </div>
+            </div>
+          
+        </mian>
+    </div>
+
+    <script src="resources/js/paho.javascript-1.0.3/paho-mqtt-min.js"></script>
+    <script src="resources/js/connection.js"></script> 
+     <script src="resources/js/main.js"></script>
+
+<script>
+    
+function connect(){    
+client.connect({ onSuccess: onConnect,useSSL:mqttUseSSL,userName,password});
+client.onConnectionLost = onConnectionLost;
+}
+//............................................................................................
+  function onConnect() {
+  console.log("onConnect");
+document.getElementById('page1').style.backgroundColor="green";
+}
+
+function onConnectionLost(responseObject) {
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost:"+responseObject.errorMessage);
+    document.getElementById('page1').style.backgroundColor="red";}
+    setTimeout(connect, 5000);
+   
+}
+
+connect();
+
+window.onload=function(){
+    var specifiedtag=document.querySelector('.scrollmenu a[href="index.html"]');
+        if(specifiedtag){
+        specifiedtag.classList.add('centered');
+        specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
+        }};
+
+
+ document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
+
+    </script>
+</body>
+</html>
