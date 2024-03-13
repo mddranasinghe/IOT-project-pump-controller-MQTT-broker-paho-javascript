@@ -35,7 +35,7 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 1
     
  }
 
- .caption{margin-right: 15px;margin-left: 15px;  border-bottom: 1px solid gray; margin-top: 10px; border-bottom-color: gray;}
+ .caption{margin-right: 15px;margin-left: 15px;  border-bottom: 1px solid rgb(211, 207, 207); margin-top: 10px; }
  p.device_name{font-size: 13px; font-weight: bold;}
 
 p.zone{ font-size: 10px; padding-top: 3px;}
@@ -127,13 +127,7 @@ margin-right:auto;}
 
 
 <script>
-    function addHoverClass() {
-    document.getElementById('waterpump').classList.add('hover-effect');
-}
 
-function removeHoverClass() {
-    document.getElementById('waterpump').classList.remove('hover-effect');
-}
 
 function showPopup() {
     // Display a popup message
@@ -212,7 +206,13 @@ function displayFunction(payload) {
         
         
          document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
-        
+         function addHoverClass() {
+    document.getElementById('waterpump').classList.add('hover-effect');
+}
+
+function removeHoverClass() {
+    document.getElementById('waterpump').classList.remove('hover-effect');
+}
             </script>
 </body>
 </html>
