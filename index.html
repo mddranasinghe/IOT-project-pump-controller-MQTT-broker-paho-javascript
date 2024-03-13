@@ -24,7 +24,7 @@
 }
 table{ margin: 0 auto; width: 100%; height: 100%;border-collapse: separate; border-spacing: 15px }
 
-td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 10px;padding-right: 20px; padding-top:10px; padding-bottom:10px ;}
+td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 10px;padding-right: 20px; padding-top:5px; padding-bottom:5px ; width: 30%;}
 
 .img_td{
     width:50px;
@@ -38,7 +38,7 @@ td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 1
  .caption{margin-right: 15px;margin-left: 15px;  border-bottom: 1px solid gray; margin-top: 10px; border-bottom-color: gray;}
  p.device_name{font-size: 13px; font-weight: bold;}
 
-p.zone{ font-size: 10px; padding-top: 5px;}
+p.zone{ font-size: 10px; padding-top: 3px;}
 
 .dot{
  
@@ -81,16 +81,23 @@ p.zone{ font-size: 10px; padding-top: 5px;}
     display:block;
     margin-right:auto;}
 
-    p .device_name{font-size: 15px; font-weight: bold;
-}
-p .zone{
-
-    font-size: 17px;
-}
+    .device_name{font-size: 15px;font-weight: bold;}
+    .zone{font-size:13px;padding-top: 3px;}
     
- }
+    }
 
+    @media only screen and (max-width: 600px) {
 
+.img_td{
+width:50px;
+ height:40px;
+display:block;
+margin-right:auto;}
+
+.device_name{font-size: 13px;font-weight: bold;}
+.zone{font-size:10px;padding-top: 3px;}
+
+}
 
 
    
@@ -101,11 +108,11 @@ p .zone{
     <div class="main_div">
 <table> <div class="caption"> <h3 style="text-align: left;margin-left: 10px;margin-bottom:10px">Home 1</h3></div>
 
-    <tr><td id="waterpump" > <div class="dot" id="device_status_pump"style="width: 5px; height: 5px; float:left"></div><img src="resources\image\pump.png"  class="img_td" ><p class="device_name">Water Pump</p><p class="zone">Pump room</small></td>  
-        <td id="w2" style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="device_status_power" style="width: 5px; height: 5px; float:left"></div><img src="resources\image\power.png"  class="img_td" > <p>power Source</p><small style="font-size: 10px;">Home</small></td>
+    <tr><td id="waterpump" > <div class="dot" id="device_status"style="width: 5px; height: 5px; float:left"></div><img src="resources\image\pump.png"  class="img_td" ><div class="device_name">Water Pump</div><div class="zone">Pump room</div></td>  
+        <td id="w2" style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="device_status_power" style="width: 5px; height: 5px; float:left"></div><img src="resources\image\power.png"  class="img_td" > <p class="device_name">power Source</p><p class="zone">Home</p></td>
     </tr>
-    <tr><td id="w3"  style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="device_status_siren" style="width: 5px; height: 5px; float:left"></div><img src="resources\image\siren.svg"  class="img_td" ><p>Siren</p><small style="font-size: 10px;">Graden</small></td>  
-        <td id="w4" style="opacity: 0.5;" onclick="showPopup()"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\cctv.png"  class="img_td" > <p>CCTV </p><small style="font-size: 10px;">Home</small></td>
+    <tr><td id="w3"  style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="device_status_siren" style="width: 5px; height: 5px; float:left"></div><img src="resources\image\siren.svg"  class="img_td" ><p class="device_name">Siren</p><p class="zone">Graden</p></td>  
+        <td id="w4" style="opacity: 0.5;" onclick="showPopup()"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\cctv.png"  class="img_td" > <p class="device_name">CCTV </p><p class="zone">Home</p></td>
     </tr>
    
 </table>
