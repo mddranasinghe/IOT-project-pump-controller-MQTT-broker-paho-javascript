@@ -106,9 +106,9 @@
                   </div>
         
                   <div class="status_box">
-                      <div class="topic"><p>Pump Power1</p></div>
+                      <div class="topic"><p>Pump Power</p></div>
                       <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump" >
-                      <input type="checkbox" id="pumppower_mainpump" /><label for="pumppower_mainpump" id="toggleLabel_pumppower_mainpump"></label></div>  
+                      <input type="checkbox" id="pumppower_mainpump" ><label for="pumppower_mainpump" id="toggleLabel_pumppower_mainpump"></label></div>  
                     </div>
                     <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_mainpower">ON</P>
                     <p style="display:none; color:rgb(156, 156, 156) ;" >OFF</p>
@@ -159,7 +159,7 @@
               <div class="option"> <div class="toggle" id="toggle_pumppower_tubewell">
               <input type="checkbox" id="pumppower_tubewell"/><label for="pumppower_tubewell" id="toggleLabel_pumppower_tubewell"></label></div> 
               <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_tubewell">ON</P>
-                    <p style="display:none; color:rgb(156, 156, 156) ;" >OFF</p>
+                    <p style="display:none; color:rgb(156, 156, 156) ;" id="pumppower_status_tubewell_off">OFF</p>
           </div> 
         </div>
 
@@ -172,7 +172,7 @@
 <div class="status_box">
   <div class="topic"><p>Pump Timer </p></div>
   <div class="option"> <div class="toggle">
-  <input type="checkbox" id="pumptimer_tubewell"/><label for="pumptimer_tubewell" id="toggleLabel_pumptimer_tubewell"></label></div> 
+  <input type="checkbox" id="pumptimer_tubewell"><label for="pumptimer_tubewell" id="toggleLabel_pumptimer_tubewell"></label></div> 
 </div> 
 </div>
 
@@ -238,10 +238,11 @@ client.onMessageArrived = onMessageArrived;
 function onConnect() {
   try {
 
-    onlinestatus();
+
     console.log("onConnect");    
     client.subscribe(subTopic);
     sendCommandToDevice(publish_topic+"info","read");
+    onlinestatus();
   }
   catch (error){
 
@@ -283,6 +284,8 @@ function onConnectionLost(responseObject) {
 
 function onlinestatus()
 {
+
+  console.log("hii");
   document.getElementById("offline").style.display="none";
   document.getElementById("online").style.display="inline";
   for (var i = 0; i < ovarlay.length; i++) {
@@ -306,14 +309,17 @@ function onlinestatus()
 function offlinestatus()
 {
 
+  console.log("ddhii");
   document.getElementById("automode_tubewell").disabled = true;
  document.getElementById("automode_mainpump").disabled = true;
 
+  
   document.getElementById("pumppower_tubewell").disabled = true;
   document.getElementById("pumptimer_tubewell").disabled = true;
 
   document.getElementById("pumppower_mainpump").disabled = true;
- document.getElementById("pumptimer_mainpump").disabled = true;
+  document.getElementById("pumptimer_mainpump").disabled = true;
+ 
 
   document.getElementById("offline").style.display="inline";
   document.getElementById("online").style.display="none";
@@ -516,6 +522,7 @@ var timer;
   }
 });
 function displayFunction(payload) {
+
       payload = JSON.parse(payload);
 
       switch (payload['stat'])
@@ -685,9 +692,14 @@ function displayFunction(payload) {
 
     document.getElementById('up').innerHTML = formatTime(payload["up"]);// runing time
     function formatTime(minutes) {
-    var hours = Math.floor(minutes / 60).toString().padStart(2, '0');
-    var minutes = Math.floor(minutes % 60) .toString().padStart(2, '0');
-    return hours + "H: " + minutes + "M" ;}
+    var days = Math.floor(minutes / (24 * 60)).toString().padStart(2, '0');
+    var remainingMinutes = minutes % (24 * 60);
+    var hours = Math.floor(remainingMinutes / 60).toString().padStart(2, '0');
+    var remainingSeconds = remainingMinutes % 60;
+    var formattedMinutes = remainingSeconds.toString().padStart(2, '0');
+    return days + "d: " + hours + "h: " + formattedMinutes + "m";
+}
+
 
     
     if(payload['fw']){ document.getElementById('fw').innerHTML = (payload["fw"]);}//  version 
@@ -703,37 +715,30 @@ updateSignalStrength(payload['rssi']);//rssi
 
 var bar=  document.getElementsByClassName("bar");  //signal bar.
     function updateSignalStrength(rssi) {
-      if (rssi > 0 && rssi <= -50) {
-		        bar[0].style.backgroundColor="green";
-			    bar[1].style.backgroundColor="green";
-				bar[2].style.backgroundColor="green";
-				bar[3].style.backgroundColor="green";
-				bar[4].style.backgroundColor="green";}
-				else if(rssi > 50 && rssi >= -55)
-        {
-          bar[0].style.backgroundColor="green";
-			    bar[1].style.backgroundColor="green";
-				  bar[2].style.backgroundColor="green";
-				  bar[3].style.backgroundColor="green";
-          
-        } else if (rssi > 55 && rssi >= -65) {
-		    bar[0].style.backgroundColor="green";
-			  bar[1].style.backgroundColor="green";
-			  bar[2].style.backgroundColor="green";
-         
-        } else if (rssi > 65 && rssi >= -80) {
-			   bar[0].style.backgroundColor="green";
-         bar[1].style.backgroundColor="green";
-         
-        } 
-      else if (rssi > 80 && rssi >= -85) {
-			   bar[0].style.backgroundColor="green";
-         
-        }else if (rssi >= -100 ) {
-           
-        } 
-    }
+      if (rssi < -1 || rssi <= -50) {
+    bar[0].style.backgroundColor = "green";
+    bar[1].style.backgroundColor = "green";
+    bar[2].style.backgroundColor = "green";
+    bar[3].style.backgroundColor = "green";
+    bar[4].style.backgroundColor = "green";
+} else if (rssi < -50 || rssi >= -55) {
+    bar[0].style.backgroundColor = "green";
+    bar[1].style.backgroundColor = "green";
+    bar[2].style.backgroundColor = "green";
+    bar[3].style.backgroundColor = "green";
+} else if (rssi < -55 || rssi >= -65) {
+    bar[0].style.backgroundColor = "green";
+    bar[1].style.backgroundColor = "green";
+    bar[2].style.backgroundColor = "green";
+} else if (rssi < -65 || rssi >= -80) {
+    bar[0].style.backgroundColor = "green";
+    bar[1].style.backgroundColor = "green";
+} else if (rssi < -80 || rssi >= -85) {
+    bar[0].style.backgroundColor = "green";
+} else if (rssi >= -100) {
+}
 
+    }
   connect();
 </script>
 </body>

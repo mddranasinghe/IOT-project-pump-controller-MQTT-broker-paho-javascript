@@ -15,25 +15,13 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-        .main_div {
-       width: 100%;
- margin: 0 auto;
+.main_div { width: 100%;margin: 0 auto;}
 
-  background-color: "";
-  
-}
 table{ margin: 0 auto; width: 100%; height: 100%;border-collapse: separate; border-spacing: 15px;}
 
 td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 10px;padding-right: 20px; padding-top:5px; padding-bottom:5px ; width: 30%;}
 
-.img_td{
-    width:50px;
-     height:40px;
-    display:block;
-    margin-right:auto;
-    
-    
- }
+.img_td{width:50px;height:40px;display:block;margin-right:auto;}
 
  .caption{margin-right: 15px;margin-left: 15px;  border-bottom: 1px solid rgb(211, 207, 207); margin-top: 10px; }
  p.device_name{font-size: 13px; font-weight: bold;}
@@ -49,8 +37,6 @@ p.zone{ font-size: 10px; padding-top: 3px;}
    margin: 0 auto;
    bottom: 0;
    }
-
-
    .dotdiv
    {
     bottom: 0;
@@ -60,62 +46,30 @@ p.zone{ font-size: 10px; padding-top: 3px;}
        padding: 10px;
        border-top: 1px; /* Add a border at the top for separation */
        z-index: 1000; /* Ensure it stays above other content */
-   
-   
    }
-  #waterpump.hover-effect
-   {
-    box-shadow: none;
-    opacity: 0.2;
-    background-color: #EEEEEE;
-    
-   }
-
-
+  #waterpump.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE;}
 
    @media only screen and (min-width: 600px) {
 
-    .img_td{
-    width:60px;
-     height:50px;
-    display:block;
-    margin-right:auto;}
-
+    .img_td{ width:60px;height:50px;display:block;margin-right:auto;}
     .device_name{font-size: 15px;font-weight: bold;}
     .zone{font-size:13px;padding-top: 3px;}
-    td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 15px;padding-right: 20px; padding-top:10px; padding-bottom:10px ; width: 30%;height: ;}
-
-    
-    }
+    td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 15px;padding-right: 20px; padding-top:10px; padding-bottom:10px ; width: 30%};
+}
 
     @media only screen and (max-width: 600px) {
 
-.img_td{
-width:50px;
- height:40px;
-display:block;
-margin-right:auto;}
-
-.device_name{font-size: 13px;font-weight: bold;}
-.zone{font-size:10px;padding-top: 3px;}
+    .img_td{width:50px;height:40px;display:block;margin-right:auto;}    
+    .device_name{font-size: 13px;font-weight: bold;}
+    .zone{font-size:10px;padding-top: 3px;}
 
 }
 @media only screen and (min-width: 1024px) {
     .img_td{width:70px;height:60px;display:block;margin-right:auto;}
-
    .device_name{font-size: 17px;font-weight: bold;}
     .zone{font-size:15px;padding-top: 3px;}
-
-
-    .main_div {
-       width: 80%;
- margin: 0 auto;
-
-  background-color: "";
-  
-}
-.dotdiv{width: 80%;}
-}
+    .main_div {width: 80%;margin: 0 auto;}
+    .dotdiv{width: 80%;}}
 
 
    
@@ -131,14 +85,8 @@ margin-right:auto;}
     </tr>
     <tr><td id="w3"  style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="device_status_siren" style="width: 5px; height: 5px; float:left"></div><img src="resources\image\siren.svg"  class="img_td" ><p class="device_name">Siren</p><p class="zone">Graden</p></td>  
         <td id="w4" style="opacity: 0.5;" onclick="showPopup()"><div class="dot" id="device_status_sirens"style="width: 5px; height: 5px; float:left"></div><img src="resources\image\cctv.png"  class="img_td" > <p class="device_name">CCTV </p><p class="zone">Home</p></td>
-    </tr>
-   
+    </tr>   
 </table>
-
-<script>
-
-</script>
-
     <div class="dotdiv">
         <div class="dot" id="page1"style="width: 10px; height: 10px;"></div>
         </div></div>
@@ -147,12 +95,6 @@ margin-right:auto;}
 
 
 <script>
-
-
-function showPopup() {
-    // Display a popup message
-    alert("This device has not been register!");
-}
         var payload; var companyID="node"; var deviceType="spc"; var deviceID="7469308fcf871dad4d4" ;
         const topic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";
         var idtopic;
@@ -220,14 +162,19 @@ function displayFunction(payload,idtopic) {
                 specifiedtag.scrollIntoView({behavior:'smooth',block:'center'});
                 }};
         
-        
-         document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
-         function addHoverClass() {
+      
+document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
+   function addHoverClass() {
     document.getElementById('waterpump').classList.add('hover-effect');
 }
 
 function removeHoverClass() {
     document.getElementById('waterpump').classList.remove('hover-effect');
+}
+
+function showPopup() {
+    // Display a popup message
+    alert("This device has not been register!");
 }
             </script>
 </body>
