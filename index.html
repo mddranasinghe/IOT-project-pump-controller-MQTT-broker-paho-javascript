@@ -100,6 +100,22 @@ margin-right:auto;}
 .zone{font-size:10px;padding-top: 3px;}
 
 }
+@media only screen and (min-width: 1024px) {
+    .img_td{width:70px;height:60px;display:block;margin-right:auto;}
+
+   .device_name{font-size: 17px;font-weight: bold;}
+    .zone{font-size:15px;padding-top: 3px;}
+
+
+    .main_div {
+       width: 80%;
+ margin: 0 auto;
+
+  background-color: "";
+  
+}
+.dotdiv{width: 80%;}
+}
 
 
    
@@ -110,14 +126,18 @@ margin-right:auto;}
     <div class="main_div">
 <table> <div class="caption"> <h3 style="text-align: left;margin-left: 10px;margin-bottom:10px">Home 1</h3></div>
 
-    <tr><td id="waterpump" ontouchstart="addHoverClass()" ontouchend="removeHoverClass()"> <div class="dot" id="device_status"style="width: 5px; height: 5px; float:left"></div><img src="resources\image\pump.png"  class="img_td" ><div class="device_name">Water Pump</div><div class="zone">Pump room</div></td>  
-        <td id="w2" style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="device_status_power" style="width: 5px; height: 5px; float:left"></div><img src="resources\image\power.png"  class="img_td" > <p class="device_name">power Source</p><p class="zone">Home</p></td>
+    <tr><td id="waterpump" ontouchstart="addHoverClass()" ontouchend="removeHoverClass()"> <div class="dot" id="node/spc/n2b/7469308fcf871dad4d4"style="width: 5px; height: 5px; float:left"></div><img src="resources\image\pump.png"  class="img_td" ><div class="device_name">Water Pump</div><div class="zone">Pump room</div></td>  
+        <td id="w2" style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="device_status_power" style="width: 5px; height: 5px; float:left"></div><img src="resources\image\power.png"  class="img_td" > <p class="device_name">Power Source</p><p class="zone">Home</p></td>
     </tr>
     <tr><td id="w3"  style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="device_status_siren" style="width: 5px; height: 5px; float:left"></div><img src="resources\image\siren.svg"  class="img_td" ><p class="device_name">Siren</p><p class="zone">Graden</p></td>  
         <td id="w4" style="opacity: 0.5;" onclick="showPopup()"><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div><img src="resources\image\cctv.png"  class="img_td" > <p class="device_name">CCTV </p><p class="zone">Home</p></td>
     </tr>
    
 </table>
+
+<script>
+
+</script>
 
     <div class="dotdiv">
         <div class="dot" id="page1"style="width: 10px; height: 10px;"></div>
@@ -135,8 +155,9 @@ function showPopup() {
 }
         var payload; var companyID="node"; var deviceType="spc"; var deviceID="7469308fcf871dad4d4" ;
 
-        const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID;
-         var t;
+        const topic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID;
+        var idtopic;
+    
         function connect(){    
         client.connect({ onSuccess: onConnect,useSSL:mqttUseSSL,userName,password});
         client.onConnectionLost = onConnectionLost;
@@ -146,7 +167,8 @@ function showPopup() {
           function onConnect() {
           console.log("onConnect");
         document.getElementById('page1').style.backgroundColor="green";
-        getDataFromDevice(subTopic);
+        getDataFromDevice(topic);
+
         }
         
         function onConnectionLost(responseObject) {
@@ -169,8 +191,9 @@ function showPopup() {
 function getDataFromDevice(topic) {
     console.log("getDataFromDevice "+topic);
   //client.onMessageArrived = callbackfun;
+  idtopic=topic;
   client.subscribe(topic+"/+");
-  t=topic;
+
  // var message = new Paho.MQTT.Message();
  // message.destinationName = topic;
  // client.send(message);
@@ -186,7 +209,7 @@ function displayFunction(payload) {
       switch (payload['stat'])
       {
         case "online":
-        document.getElementById("device_status").style.backgroundColor="green";
+        document.getElementById(idtopic).style.backgroundColor="green";
       
           break;
         case "offline":
