@@ -21,8 +21,7 @@ table{ margin: 0 auto; width: 100%; height: 100%;border-collapse: separate; bord
 
 td{ box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 10px; padding-left: 10px;padding-right: 20px; padding-top:5px; padding-bottom:5px ; width: 30%;}
 
-
-	.img-container {width: 50px;  height: 50px; overflow: hidden; position: relative;} 
+.img-container {width: 50px;  height: 50px; overflow: hidden; position: relative;} 
 .img-container img { width: 100%; height: auto; display: block; position: absolute; top: 50%;left: 50%;transform: translate(-50%, -50%);}
 
  .caption{margin-right: 15px;margin-left: 15px;  border-bottom: 1px solid rgb(211, 207, 207); margin-top: 10px; }
@@ -49,10 +48,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
        border-top: 1px; /* Add a border at the top for separation */
        z-index: 1000; /* Ensure it stays above other content */
    }
-  #waterpump.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE;}
-
-
-
+  #waterpump.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE; }
 
     @media only screen and (max-width: 600px) {
 
@@ -79,21 +75,17 @@ p.zone{ font-size: 10px; padding-top: 3px;}
     .zone{font-size:15px;padding-top: 3px;}
     .main_div {width: 80%;margin: 0 auto;}
     .dotdiv{width: 80%;}}
-	
-	
-	
-   
-    </style>
+	</style>
 </head>
 <body>
 
   <div class="main_div">
-    <table> <div class="caption"> <h3 style="text-align: left;margin-left: 10px;margin-bottom:10px">Home 1</h3></div>
+    <table> <div class="caption"> <h3 style="text-align: left;margin-left: 10px;margin-bottom:10px">Additional Devices</h3></div>
     
-        <tr><td id="waterpump" ontouchstart="addHoverClass()" ontouchend="removeHoverClass()"> <div class="dot" id="node/spc/7469308fcf871dad4d4"style="width: 5px; height: 5px; float:left"></div>  <div class="img-container">
+        <tr><td id="waterpump" ontouchstart="addHoverClass()" ontouchend="removeHoverClass()" style="cursor:pointer;"> <div class="dot" id="node/spc/7469308fcf871dad4d4"style="width: 5px; height: 5px; float:left;"></div>  <div class="img-container">
                 <img src="resources\image\pump.png" class="img_td" alt="Pump Image">
             </div><p class="device_name">Water Pump</p><p class="zone">Pump room</p></td>  
-            <td id="w2" style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="node/spc/7469308fcf871dad4d4+++" style="width: 5px; height: 5px; float:left"></div>  <div class="img-container">
+            <td id="w2" style="opacity: 0.5;"onclick="showPopup()"><div class="dot" id="node/spc/7469308fcf871dad4d4" style="width: 5px; height: 5px; float:left"></div>  <div class="img-container">
                 <img src="resources\image\pw.jpg" class="img_td" alt="Power">
             </div><p class="device_name">Power Source</p><p class="zone">Home</p></td>
         </tr>
@@ -124,6 +116,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
           console.log("onConnect");
           document.getElementById('page1').style.backgroundColor="green";
           getDataFromDevice(pumpTopic); 
+      
         }
         
         function onConnectionLost(responseObject) {
@@ -147,6 +140,8 @@ p.zone{ font-size: 10px; padding-top: 3px;}
     catch(error){
         console.log(error);}}
 
+
+
 function displayFunction(payload,topic) {
      topicsArray = topic.split("/");
       payload = JSON.parse(payload);
@@ -154,10 +149,10 @@ try{
       switch (payload['stat'])
       {
         case "online":
-       document.getElementById(topicsArray[0]+'/'+topicsArray[1]+'/'+topicsArray[3]).style.backgroundColor="green";
+       document.getElementById(topicsArray[0]+'/'+topicsArray[1]+'/'+topicsArray[3]).style.backgroundColor="#7BDD0A";
           break;
         case "offline":
-        document.getElementById(topicsArray[0]+'/'+topicsArray[1]+'/'+topicsArray[3]).style.backgroundColor="red";
+        document.getElementById(topicsArray[0]+'/'+topicsArray[1]+'/'+topicsArray[3]).style.backgroundColor="#DF2D45";
          
           break;
       }

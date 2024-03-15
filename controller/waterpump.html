@@ -86,8 +86,8 @@
     </tr></table>
     
 <table><tr style="width: 100%;"><td  style="width: 50%;"><p style=" color:grey; margin-bottom: -2px; margin-top: 3px;"><b>Main pump status </b> </p></td><td style="width: 50%; text-align: right;">
-  <p style="font-size: 15px; color:red; display: none;" id="offline">offline</p> 
-  <p style="font-size: 15px; color:#4BD865; display: none;" id="online">online</p></td>
+  <p style="font-size: 13px; color:red; display: none;" id="offline">offline</p> 
+  <p style="font-size: 13px; color:#7BDD0A; display: none;" id="online">online</p></td>
   <td>
     <div class="signal-bars" id="signalBars">
       <div class="bar" id="bar1" style="height:2px; margin-top:8px;"></div>
@@ -718,25 +718,25 @@ updateSignalStrength(payload['rssi']);//rssi
 var bar=  document.getElementsByClassName("bar");  //signal bar.
     function updateSignalStrength(rssi) {
       if (rssi >= -50) {
-    bar[0].style.backgroundColor = "green";
-    bar[1].style.backgroundColor = "green";
-    bar[2].style.backgroundColor = "green";
-    bar[3].style.backgroundColor = "green";
-    bar[4].style.backgroundColor = "green";
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+    bar[2].style.backgroundColor = "#565461";
+    bar[3].style.backgroundColor = "#565461";
+    bar[4].style.backgroundColor = "#565461";
 } else if (rssi >= -55) {
-    bar[0].style.backgroundColor = "green";
-    bar[1].style.backgroundColor = "green";
-    bar[2].style.backgroundColor = "green";
-    bar[3].style.backgroundColor = "green";
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+    bar[2].style.backgroundColor = "#565461";
+    bar[3].style.backgroundColor = "#565461";
 } else if (rssi >= -65) {
-    bar[0].style.backgroundColor = "green";
-    bar[1].style.backgroundColor = "green";
-    bar[2].style.backgroundColor = "green";
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+    bar[2].style.backgroundColor = "#565461";
 } else if (rssi >= -80) {
-    bar[0].style.backgroundColor = "green";
-    bar[1].style.backgroundColor = "green";
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
 } else if (rssi >= -85) {
-    bar[0].style.backgroundColor = "green";
+    bar[0].style.backgroundColor = "#565461";
 } else if (rssi >= -100) {
 }
 
