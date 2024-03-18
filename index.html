@@ -51,21 +51,22 @@ p.zone{ font-size: 10px; padding-top: 3px;}
   #waterpump.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE; }
 
   .popup {
-    width: 250px;
+    width: 260px;
   display: none; 
   position: fixed;
-  top: 50%; 
+  top: 90%; 
   left: 50%; 
   transform: translate(-50%, -50%); 
   border-radius: 10px 10px;
-  background-color:#1C1C1E;
+  background-color:#7D63BE;
   padding: 10px 10px 10px 10px;
   z-index: 9999; 
   color: white;
+ 
 }
 
 .close { bottom: 4px; font-size: 15px; cursor: pointer; color: #106dd0; background-color: transparent; border-style: none; padding-bottom: 3%; margin-top:5%;}
-.popup-content {text-align: center; font-size: 15px;margin-bottom:0%;}
+.popup-content {text-align: center; font-size: 15px;margin-bottom:0%; }
 
     @media only screen and (max-width: 600px) {
 
@@ -121,10 +122,10 @@ p.zone{ font-size: 10px; padding-top: 3px;}
             </div></div>
 
             <!-- The popup message box -->
-            <div id="popup" class="popup">
-              <div class="popup-content">
-                <p>This Device has not been register!</p>
-                <button class="close" onclick="closePopup()"> Close</button>
+            <div id="popup" class="popup" >
+              <div class="popup-content" >
+                <p style=" font-size: 12px;">This Device Has Not Been Registered!</p>
+      
               </div>
             </div>
 
@@ -148,7 +149,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
         function onConnectionLost(responseObject) {
           if (responseObject.errorCode !== 0) {
             console.log("onConnectionLost:"+responseObject.errorMessage);
-            document.getElementById('page1').style.backgroundColor="red"
+            document.getElementById('page1').style.backgroundColor="#FF3827"
           document.getElementById('node/spc/7469308fcf871dad4d4').style.backgroundColor="#b4b4b0";
         } setTimeout(connect, 5000); }
 
@@ -178,7 +179,7 @@ try{
        document.getElementById(topicsArray[0]+'/'+topicsArray[1]+'/'+topicsArray[3]).style.backgroundColor="#7BDD0A";
           break;
         case "offline":
-        document.getElementById(topicsArray[0]+'/'+topicsArray[1]+'/'+topicsArray[3]).style.backgroundColor="#DF2D45";
+        document.getElementById(topicsArray[0]+'/'+topicsArray[1]+'/'+topicsArray[3]).style.backgroundColor="#FF3827";
          
           break;
       }
@@ -199,12 +200,11 @@ function removeHoverClass() {
 function openPopup() {
   var popup = document.getElementById("popup");
   popup.style.display = "block";
-}
 
-// Function to close the popup
-function closePopup() {
-  var popup = document.getElementById("popup");
-  popup.style.display = "none";
+  setTimeout(function() {
+    popup.style.display = "none";
+  }, 1300); 
+  
 }
 
 connect();
