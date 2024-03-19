@@ -537,7 +537,7 @@ function displayFunction(payload) {
           break;
       }
 
-    if (payload.sw_mode && payload.sw_mode.length > 0) { // auto mode main pump
+    if (payload.sw_mode && payload.sw_mode.length > 0 && payload.stat === "online") { // auto mode main pump
         switch (payload.sw_mode[0]) { 
             case 1:
                 document.getElementById('automode_mainpump').checked = true;
@@ -557,7 +557,7 @@ function displayFunction(payload) {
         }
     }
 
-    if (payload.sw_mode && payload.sw_mode.length > 0) { // auto mpode tubewell
+    if (payload.sw_mode && payload.sw_mode.length > 0 && payload.stat === "online") { // auto mpode tubewell
         switch (payload.sw_mode[1]) {
             case 1:
                 document.getElementById('automode_tubewell').checked = true;
