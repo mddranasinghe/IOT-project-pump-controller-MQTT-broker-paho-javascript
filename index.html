@@ -131,7 +131,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
             <button id="registerButton">Register Credentials</button>
 
             <button id="enableAuthButton">Enable Authentication</button>
-            <button id="disableAuthButton" style="display: none;">Disable Authentication</button>
+            <button id="disableAuthButton">Disable Authentication</button>
 
 
 <script>
@@ -213,7 +213,7 @@ function openPopup() {
 }
 
 
-
+/*
 let isAuthenticationEnabled = false;
 
         document.getElementById('enableAuthButton').addEventListener('click', async () => {
@@ -221,7 +221,7 @@ let isAuthenticationEnabled = false;
                 const publicKeyCredentialCreationOptions = {
                     challenge: new Uint8Array(32),
                     rp: {
-                        name: 'Water Pump Controller'
+                      name: 'home.onesmartapi.com' 
                     },
                     user: {
                         id: new Uint8Array(32),
@@ -233,9 +233,10 @@ let isAuthenticationEnabled = false;
                     ],
                     timeout: 60000
                 };
-
-                // Perform WebAuthn registration here
-                // This part is omitted for brevity
+                const credential = await navigator.credentials.create({
+                    publicKey: publicKeyCredentialCreationOptions
+                });
+          
 
                 console.log('Authentication enabled');
                 alert('Authentication enabled successfully!');
@@ -272,6 +273,7 @@ let isAuthenticationEnabled = false;
             }
         });
 
+6*/
 
 
 
@@ -282,14 +284,8 @@ let isAuthenticationEnabled = false;
 
 
 
-
-
-
-
-
-
-/*
-document.getElementById('registerButton').addEventListener('click', async () => {
+let enable=false;
+document.getElementById('enableAuthButton').addEventListener('click', async () => {
             try {
                 const publicKeyCredentialCreationOptions = {
                     challenge: new Uint8Array(32), 
@@ -315,9 +311,12 @@ document.getElementById('registerButton').addEventListener('click', async () => 
             } catch (error) {
                 console.error('Error during credential registration:', error);
             }
+
+            enable=true;
         });
 
         document.getElementById('waterpump').addEventListener('click', async () => {
+          if(enable === true){
             try {
                 const publicKeyCredentialRequestOptions = {
                     challenge: new Uint8Array(32), 
@@ -337,9 +336,13 @@ document.getElementById('registerButton').addEventListener('click', async () => 
             } catch (error) {
                 console.error('Error during WebAuthn authentication:', error);
             }
+          }
+          else if(enable === false)
+          {
+            document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
+          }
         });
-
-*/
+      
 connect();
  </script>
 </body>
