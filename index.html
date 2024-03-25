@@ -259,13 +259,14 @@ document.getElementById('registerButton').addEventListener('click', async () => 
                 // You'll need to implement server-side logic to validate the credential
                 // and grant access to the protected resource if authentication is successful
                 console.log('Credential authenticated:', credential);
+         
+
+            if (credential) {
+                    window.location.href = "controller/waterpump.html";
+                }
             } catch (error) {
                 console.error('Error during WebAuthn authentication:', error);
             }
-
-            if(credential){
-            document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}};
-
         });
 
 
