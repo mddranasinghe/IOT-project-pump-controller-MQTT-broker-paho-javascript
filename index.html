@@ -188,7 +188,7 @@ try{
       catch(error){
        console.log(error);}}
         
-document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
+//document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
    function addHoverClass() {
     document.getElementById('waterpump').classList.add('hover-effect');
 }
@@ -262,6 +262,8 @@ document.getElementById('registerButton').addEventListener('click', async () => 
             } catch (error) {
                 console.error('Error during WebAuthn authentication:', error);
             }
+            document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
+
         });
 
 
