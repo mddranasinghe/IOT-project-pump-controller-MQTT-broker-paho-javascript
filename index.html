@@ -262,7 +262,9 @@ document.getElementById('registerButton').addEventListener('click', async () => 
             } catch (error) {
                 console.error('Error during WebAuthn authentication:', error);
             }
-            document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
+
+            if(credential){
+            document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}};
 
         });
 
