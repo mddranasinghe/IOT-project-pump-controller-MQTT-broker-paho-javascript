@@ -130,6 +130,10 @@ p.zone{ font-size: 10px; padding-top: 3px;}
             </div>
             <button id="registerButton">Register Credentials</button>
 
+            <button id="enableAuthButton">Enable Authentication</button>
+            <button id="disableAuthButton" style="display: none;">Disable Authentication</button>
+
+
 <script>
          var payload,companyID="node", deviceType="spc", deviceID="7469308fcf871dad4d4",topic,topicsArray;
         const pumpTopic= companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";
@@ -210,11 +214,81 @@ function openPopup() {
 
 
 
+let isAuthenticationEnabled = false;
+
+        document.getElementById('enableAuthButton').addEventListener('click', async () => {
+            try {
+                const publicKeyCredentialCreationOptions = {
+                    challenge: new Uint8Array(32),
+                    rp: {
+                        name: 'Water Pump Controller'
+                    },
+                    user: {
+                        id: new Uint8Array(32),
+                        name: 'user@example.com',
+                        displayName: 'User'
+                    },
+                    pubKeyCredParams: [
+                        { type: 'public-key', alg: -7 }
+                    ],
+                    timeout: 60000
+                };
+
+                // Perform WebAuthn registration here
+                // This part is omitted for brevity
+
+                console.log('Authentication enabled');
+                alert('Authentication enabled successfully!');
+                
+                // Toggle button visibility
+                document.getElementById('enableAuthButton').style.display = 'none';
+                document.getElementById('disableAuthButton').style.display = 'inline-block';
+
+                isAuthenticationEnabled = true;
+            } catch (error) {
+                console.error('Error during credential registration:', error);
+            }
+        });
+
+        document.getElementById('disableAuthButton').addEventListener('click', () => {
+            // Toggle button visibility
+            document.getElementById('enableAuthButton').style.display = 'inline-block';
+            document.getElementById('disableAuthButton').style.display = 'none';
+
+            console.log('Authentication disabled');
+            alert('Authentication disabled successfully!');
+            
+            isAuthenticationEnabled = false;
+        });
+
+        document.getElementById('waterpump').addEventListener('click', () => {
+            if (isAuthenticationEnabled) {
+                // Redirect to water pump control page only if authentication is enabled
+                window.location.href = "controller/waterpump.html";
+            } else {
+                // Perform water pump control functionality without authentication
+                alert('Controlling water pump without authentication');
+                // Add your logic for controlling the water pump here
+            }
+        });
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 document.getElementById('registerButton').addEventListener('click', async () => {
             try {
                 const publicKeyCredentialCreationOptions = {
@@ -255,10 +329,6 @@ document.getElementById('registerButton').addEventListener('click', async () => 
                     publicKey: publicKeyCredentialRequestOptions
                 });
 
-                // Send the credential to the server for validation
-                // You'll need to implement server-side logic to validate the credential
-                // and grant access to the protected resource if authentication is successful
-                console.log('Credential authenticated:', credential);
          
 
             if (credential) {
@@ -269,7 +339,7 @@ document.getElementById('registerButton').addEventListener('click', async () => 
             }
         });
 
-
+*/
 connect();
  </script>
 </body>
