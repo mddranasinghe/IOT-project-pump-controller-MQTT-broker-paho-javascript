@@ -128,6 +128,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
       
               </div>
             </div>
+            <button id="registerButton">Register Credentials</button>
 
 <script>
          var payload,companyID="node", deviceType="spc", deviceID="7469308fcf871dad4d4",topic,topicsArray;
@@ -206,6 +207,63 @@ function openPopup() {
   }, 1300); 
   
 }
+
+
+
+
+
+
+
+
+document.getElementById('registerButton').addEventListener('click', async () => {
+            try {
+                const publicKeyCredentialCreationOptions = {
+                    challenge: new Uint8Array(32), 
+                    rp: {
+                        name: 'index.html' 
+                    },
+                    user: {
+                        id: new Uint8Array(32), 
+                        name: 'te 1282', 
+                        displayName: 'Test User' 
+                    },
+                    pubKeyCredParams: [
+                        { type: 'public-key', alg: -7 } 
+                    ],
+                    timeout: 60000 
+                };
+
+                const credential = await navigator.credentials.create({
+                    publicKey: publicKeyCredentialCreationOptions
+                });
+
+                console.log('Credential registered:', credential);
+            } catch (error) {
+                console.error('Error during credential registration:', error);
+            }
+        });
+
+        document.getElementById('waterpump').addEventListener('click', async () => {
+            try {
+                const publicKeyCredentialRequestOptions = {
+                    challenge: new Uint8Array(32), 
+                  rpId: 'index.html', // Relying party ID
+                    userVerification: 'required' // Require user verification (e.g., fingerprint)
+                };
+
+                const credential = await navigator.credentials.get({
+                    publicKey: publicKeyCredentialRequestOptions
+                });
+
+                // Send the credential to the server for validation
+                // You'll need to implement server-side logic to validate the credential
+                // and grant access to the protected resource if authentication is successful
+                console.log('Credential authenticated:', credential);
+            } catch (error) {
+                console.error('Error during WebAuthn authentication:', error);
+            }
+        });
+
 
 connect();
  </script>
