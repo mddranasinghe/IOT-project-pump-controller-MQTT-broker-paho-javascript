@@ -85,7 +85,7 @@
   transform: translate(-50%, -50%); 
   border-radius: 10px 10px;
   background-color:#7D63BE;
-  padding: 10px 10px 10px 10px;
+ 
   z-index: 9999; 
   color: white;
   font-size: 100%;
@@ -127,7 +127,7 @@
         
                   <div class="status_box">
                       <div class="topic"><p>Pump Power</p></div>
-                      <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump" >
+                      <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump">
                       <input type="checkbox" id="pumppower_mainpump" ><label for="pumppower_mainpump" id="toggleLabel_pumppower_mainpump"></label></div>  
                     </div>
                     <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_mainpower">ON</P>
@@ -148,7 +148,7 @@
           
         <div class="status_box">
           <div class="topic"><p>Pump Timer</p></div>
-          <div class="option"> <div class="toggle">
+          <div class="option" > <div class="toggle" id="p">
           <input type="checkbox" id="pumptimer_mainpump"/><label for="pumptimer_mainpump" id="toggleLabel_pumptimer_mainpump"></label> </div>
       </div> 
     </div>
@@ -764,6 +764,22 @@ document.getElementById('set_timer_time_tubewell').value=payload.timer_val[1];//
 document.getElementById('set_timer_time_soft').value=payload['soft_delay'];// soft time
 
 updateSignalStrength(payload['rssi']);//rssi
+
+
+
+document.getElementById('p').addEventListener('click', function() {
+  
+  if(payload.sw_mode[0] === 1){
+  var popup = document.getElementById("popup");
+  popup.style.display = "block";
+
+  setTimeout(function() {
+    popup.style.display = "none";
+  }, 1300); 
+}
+});
+
+
 }
 
 
@@ -796,15 +812,7 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
 
 
 
-    function openPopup() {
-  var popup = document.getElementById("popup");
-  popup.style.display = "block";
 
-  setTimeout(function() {
-    popup.style.display = "none";
-  }, 1300); 
-  
-}
 
   connect();
 </script>
