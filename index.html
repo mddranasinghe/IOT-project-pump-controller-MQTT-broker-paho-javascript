@@ -128,6 +128,11 @@ p.zone{ font-size: 10px; padding-top: 3px;}
       
               </div>
             </div>
+
+
+
+
+            
             <button id="registerButton">Register Credentials</button>
 
             <button id="enableAuthButton">Enable Authentication</button>
@@ -327,6 +332,7 @@ document.getElementById('enableAuthButton').addEventListener('click', async () =
                 const credential = await navigator.credentials.get({
                     publicKey: publicKeyCredentialRequestOptions
                 });
+                
 
          
 
