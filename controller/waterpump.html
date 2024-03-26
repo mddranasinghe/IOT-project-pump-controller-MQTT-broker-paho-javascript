@@ -377,17 +377,11 @@ setTimeout(connect, 10000);
           payload="1";
           document.getElementById("pumppower_mainpump").disabled = true;
           document.getElementById("pumptimer_mainpump").disabled = true;
-         // document.getElementById("pumppower_status_mainpower").style.display="inline";
-         // document.getElementById("toggle_pumppower_mainpump").style.display="none";
-    
-
         }
         else{
           payload="0";
           document.getElementById("pumppower_mainpump").disabled = false;
           document.getElementById("pumptimer_mainpump").disabled = false;
-         // document.getElementById("pumppower_status_mainpower").style.display="none";
-          //document.getElementById("toggle_pumppower_mainpump").style.display="inline";
         }
         sendCommandToDevice(topic,payload);
         
@@ -424,15 +418,11 @@ setTimeout(connect, 10000);
         if (this.checked) {
           document.getElementById("pumppower_tubewell").disabled = true;
           document.getElementById("pumptimer_tubewell").disabled = true;
-         // document.getElementById("pumppower_status_tubewell").style.display="inline";
-        //  document.getElementById("toggle_pumppower_tubewell").style.display="none";
           payload="1";
        } 
        else{
         document.getElementById("pumppower_tubewell").disabled = false;
           document.getElementById("pumptimer_tubewell").disabled = false;
-          //document.getElementById("pumppower_status_tubewell").style.display="none";
-         // document.getElementById("toggle_pumppower_tubewell").style.display="inline";
           payload="0";
        }
          sendCommandToDevice(topic,payload);
@@ -577,12 +567,9 @@ function displayFunction(payload) {
 
             case 0:
                 document.getElementById('automode_mainpump').checked = false;
-              //  document.getElementById("pumppower_mainpump").disabled = false;
                 document.getElementById("pumptimer_mainpump").disabled = false;
-               // document.getElementById("pumppower_status_mainpower").style.display="inline";
                 document.getElementById("toggle_pumppower_mainpump").style.display="inline";
 
-              //  document.getElementById('pumppower_status_mainpower_OFF').style.display="none";
 
                 break;
         }
@@ -599,7 +586,6 @@ function displayFunction(payload) {
                 document.getElementById('automode_tubewell').checked = true;
                 document.getElementById("pumppower_tubewell").disabled = true;
                 document.getElementById("pumptimer_tubewell").disabled = true;
-                //document.getElementById("pumppower_status_tubewell").style.display="inline";
                 document.getElementById("toggle_pumppower_tubewell").style.display="inline";
                  document.getElementById("set_timer_time_tubewell").disabled = true;
                 break;
@@ -607,7 +593,6 @@ function displayFunction(payload) {
                 document.getElementById('automode_tubewell').checked = false;
                 document.getElementById("pumppower_tubewell").disabled = false;
                 document.getElementById("pumptimer_tubewell").disabled = false;
-               // document.getElementById("pumppower_status_tubewell").style.display="none";
                 document.getElementById("toggle_pumppower_tubewell").style.display="inline";
                 break;
         }
@@ -635,7 +620,6 @@ function displayFunction(payload) {
         if (payload.sw && payload.sw.length > 0) {  //   main pump switch
         switch (payload.sw[0]) {
             case 1:
-              //  document.getElementById('pumppower_status_mainpower_OFF').style.display="none";
                 document.getElementById('pumppower_mainpump').checked = true;
                 break;
             case 0:
