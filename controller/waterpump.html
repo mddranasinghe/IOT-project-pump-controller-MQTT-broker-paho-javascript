@@ -127,7 +127,7 @@
         
                   <div class="status_box">
                       <div class="topic"><p>Pump Power</p></div>
-                      <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump">
+                      <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump" onclick="openPopup()">
                       <input type="checkbox" id="pumppower_mainpump" ><label for="pumppower_mainpump" id="toggleLabel_pumppower_mainpump"></label></div>  
                     </div>
                     <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_mainpower">ON</P>
@@ -148,7 +148,7 @@
           
         <div class="status_box">
           <div class="topic"><p>Pump Timer</p></div>
-          <div class="option" > <div class="toggle" id="p">
+          <div class="option" > <div class="toggle" onclick="openPopup()">
           <input type="checkbox" id="pumptimer_mainpump"/><label for="pumptimer_mainpump" id="toggleLabel_pumptimer_mainpump"></label> </div>
       </div> 
     </div>
@@ -176,7 +176,7 @@
 
           <div class="status_box">
               <div class="topic"><p>Pump Power</p></div>
-              <div class="option"> <div class="toggle" id="toggle_pumppower_tubewell">
+              <div class="option"> <div class="toggle" id="toggle_pumppower_tubewell" onclick="openPopup()">
               <input type="checkbox" id="pumppower_tubewell"/><label for="pumppower_tubewell" id="toggleLabel_pumppower_tubewell"></label></div> 
               <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_tubewell">ON</P>
                     <p style="display:none; color:rgb(156, 156, 156) ;" id="pumppower_status_tubewell_off">OFF</p>
@@ -189,10 +189,10 @@
   </div> 
 
 
-<div class="status_box">
+<div class="status_box" onclick="openPopup()">
   <div class="topic"><p>Pump Timer </p></div>
-  <div class="option"> <div class="toggle">
-  <input type="checkbox" id="pumptimer_tubewell"><label for="pumptimer_tubewell" id="toggleLabel_pumptimer_tubewell"></label></div> 
+  <div class="option"> <div class="toggle" onclick="openPopup()">
+  <input type="checkbox" id="pumptimer_tubewell"><label for="pumptimer_tubewell" id="toggleLabel_pumptimer_tubewell" onclick="openPopup()"></label></div> 
 </div> 
 </div>
 
@@ -254,7 +254,7 @@ const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";// subscribe 
 
 var ovarlay=  document.getElementsByClassName("status_box");
 //..............................................................................................................
-
+var automodemain,automodetubewell;
 function connect(){
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
 client.onConnectionLost = onConnectionLost;
@@ -585,23 +585,7 @@ function displayFunction(payload) {
                 break;
         }
 
-        if(payload.sw_mode[0] === 1 && payload.sw_mode.length > 0 && payload.stat === "online")
-    {
-      switch (payload.sw[0]) {
-            case 1:
-         //   document.getElementById("pumppower_mainpump").style.display="none";
-          //  document.getElementById("pumppower_status_mainpower").style.display="inline";
-          // document.getElementById('pumppower_status_mainpower_OFF').style.display="none";
-            
-            break;
-            case 0:
-             //   document.getElementById("pumppower_mainpump").style.display="none";
-              //  document.getElementById('pumppower_status_mainpower_OFF').style.display="inline";
-              //  document.getElementById('pumppower_status_mainpower').style.display="none";
-
-                break;
-        }
-    }
+        automodemain=payload.sw_mode[0];
 
     }
 
@@ -625,6 +609,7 @@ function displayFunction(payload) {
                 document.getElementById("toggle_pumppower_tubewell").style.display="inline";
                 break;
         }
+        automodetubewell=payload.sw_mode[1];
     }
     
     switch (payload['soft_start']) { 
@@ -767,17 +752,6 @@ updateSignalStrength(payload['rssi']);//rssi
 
 
 
-document.getElementById('p').addEventListener('click', function() {
-  
-  if(payload.sw_mode[0] === 1){
-  var popup = document.getElementById("popup");
-  popup.style.display = "block";
-
-  setTimeout(function() {
-    popup.style.display = "none";
-  }, 1300); 
-}
-});
 
 
 }
@@ -812,6 +786,26 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
 
 
 
+    function openPopup(){
+  if(automodemain === 1){
+  var popup = document.getElementById("popup");
+  popup.style.display = "block";
+
+  setTimeout(function() {
+    popup.style.display = "none";
+  }, 1300); 
+}
+else if(automodetubewell === 1)
+{
+  var popup = document.getElementById("popup");
+  popup.style.display = "block";
+
+  setTimeout(function() {
+    popup.style.display = "none";
+  }, 1300); 
+
+}
+  }
 
 
   connect();
