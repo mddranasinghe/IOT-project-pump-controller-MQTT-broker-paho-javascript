@@ -127,7 +127,7 @@
         
                   <div class="status_box">
                       <div class="topic"><p>Pump Power</p></div>
-                      <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump" onclick="openPopup()">
+                      <div class="option"> <div class="toggle" id="toggle_pumppower_mainpump" onclick="openPopupmain()">
                       <input type="checkbox" id="pumppower_mainpump" ><label for="pumppower_mainpump" id="toggleLabel_pumppower_mainpump"></label></div>  
                     </div>
                     <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_mainpower">ON</P>
@@ -148,8 +148,8 @@
           
         <div class="status_box">
           <div class="topic"><p>Pump Timer</p></div>
-          <div class="option" > <div class="toggle" onclick="openPopup()">
-          <input type="checkbox" id="pumptimer_mainpump"/><label for="pumptimer_mainpump" id="toggleLabel_pumptimer_mainpump"></label> </div>
+          <div class="option" > <div class="toggle" onclick="openPopupmain()">
+          <input type="checkbox" id="pumptimer_mainpump"/><label for="pumptimer_mainpump" id="toggleLabel_pumptimer_mainpump"></label onclick="openPopupmain()"> </div>
       </div> 
     </div>
 
@@ -176,7 +176,7 @@
 
           <div class="status_box">
               <div class="topic"><p>Pump Power</p></div>
-              <div class="option"> <div class="toggle" id="toggle_pumppower_tubewell" onclick="openPopup()">
+              <div class="option"> <div class="toggle" id="toggle_pumppower_tubewell" onclick="openPopupTubewell()">
               <input type="checkbox" id="pumppower_tubewell"/><label for="pumppower_tubewell" id="toggleLabel_pumppower_tubewell"></label></div> 
               <P style="display:None;color: rgb(70, 184, 110);" id="pumppower_status_tubewell">ON</P>
                     <p style="display:none; color:rgb(156, 156, 156) ;" id="pumppower_status_tubewell_off">OFF</p>
@@ -189,10 +189,10 @@
   </div> 
 
 
-<div class="status_box" onclick="openPopup()">
+<div class="status_box" onclick="openPopupTubewell()">
   <div class="topic"><p>Pump Timer </p></div>
-  <div class="option"> <div class="toggle" onclick="openPopup()">
-  <input type="checkbox" id="pumptimer_tubewell"><label for="pumptimer_tubewell" id="toggleLabel_pumptimer_tubewell" onclick="openPopup()"></label></div> 
+  <div class="option"> <div class="toggle" onclick="openPopupTubewell()">
+  <input type="checkbox" id="pumptimer_tubewell"><label for="pumptimer_tubewell" id="toggleLabel_pumptimer_tubewell" onclick="openPopupTubewell()"></label></div> 
 </div> 
 </div>
 
@@ -786,16 +786,8 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
 
 
 
-    function openPopup(){
-  if(automodemain === 1){
-  var popup = document.getElementById("popup");
-  popup.style.display = "block";
-
-  setTimeout(function() {
-    popup.style.display = "none";
-  }, 1300); 
-}
-else if(automodetubewell === 1)
+    function openPopupTubewell(){
+ if(automodetubewell === 1)
 {
   var popup = document.getElementById("popup");
   popup.style.display = "block";
@@ -806,7 +798,16 @@ else if(automodetubewell === 1)
 
 }
   }
+  function openPopupmain(){
+  if(automodemain === 1){
+  var popup = document.getElementById("popup");
+  popup.style.display = "block";
 
+  setTimeout(function() {
+    popup.style.display = "none";
+  }, 1300); 
+}
+  }
 
   connect();
 </script>
