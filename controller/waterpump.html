@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <link rel="icon" href="data:,">
     <title>water pump</title>
     <script src="../resources/js/paho.javascript-1.0.3/paho-mqtt-min.js"></script>
     <script src="../resources/js/connection.js"></script>
@@ -106,7 +107,7 @@
     </tr></table>
     
 <table><tr style="width: 100%;"><td  style="width: 50%;"><p style=" color:grey; margin-bottom: -2px; margin-top: 3px;"><b>Main pump status </b> </p></td><td style="width: 50%; text-align: right;">
-  <p style="font-size: 13px; color:#FF3827; display: none;" id="offline">offline</p> 
+  <p style="font-size: 13px; color:rgb(156, 156, 156) ; display: inline;" id="offline">offline</p> 
   <p style="font-size: 13px; color:#7BDD0A; display: none;" id="online">online</p></td>
   <td>
     <div class="signal-bars" id="signalBars">
@@ -170,7 +171,7 @@
            <div class="status_box">
               <div class="topic"><p>Auto Mode</p></div>
               <div class="option">  <div class="toggle" >
-              <input type="checkbox" id="automode_tubewell" /><label for="automode_tubewell" id="toggleLabel_automode_tubewell"></label></div> 
+              <input type="checkbox" id="automode_tubewell"/><label for="automode_tubewell" id="toggleLabel_automode_tubewell" ></label></div> 
            </div>
           </div>
 
@@ -263,12 +264,10 @@ client.onMessageArrived = onMessageArrived;
 }
 function onConnect() {
   try {
-
-
     console.log("onConnect");    
     client.subscribe(subTopic);
     sendCommandToDevice(publish_topic+"info","read");
-    onlinestatus();
+    offlinestatus();
   }
   catch (error){
 
@@ -292,6 +291,7 @@ function sendCommandToDevice(topic,payload) {
 
 
 function onMessageArrived(message) {
+  onlinestatus();
   topic = message.destinationName;
   payload=message.payloadString;
     console.log("Payload:" + payload);
@@ -349,7 +349,7 @@ function offlinestatus()
   document.getElementById("pumptimer_mainpump").disabled = true;
  
 
-  document.getElementById("offline").style.display="inline";
+  document.getElementById("offline").style.color="#FF3827";
   document.getElementById("online").style.display="none";
 
   document.getElementById('Soft_Start1').disabled = true;
