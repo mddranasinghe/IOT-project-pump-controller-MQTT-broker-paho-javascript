@@ -305,7 +305,7 @@ function onMessageArrived(message) {
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
-    offlinestatus();
+    offlinestatus('offline');
   }
   
    setTimeout(connect, 10000);
@@ -335,9 +335,9 @@ function onlinestatus()
 
 }
 
-function offlinestatus()
+function offlinestatus(stat)
 {
-
+ if(stat === 'offline'){  document.getElementById("offline").style.color="#FF3827";}
 
   document.getElementById("automode_tubewell").disabled = true;
  document.getElementById("automode_mainpump").disabled = true;
@@ -350,7 +350,7 @@ function offlinestatus()
   document.getElementById("pumptimer_mainpump").disabled = true;
  
 
-  document.getElementById("offline").style.color="#FF3827";
+
   document.getElementById("online").style.display="none";
 
   document.getElementById('Soft_Start1').disabled = true;
@@ -551,7 +551,7 @@ function displayFunction(payload) {
           onlinestatus();
           break;
         case "offline":
-        offlinestatus();
+        offlinestatus(stat);
           break;
 
       }
@@ -794,7 +794,7 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
   }
 
   connect();
-  offlinestatus();
+  offlinestatus('none');
 </script>
 </body>
 </html>
