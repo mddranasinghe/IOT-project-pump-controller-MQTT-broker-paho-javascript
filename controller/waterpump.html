@@ -259,11 +259,12 @@ var ovarlay=  document.getElementsByClassName("status_box");
 var automodemain,automodetubewell, stat;
 
 function connect(){
+
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
-
 }
+
 function onConnect() {
   try {
     console.log("onConnect");    
@@ -315,8 +316,6 @@ function onConnectionLost(responseObject) {
 
 function onlinestatus()
 {
-
-
   document.getElementById("offline").style.display="none";
   document.getElementById("online").style.display="inline";
   for (var i = 0; i < ovarlay.length; i++) {

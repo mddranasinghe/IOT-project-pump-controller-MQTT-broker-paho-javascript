@@ -155,9 +155,14 @@ p.zone{ font-size: 10px; padding-top: 3px;}
         const pumpTopic= companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";
 
         function connect(){    
+            try{
         client.connect({ onSuccess: onConnect,useSSL:mqttUseSSL,userName,password});
         client.onConnectionLost = onConnectionLost;
         client.onMessageArrived = onMessageArrived;
+            }catch(error)
+            {
+        
+            }
         }
         //............................................................................................
           function onConnect() {
@@ -188,7 +193,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
     catch(error){
         console.log(error);}}
 
-
+        setInterval(connect, 1000);
 
 function displayFunction(payload,topic) {
      topicsArray = topic.split("/");
