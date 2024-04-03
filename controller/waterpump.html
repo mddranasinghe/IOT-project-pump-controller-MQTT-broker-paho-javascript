@@ -268,7 +268,7 @@ function onConnect() {
     console.log("onConnect");    
     client.subscribe(subTopic);
     sendCommandToDevice(publish_topic+"info","read");
-    //offlinestatus();
+    offlinestatus('none');
   }
   catch (error){
 
@@ -797,7 +797,7 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
   }
 
   connect();
-  offlinestatus('none');
+ // offlinestatus('none');
 </script>
 </body>
 </html>
