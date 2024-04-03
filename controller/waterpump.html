@@ -337,12 +337,15 @@ function onlinestatus()
 
 function offlinestatus(stat)
 {
+  document.getElementById("offline").style.display="inline";
  if(stat === 'offline'){  document.getElementById("offline").style.color="#FF3827";}
 
   document.getElementById("automode_tubewell").disabled = true;
  document.getElementById("automode_mainpump").disabled = true;
 
   
+ 
+
   document.getElementById("pumppower_tubewell").disabled = true;
   document.getElementById("pumptimer_tubewell").disabled = true;
 
