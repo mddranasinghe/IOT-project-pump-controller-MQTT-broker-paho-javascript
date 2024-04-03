@@ -268,7 +268,6 @@ function onConnect() {
     console.log("onConnect");    
     client.subscribe(subTopic);
     sendCommandToDevice(publish_topic+"info","read");
-    offlinestatus('none');
   }
   catch (error){
 
@@ -292,7 +291,7 @@ function sendCommandToDevice(topic,payload) {
 
 
 function onMessageArrived(message) {
-  onlinestatus();
+   onlinestatus();
   topic = message.destinationName;
   payload=message.payloadString;
     console.log("Payload:" + payload);
@@ -308,7 +307,7 @@ function onConnectionLost(responseObject) {
     offlinestatus('offline');
   }
   
-   setTimeout(connect, 10000);
+  setInterval(connect, 2000);
 }
 
 function onlinestatus()
@@ -342,17 +341,13 @@ function offlinestatus(stat)
 
   document.getElementById("automode_tubewell").disabled = true;
  document.getElementById("automode_mainpump").disabled = true;
-
-  
  
-
   document.getElementById("pumppower_tubewell").disabled = true;
   document.getElementById("pumptimer_tubewell").disabled = true;
 
   document.getElementById("pumppower_mainpump").disabled = true;
   document.getElementById("pumptimer_mainpump").disabled = true;
  
-
 
   document.getElementById("online").style.display="none";
 
@@ -738,14 +733,15 @@ document.getElementById('set_timer_time').value=payload.timer_val[0];// main pum
 document.getElementById('set_timer_time_tubewell').value=payload.timer_val[1];// tubewell time
 document.getElementById('set_timer_time_soft').value=payload['soft_delay'];// soft time
 
-updateSignalStrength(payload['rssi']);//rssi
+updateSignalStrength(payload['rssi'],payload['stat']);//rssi
 
 
 }
 
 
 var bar=  document.getElementsByClassName("bar");  //signal bar.
-    function updateSignalStrength(rssi) {
+    function updateSignalStrength(rssi,stat) {
+    if(stat === 'online'){
       if (rssi >= -50) {
     bar[0].style.backgroundColor = "#565461";
     bar[1].style.backgroundColor = "#565461";
@@ -768,7 +764,7 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
     bar[0].style.backgroundColor = "#565461";
 } else if (rssi >= -100) {
 }
-
+    }
     }
 
 
