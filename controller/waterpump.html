@@ -257,6 +257,7 @@ const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";// subscribe 
 var ovarlay=  document.getElementsByClassName("status_box");
 //..............................................................................................................
 var automodemain,automodetubewell, stat;
+
 function connect(){
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
 client.onConnectionLost = onConnectionLost;
@@ -300,7 +301,6 @@ function onMessageArrived(message) {
   
 }
 
-
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
@@ -311,7 +311,7 @@ function onConnectionLost(responseObject) {
 }
 
 
-setInterval(offlinestatus, 1000);
+//setInterval(offlinestatus, 1000);
 
 function onlinestatus()
 {
@@ -796,7 +796,7 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
   }
 
   connect();
- // offlinestatus('none');
+ offlinestatus('none');
 </script>
 </body>
 </html>
