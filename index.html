@@ -162,7 +162,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
             console.log("onConnectionLost:"+responseObject.errorMessage);
             document.getElementById('page1').style.backgroundColor="#FF3827"
           document.getElementById('node/spc/7469308fcf871dad4d4').style.backgroundColor="#b4b4b0";
-        } setTimeout(connect, 5000); }
+        }  setInterval(connect, 2000); }
 
         function onMessageArrived(message) {
             topic = message.destinationName;
