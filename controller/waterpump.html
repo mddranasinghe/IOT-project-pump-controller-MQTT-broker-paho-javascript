@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <link rel="icon" href="data:,">
     <title>water pump</title>
     <script src="../resources/js/paho.javascript-1.0.3/paho-mqtt-min.js"></script>
@@ -259,22 +258,23 @@ var ovarlay=  document.getElementsByClassName("status_box");
 var automodemain,automodetubewell, stat;
 
 function connect(){
-
+try{
 client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
+}catch
+{
+
+}
+
 }
 
 function onConnect() {
-  try {
+
     console.log("onConnect");    
     client.subscribe(subTopic);
     sendCommandToDevice(publish_topic+"info","read");
-  }
-  catch (error){
 
-    console.log(error);
-  }
 }
 
 function sendCommandToDevice(topic,payload) {
@@ -794,7 +794,7 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
 }
   }
 
-  connect();
+ connect();
  offlinestatus('none');
 </script>
 </body>

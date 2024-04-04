@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:,">
     <title>Document</title>
     <script src="resources/js/paho.javascript-1.0.3/paho-mqtt-min.js"></script>
     <script src="resources/js/connection.js"></script>
@@ -161,6 +162,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
         client.onMessageArrived = onMessageArrived;
             }catch(error)
             {
+                console.log('hhhh')
         
             }
         }
@@ -191,9 +193,10 @@ p.zone{ font-size: 10px; padding-top: 3px;}
     console.log("getDataFromDevice "+topic);
     client.subscribe(topic);}
     catch(error){
-        console.log(error);}}
+        console.log(error);}
+    }
 
-        setInterval(connect, 1000);
+    
 
 function displayFunction(payload,topic) {
      topicsArray = topic.split("/");
@@ -233,6 +236,7 @@ function openPopup() {
   
 }
 
+setInterval(connect, 3000);
 
 /*
 let isAuthenticationEnabled = false;
