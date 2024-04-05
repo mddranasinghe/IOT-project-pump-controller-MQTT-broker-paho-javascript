@@ -252,7 +252,7 @@
 var payload; var companyID="node"; var deviceType="spc"; var deviceID="7469308fcf871dad4d4" ;
 var publish_topic=companyID+"/"+deviceType+"/"+"b2n/"+deviceID+"/";// publish topic
 const subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";// subscribe topic
-
+let rebootfun=true;
 var ovarlay=  document.getElementsByClassName("status_box");
 //..............................................................................................................
 var automodemain,automodetubewell, stat;
@@ -308,7 +308,7 @@ function onConnectionLost(responseObject) {
     offlinestatus('offline');
   }
   
-  setInterval(connect, 1000);
+  setInterval(connect, 2000);
 }
 
 
@@ -541,7 +541,7 @@ var timer;
   }
 });
 function displayFunction(payload) {
-
+      rebootfun=false;
       payload = JSON.parse(payload);
       stat=payload['stat'];
 
@@ -795,7 +795,7 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
   }
 
  connect();
- offlinestatus('none');
+ if (rebootfun === true){ offlinestatus('none');}
 </script>
 </body>
 </html>
