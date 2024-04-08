@@ -265,14 +265,12 @@ client.onMessageArrived = onMessageArrived;
 }catch
 {
 
-}
-
-}
+}}
 
 function onConnect() {
 
     console.log("onConnect");    
-    client.subscribe(subTopic);
+   client.subscribe(subTopic);
     sendCommandToDevice(publish_topic+"info","read");
 
 }
@@ -293,12 +291,19 @@ function sendCommandToDevice(topic,payload) {
 
 
 function onMessageArrived(message) {
+  try{
    onlinestatus();
   topic = message.destinationName;
   payload=message.payloadString;
     console.log("Payload:" + payload);
     console.log("Topic:", topic);
     displayFunction(payload);  
+  }
+  catch(error)
+  {
+    console.log(error);
+
+  }
   
 }
 
@@ -308,7 +313,6 @@ function onConnectionLost(responseObject) {
     offlinestatus('offline');
   }
   
-  setInterval(connect, 2000);
 }
 
 
@@ -361,12 +365,6 @@ function offlinestatus(stat)
 for (var i = 0; i < ovarlay.length; i++) {
 ovarlay[i].style.backgroundColor = "#C2C2C2";}
 
-for(var x = 0; x < bar.length; x++)
-{
-bar[x].style.backgroundColor = "#ccc";
-}
-
-setTimeout(connect, 10000);
 }
 
       var automode_mainpump=document.getElementById('automode_mainpump');
@@ -794,8 +792,14 @@ var bar=  document.getElementsByClassName("bar");  //signal bar.
 }
   }
 
- connect();
- offlinestatus('none');
+connect();
+//offlinestatus('none'); // Call the function with argument 'none'
+
+setTimeout(function() {
+  offlinestatus('none');
+   }, 3000); 
+
+ setInterval(connect, 2000);
 </script>
 </body>
 </html>
