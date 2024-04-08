@@ -796,7 +796,8 @@ connect();
 //offlinestatus('none'); // Call the function with argument 'none'
 
 setTimeout(function() {
-  offlinestatus('none');
+  if(stat !== 'online'){
+  offlinestatus('none');}
    }, 3000); 
 
  setInterval(connect, 2000);
