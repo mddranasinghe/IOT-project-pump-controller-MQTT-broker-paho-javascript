@@ -8,7 +8,7 @@
     <script src="../resources/js/paho.javascript-1.0.3/paho-mqtt-min.js"></script>
     <script src="../resources/js/connection.js"></script>
     <style>
-
+body{touch-action: none;}
 .toggle { position: relative; box-sizing: border-box;}
 .toggle input[type="checkbox"] {
   position: absolute;
@@ -122,7 +122,7 @@
                    <div class="status_box">
                       <div class="topic"><p>Auto Mode</p></div>
                       <div class="option">  <div class="toggle">
-                      <input type="checkbox" id="automode_mainpump" ><label for="automode_mainpump" id="toggleLabel_mainpump_auto"></label></div> 
+                      <input type="checkbox" id="automode_mainpump"  ><label for="automode_mainpump" id="toggleLabel_mainpump_auto"></label></div> 
                    </div>
                   </div>
         
@@ -368,6 +368,7 @@ for(var x = 0; x < bar.length; x++)
 {
 bar[x].style.backgroundColor = "#ccc";
 }
+
 }
 
       var automode_mainpump=document.getElementById('automode_mainpump');
@@ -386,6 +387,7 @@ bar[x].style.backgroundColor = "#ccc";
           document.getElementById("pumptimer_mainpump").disabled = false;
         }
         sendCommandToDevice(topic,payload);
+
         
       });
 
